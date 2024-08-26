@@ -963,7 +963,7 @@ section {
     /* Ẩn phần văn bản vượt quá */
     padding: 0.3125rem 0px;
     font-size: 0.775rem;
-    line-height: 1.1875rem;
+    line-height: 1.5875rem;
     color: rgb(20, 20, 20);
 
 }
@@ -1883,12 +1883,91 @@ section {
     margin: 20px 0 0 0;
 }
 
+.checkout_main_left_three {
+    background-color: #FFFFFF;
+    padding: 20px 20px;
+    margin: 20px 0 0 0;
+}
+
+.checkout_main_left_three_pttt label {
+    display: flex;
+    padding: 10px 0;
+}
+
+.checkout_main_left_three_img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.checkout_main_left_three_img img {
+    width: 100%;
+    height: 100%;
+}
+
 /*-------------------------------END CHECKOUT---------------------------------------*/
 
-/*------------------------------- START ---------------------------------------*/
+/*------------------------------- START CONTACT---------------------------------------*/
+.contact_main {
+    padding-top: 40px;
+}
 
+.contact_left {
+    background-color: #fff;
+    padding: 20px 0 10px 20px;
+}
 
-/*-------------------------------END ---------------------------------------*/
+.contact_left_content h2 {
+    font-size: 1.6rem;
+    line-height: 2rem;
+}
+
+.contact_left_content ul li {
+    font-size: 1rem;
+    line-height: 2rem;
+    list-style: none;
+}
+
+.contact_left_content ul li i {
+    padding-right: 10px;
+}
+
+.contact_right {
+    background-color: #fff;
+    padding: 20px 20px 10px 20px;
+}
+
+.contact_right_title h2 {
+    font-size: 1.6rem;
+    line-height: 2rem;
+}
+
+.input_form_contact {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+    padding: 10px 0;
+}
+
+.contact_input {
+    display: block;
+    padding: 10px 10px;
+    outline: none;
+    border: 1px solid #f4f1f1;
+}
+
+.contact_textarea {
+    display: block;
+    padding: 10px 10px;
+    outline: none;
+    border: 1px solid #f4f1f1;
+}
+
+.input_form_contact_2 {
+    padding: 10px 10px;
+}
+
+/*-------------------------------END CONTACT---------------------------------------*/
 
 /*------------------------------- START ---------------------------------------*/
 
