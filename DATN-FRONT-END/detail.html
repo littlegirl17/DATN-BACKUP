@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="icon" type="image/png" href="{{ asset('uploads/HK.png') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v6.4.0/css/all.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+      integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- START NAV -->
+    <nav class="nav_box">
+      <div class="container">
+        <div class="nav_box_item">
+          <div class="nav-brand">
+            <a href="#" class="toggle-menu">
+              <i class="fas fa-bars"></i>
+            </a>
+            <div><h3>IMAGE</h3></div>
+          </div>
+          <div class="nav_box_menu">
+            <ul class="nav_box_menu_item show-menu">
+              <li><a href="#">Trang chủ</a></li>
+              <li class="parent-menu">
+                <a href="category.html" class="toggle-submenu"
+                  >Bộ theo chủ đề</a
+                >
+              </li>
+              <li><a href="#">Về chúng tôi</a></li>
+              <li><a href="#">Liên hệ</a></li>
+              <li><a href="#">Bài viết </a></li>
+            </ul>
+          </div>
+          <div class="nav_box_menu_right">
+            <div class="">
+              <div class="containerInput">
+                <input checked="" class="checkbox" type="checkbox" />
+                <div class="mainbox">
+                  <div class="iconContainer">
+                    <svg
+                      viewBox="0 0 512 512"
+                      height="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="search_icon"
+                    >
+                      <path
+                        d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <input
+                    class="search_input"
+                    placeholder="search"
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="">
+              <i class="fa-solid fa-bag-shopping text-light"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main_bar_menu submenu">
+        <div class="button_close_back">
+          <div class=""><p class="back-button">Back</p></div>
+          <div class="submenu_close"><p class="close-button">X</p></div>
+        </div>
+        <ul class="main_bar_menu_title">
+          <li><a href="#">Trang chủ</a></li>
+          <li class="d-flex justify-content-between align-items-center">
+            <a href="#" class="toggle-submenu">Bộ theo chủ đề</a>
+            <i class="fa-solid fa-chevron-right"></i>
+          </li>
+          <li><a href="#">Về chúng tôi</a></li>
+          <li><a href="#">Liên hệ</a></li>
+          <li><a href="#">Bài viết </a></li>
+        </ul>
+        <ul class="main_bar_menu_list">
+          <li><a href="category.html">Xem tất cả chủ đề</a></li>
+          <li><a href="#">danh muc con</a></li>
+          <li><a href="#">danh muc con</a></li>
+          <li><a href="#">danh muc con</a></li>
+          <li><a href="#">danh muc con</a></li>
+          <li><a href="#">danh muc con</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- END NAV -->
+
+    <!-- START MAIN -->
+
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-md-8 col-12">
+          <div class="detail_product_left">
+            <div class="detail_product_left_img_item">
+              <ul>
+                <li><img src="img/city-product-5.webp" alt="" /></li>
+                <li><img src="img/city-product-3.webp" alt="" /></li>
+                <li><img src="img/city-product-4.webp" alt="" /></li>
+                <li><img src="img/city-product-1.webp" alt="" /></li>
+                <li><img src="img/city-product-5.webp" alt="" /></li>
+                <li><img src="img/city-product-3.webp" alt="" /></li>
+                <li><img src="img/city-product-4.webp" alt="" /></li>
+                <li><img src="img/city-product-1.webp" alt="" /></li>
+                <li><img src="img/city-product-5.webp" alt="" /></li>
+                <li><img src="img/city-product-3.webp" alt="" /></li>
+                <li><img src="img/city-product-4.webp" alt="" /></li>
+                <li><img src="img/city-product-1.webp" alt="" /></li>
+              </ul>
+            </div>
+            <div class="detail_product_left_img">
+              <img src="img/city-product-1.webp" alt="" />
+              <div class="detail_prev_next">
+                <button class="prev_detail_img" id="prevBtn"><</button>
+                <button class="next_detail_img" id="nextBtn">></button>
+              </div>
+              <div class="detail_product_left_img_item_res">
+                <ul>
+                  <li><img src="img/city-product-5.webp" alt="" /></li>
+                  <li><img src="img/city-product-3.webp" alt="" /></li>
+                  <li><img src="img/city-product-4.webp" alt="" /></li>
+                  <li><img src="img/city-product-1.webp" alt="" /></li>
+                  <li><img src="img/city-product-5.webp" alt="" /></li>
+                  <li><img src="img/city-product-3.webp" alt="" /></li>
+                  <li><img src="img/city-product-4.webp" alt="" /></li>
+                  <li><img src="img/city-product-1.webp" alt="" /></li>
+                  <li><img src="img/city-product-5.webp" alt="" /></li>
+                  <li><img src="img/city-product-3.webp" alt="" /></li>
+                  <li><img src="img/city-product-1.webp" alt="" /></li>
+                  <li><img src="img/city-product-5.webp" alt="" /></li>
+                  <li><img src="img/city-product-3.webp" alt="" /></li>
+                  <li><img src="img/city-product-4.webp" alt="" /></li>
+                  <li><img src="img/city-product-1.webp" alt="" /></li>
+                  <li><img src="img/city-product-5.webp" alt="" /></li>
+                  <li><img src="img/city-product-3.webp" alt="" /></li>
+                  <li><img src="img/city-product-4.webp" alt="" /></li>
+                  <li><img src="img/city-product-1.webp" alt="" /></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-12">
+          <div class="detail_product_right">
+            <div class="detail_product_right_one">
+              <span>Còn hàng</span>
+            </div>
+            <div class="detail_product_right_two">
+              <h1>Mercedes-Benz G 500 PROFESSIONAL Line</h1>
+            </div>
+            <div class="detail_product_right_three">
+              <span>100.000đ</span>90.000đ
+            </div>
+            <div class="detail_product_right_four">
+              <div class="detail_product_right_four_item">
+                <button class="right_four_item_decrease">-</button>
+                <input type="text" class="right_four_item_number" value="1" />
+                <button class="right_four_item_increase">+</button>
+              </div>
+              <div class="detail_product_right_four_span">
+                <span>Giới hạn 5</span>
+              </div>
+            </div>
+            <div class="detail_product_right_five">
+              <div class="right_five_bnt">
+                <button class="detail_btn">Mua ngay</button>
+                <button class="detail_btn">Thêm vào giỏ hàng</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container mt-5 accordion-section">
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseOne"
+              aria-expanded="false"
+              aria-controls="flush-collapseOne"
+            >
+              Thông số kỹ thuật
+            </button>
+          </h2>
+          <div
+            id="flush-collapseOne"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <div class="row">
+                <div class="col-md-9 col-sm-8 col-12">
+                  <p>
+                    Những cuộc phiêu lưu thú vị đang ở phía trước với LEGO® City
+                    Arctic Explorer Ship (60368) hùng mạnh. Chiếc thuyền đồ chơi
+                    khổng lồ có thể nổi này được trang bị đầy đủ chi tiết chân
+                    thực cho những cuộc phiêu lưu khám phá giàu trí tưởng tượng.
+                    Bộ đồ chơi cao cấp này cũng bao gồm một máy bay trực thăng,
+                    xuồng, tàu ngầm ROV dưới nước và một xác tàu đắm của người
+                    Viking, cùng với một rương kho báu, 7 nhân vật nhỏ và một
+                    nhân vật cá voi sát thủ.
+                  </p>
+                  <p>
+                    Trò chơi xây dựng kỹ thuật số thú vị dành cho trẻ em từ 7
+                    tuổi trở lên Ứng dụng LEGO Builder hướng dẫn trẻ nhỏ vào
+                    cuộc phiêu lưu xây dựng trực quan với các công cụ cho phép
+                    trẻ phóng to và xoay mô hình 3D, theo dõi quá trình xây dựng
+                    cũng như khám phá và lưu các bộ đồ chơi ảo.
+                  </p>
+                  <p>
+                    Những cuộc phiêu lưu không giới hạn Trẻ em lớn lên trong môi
+                    trường xung quanh là những phương tiện và máy móc tuyệt vời,
+                    và với bộ lắp ghép LEGO City, trẻ em có thể khám phá chúng
+                    một cách gần gũi với các mô hình thực tế và các nhân vật vui
+                    nhộn truyền cảm hứng cho trò chơi mở, giàu trí tưởng tượng.
+                    Kết hợp bộ này với các bộ khác trong dòng LEGO City để có
+                    thêm nhiều niềm vui.
+                  </p>
+                </div>
+                <div class="col-md-3 col-sm-4 col-12">
+                  <div class="detail_accordion_img">
+                    <img src="img/city-product-1.webp" alt="" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseTwo"
+              aria-expanded="false"
+              aria-controls="flush-collapseTwo"
+            >
+              Phản hồi khách hàng (10) đánh giá
+            </button>
+          </h2>
+          <div
+            id="flush-collapseTwo"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              <div class="product_review">
+                <ul>
+                  <li>
+                    <p>Ngày 6 tháng 3 năm 2022</p>
+                    <span class="product_review_name">HuynhKha</span>
+                    <span class="product_review_content"
+                      >Tôi thực sự thích bản dựng này, hệ thống treo thanh đẩy
+                      được triển khai rất tốt, thiết kế rất phù hợp với chiếc xe
+                      thật, là một người hâm mộ F1 lớn, đây là điều bắt buộc,
+                      bản dựng khá nhanh nhưng sản phẩm cuối cùng trông thật
+                      tuyệt vời.</span
+                    >
+                    <div class="product_review_img">
+                      <button class="product_review_imgbtn">
+                        <img src="img/city-product-1.webp" alt="" />
+                      </button>
+                      <button class="product_review_imgbtn">
+                        <img src="img/city-product-5.webp" alt="" />
+                      </button>
+                      <button class="product_review_imgbtn">
+                        <img src="img/city-product-1.webp" alt="" />
+                      </button>
+                      <button class="product_review_imgbtn">
+                        <img src="img/city-product-4.webp" alt="" />
+                      </button>
+                      <button class="product_review_imgbtn">
+                        <img src="img/city-product-3.webp" alt="" />
+                      </button>
+                    </div>
+                  </li>
+                  <li>
+                    <p>Ngày 6 tháng 3 năm 2022</p>
+                    <span class="product_review_name">HuynhKha</span>
+                    <span class="product_review_content"
+                      >Tôi thực sự thích bản dựng này, hệ thống treo thanh đẩy
+                      được triển khai rất tốt, thiết kế rất phù hợp với chiếc xe
+                      thật, là một người hâm mộ F1 lớn, đây là điều bắt buộc,
+                      bản dựng khá nhanh nhưng sản phẩm cuối cùng trông thật
+                      tuyệt vời.</span
+                    >
+                    <div class="product_review_img">
+                      <button class="product_review_imgbtn">
+                        <img src="img/city-product-1.webp" alt="" />
+                      </button>
+                    </div>
+                  </li>
+                  <li>
+                    <p>Ngày 6 tháng 3 năm 2022</p>
+                    <span class="product_review_name">HuynhKha</span>
+                    <span class="product_review_content"
+                      >Tôi thực sự thích bản dựng này, hệ thống treo thanh đẩy
+                      được triển khai rất tốt, thiết kế rất phù hợp với chiếc xe
+                      thật, là một người hâm mộ F1 lớn, đây là điều bắt buộc,
+                      bản dựng khá nhanh nhưng sản phẩm cuối cùng trông thật
+                      tuyệt vời.</span
+                    >
+                    <div class="product_review_img">
+                      <button class="product_review_imgbtn">
+                        <img src="img/city-product-1.webp" alt="" />
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button
+              class="accordion-button collapsed"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#flush-collapseThree"
+              aria-expanded="false"
+              aria-controls="flush-collapseThree"
+            >
+              Accordion Item #3
+            </button>
+          </h2>
+          <div
+            id="flush-collapseThree"
+            class="accordion-collapse collapse"
+            data-bs-parent="#accordionFlushExample"
+          >
+            <div class="accordion-body">
+              Placeholder content for this accordion, which is intended to
+              demonstrate the <code>.accordion-flush</code> class. This is the
+              third item's accordion body. Nothing more exciting happening here
+              in terms of content, but just filling up the space to make it
+              look, at least at first glance, a bit more representative of how
+              this would look in a real-world application.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section class="detail_product_section">
+      <div class="container">
+        <div class="title_home">
+          <h2 class="">Đề xuất cho bạn</h2>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="product_box">
+              <div class="product_box_effect">
+                <div class="product_box_tag">Nổi bật</div>
+                <div class="product_box_icon">
+                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-regular fa-eye"></i>
+                  <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <div class="product_box_image">
+                  <img src="img/product-test.webp" alt="" />
+                </div>
+                <div class="product_box_content_out">
+                  <div class="product_box_content">
+                    <h3><a href="">Tên sản phẩm</a></h3>
+                  </div>
+                  <div class="product_box_price">
+                    <span>100.000đ</span>90.000đ
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="product_box">
+              <div class="product_box_effect">
+                <div class="product_box_tag">Nổi bật</div>
+                <div class="product_box_icon">
+                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-regular fa-eye"></i>
+                  <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <div class="product_box_image">
+                  <img src="img/product-test.webp" alt="" />
+                </div>
+                <div class="product_box_content_out">
+                  <div class="product_box_content">
+                    <h3><a href="">Tên sản phẩm</a></h3>
+                  </div>
+                  <div class="product_box_price">
+                    <span>100.000đ</span>90.000đ
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="product_box">
+              <div class="product_box_effect">
+                <div class="product_box_tag">Nổi bật</div>
+                <div class="product_box_icon">
+                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-regular fa-eye"></i>
+                  <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <div class="product_box_image">
+                  <img src="img/product-test.webp" alt="" />
+                </div>
+                <div class="product_box_content_out">
+                  <div class="product_box_content">
+                    <h3><a href="">Tên sản phẩm</a></h3>
+                  </div>
+                  <div class="product_box_price">
+                    <span>100.000đ</span>90.000đ
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="product_box">
+              <div class="product_box_effect">
+                <div class="product_box_tag">Nổi bật</div>
+                <div class="product_box_icon">
+                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-regular fa-eye"></i>
+                  <i class="fa-solid fa-bag-shopping"></i>
+                </div>
+                <div class="product_box_image">
+                  <img src="img/product-test.webp" alt="" />
+                </div>
+                <div class="product_box_content_out">
+                  <div class="product_box_content">
+                    <h3><a href="">Tên sản phẩm</a></h3>
+                  </div>
+                  <div class="product_box_price">
+                    <span>100.000đ</span>90.000đ
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div id="modal_review" class="modal_review">
+      <div class="modal_review_box">
+        <span class="close my-0">&times;</span>
+        <div id="modal_review_box_img"></div>
+      </div>
+    </div>
+
+    <!-- END MAIN -->
+
+    <footer class="footer_home">
+      <div class="footer_home_main">
+        <div class="footer_main_column">
+          <div class="footer_main_column_item">
+            <div class="footer_main_column_item_img">
+              <img src="img/logo-ngang.png" alt="" />
+            </div>
+            <div class="footer_main_column_item_content">
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer_main_column">
+          <div class="footer_main_column_item">
+            <div class="footer_main_column_item_title">
+              <h3>Về chúng tôi</h3>
+            </div>
+            <div class="footer_main_column_item_content">
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer_main_column">
+          <div class="footer_main_column_item">
+            <div class="footer_main_column_item_title">
+              <h3>Về chúng tôi</h3>
+            </div>
+            <div class="footer_main_column_item_content">
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer_main_column">
+          <div class="footer_main_column_item">
+            <div class="footer_main_column_item_title">
+              <h3>Về chúng tôi</h3>
+            </div>
+            <div class="footer_main_column_item_content">
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>

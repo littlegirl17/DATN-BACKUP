@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="icon" type="image/png" href="{{ asset('uploads/HK.png') }}" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v6.4.0/css/all.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
+      integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css"
+      integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw=="
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <!-- START NAV -->
+    <header class="header_top">
+      <div class="container">
+        <div class="header_top_main">
+          <div class="header_top_item">
+            <div class="header_top_item_child">
+              <span class="header_top_item_span"
+                ><i class="fa-regular fa-clock pe-1" style="color: #ffffff"></i
+                >7:00 - 22:00</span
+              >
+              <span class="ps-2"
+                ><i class="fa-solid fa-phone pe-1" style="color: #ffffff"></i
+                >0353123771</span
+              >
+            </div>
+          </div>
+
+          <div class="header_top_item">
+            <span
+              ><i
+                class="fa-solid fa-location-dot pe-1"
+                style="color: #ffffff"
+              ></i
+              >Hệ thông cửa hàng</span
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+    <nav class="nav_box">
+      <div class="container">
+        <div class="nav_box_item">
+          <div class="nav-brand">
+            <a href="#" class="toggle-menu">
+              <i class="fas fa-bars"></i>
+            </a>
+            <div class="nav_img_logo">
+              <img src="img/legoloft.png" alt="" />
+            </div>
+          </div>
+          <div class="nav_box_menu">
+            <ul class="nav_box_menu_item show-menu">
+              <li><a href="#">Trang chủ</a></li>
+              <li class="parent-menu">
+                <a href="category.html" class="toggle-submenu"
+                  >Bộ theo chủ đề</a
+                >
+              </li>
+              <li><a href="#">Về chúng tôi</a></li>
+              <li><a href="#">Liên hệ</a></li>
+              <li><a href="#">Bài viết </a></li>
+            </ul>
+          </div>
+          <div class="nav_box_menu_right">
+            <div class="">
+              <div class="containerInput">
+                <input checked="" class="checkbox" type="checkbox" />
+                <div class="mainbox">
+                  <div class="iconContainer">
+                    <svg
+                      viewBox="0 0 512 512"
+                      height="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="search_icon"
+                    >
+                      <path
+                        d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+                      ></path>
+                    </svg>
+                  </div>
+                  <input
+                    class="search_input"
+                    placeholder="Tìm kiếm..."
+                    type="text"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="header_user_click">
+              <div class="header_user_img">
+                <img src="img/user.svg" alt="" />
+              </div>
+              <div class="header_user_content">
+                <div class="header_user_content_moc_item">
+                  <img src="img/legomini.svg" alt="" />
+                </div>
+                <div class="m-0 p-0">
+                  <div class="btn_contain">
+                    <button class="btn-login">Đăng nhập</button>
+                  </div>
+                  <div class="btn_contain">
+                    <button class="btn-register">Đăng ký</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="">
+              <img src="img/cart.svg" alt="" />
+            </div>
+          </div>
+        </div>
+        <div class="nav_box_menu_right_mobile">
+          <input type="text" placeholder="Tìm kiếm tại đây..." />
+        </div>
+      </div>
+      <div class="main_bar_menu_bg">
+        <div class="main_bar_menu submenu">
+          <div class="button_close_back">
+            <div class=""><p class="back-button">Back</p></div>
+            <div class="submenu_close"><p class="close-button">X</p></div>
+          </div>
+          <ul class="main_bar_menu_title">
+            <li><a href="#">Trang chủ</a></li>
+            <li class="d-flex justify-content-between align-items-center">
+              <a href="#" class="main_bar_menu_title_item">Bộ theo chủ đề</a>
+              <i class="fa-solid fa-chevron-right"></i>
+            </li>
+            <li><a href="#">Về chúng tôi</a></li>
+            <li><a href="#">Liên hệ</a></li>
+            <li><a href="#">Bài viết </a></li>
+          </ul>
+          <ul class="main_bar_menu_list">
+            <li><a href="category.html">Xem tất cả chủ đề</a></li>
+            <li class="main_bar_menu_list_item">
+              <a href="#" data-category-id="{{ $category->id }}"
+                >danh muc con</a
+              >
+            </li>
+            <li class="main_bar_menu_list_item">
+              <a href="#">danh muc con</a>
+            </li>
+            <li class="main_bar_menu_list_item">
+              <a href="#">danh muc con</a>
+            </li>
+            <li class="main_bar_menu_list_item">
+              <a href="#">danh muc con</a>
+            </li>
+            <li class="main_bar_menu_list_item">
+              <a href="#">danh muc con</a>
+            </li>
+          </ul>
+          <ul class="main_bar_submenu_list">
+            <div
+              class="submenu-category"
+              data-category-id="{{ $category->id }}"
+              style="display: none"
+            >
+              <li><a href="#">danh muc con1</a></li>
+            </div>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- END NAV -->
+
+    <!-- START BANNER -->
+    <div class="">
+      <div class="banner_home">
+        <div class="banner_home_image">
+          <img src="img/banner-home-1.webp" alt="" />
+        </div>
+        <div class="banner_home_text">
+          <div class="banner_home_text_logo">
+            <img src="img/logo-ngang.png" alt="" />
+          </div>
+          <h2 class="banner_home_text_h2">Đặt hàng trước bộ LEGO</h2>
+          <span class="banner_home_text_span"
+            >Cho đến khi hết hàng giao từ ngày 30/8</span
+          >
+          <a href="" class="banner_home_text_btn"
+            >Mua ngay <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </div>
+      </div>
+      <div class="banner_home_mobile">
+        <div class="banner_home_mobile_image">
+          <img src="img/banner-home-mobile-1.webp" alt="" />
+        </div>
+        <!-- <div class="banner_home_mobile_image_logo">
+          <img src="img/logo-ngang.png" alt="" />
+        </div> -->
+        <div class="banner_home_mobile_text">
+          <h2 class="banner_home_mobile_text_h2">Đặt hàng trước bộ LEGO</h2>
+          <span class="banner_home_mobile_text_span"
+            >Cho đến khi hết hàng giao từ ngày 30/8</span
+          >
+          <a href="" class="banner_home_mobile_text_btn"
+            >Mua ngay <i class="fa-solid fa-chevron-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- END BANNER -->
+
+    <div class="background_home">
+      <!-- START CATEGORY -->
+      <div class="container">
+        <div class="image_category">
+          <ul class="image_category_ul">
+            <li class="">
+              <a href="" class="text-decoration-none">
+                <img src="img/category-1.webp" alt="" />
+                <div class="image_category_span">
+                  <span>Tốc độ</span>
+                </div>
+              </a>
+            </li>
+            <li class="">
+              <a href="" class="text-decoration-none">
+                <img src="img/category-1.webp" alt="" />
+                <div class="image_category_span">
+                  <span>Tốc độ</span>
+                </div>
+              </a>
+            </li>
+            <li class="">
+              <a href="" class="text-decoration-none">
+                <img src="img/category-1.webp" alt="" />
+                <div class="image_category_span">
+                  <span>Tốc độ</span>
+                </div>
+              </a>
+            </li>
+            <li class="">
+              <a href="" class="text-decoration-none">
+                <img src="img/category-1.webp" alt="" />
+                <div class="image_category_span">
+                  <span>Tốc độ</span>
+                </div>
+              </a>
+            </li>
+            <li class="">
+              <a href="" class="text-decoration-none">
+                <img src="img/category-1.webp" alt="" />
+                <div class="image_category_span">
+                  <span>Tốc độ</span>
+                </div>
+              </a>
+            </li>
+            <li class="">
+              <a href="" class="text-decoration-none">
+                <img src="img/category-1.webp" alt="" />
+                <div class="image_category_span">
+                  <span>Tốc độ</span>
+                </div>
+              </a>
+            </li>
+            <li class="">
+              <a href="" class="text-decoration-none">
+                <img src="img/category-1.webp" alt="" />
+                <div class="image_category_span">
+                  <span>Tốc độ</span>
+                </div>
+              </a>
+            </li>
+            <li class="">
+              <a href="" class="text-decoration-none">
+                <img src="img/category-1.webp" alt="" />
+                <div class="image_category_span">
+                  <span>Tốc độ</span>
+                </div>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- END CATEGORY -->
+
+      <!-- START LỰA CHỌN -->
+      <section class="product">
+        <div class="container">
+          <div class="title_home">
+            <h2>Những lựa chọn hàng đầu trong tuần này</h2>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card_box">
+                <div class="card_box_img">
+                  <img src="img/box_choice_1.webp" alt="" />
+                </div>
+                <div class="card_box_content">
+                  <h3>Đặt hàng trước bộ LEGO® Fortnite mới</h3>
+                  <p>Cho đến khi hết hàng. Giao hàng từ ngày 10/1.</p>
+                </div>
+                <div class="card_box_btn">
+                  <a href="">Đặt hàng trước </a>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card_box">
+                <div class="card_box_img">
+                  <img src="img/box_choice_1.webp" alt="" />
+                </div>
+                <div class="card_box_content">
+                  <h3>Đặt hàng trước bộ LEGO® Fortnite mới</h3>
+                  <p>Cho đến khi hết hàng. Giao hàng từ ngày 10/1.</p>
+                </div>
+                <div class="card_box_btn">
+                  <a href="">Đặt hàng trước </a>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card_box">
+                <div class="card_box_img">
+                  <img src="img/box_choice_1.webp" alt="" />
+                </div>
+                <div class="card_box_content">
+                  <h3>Đặt hàng trước bộ LEGO® Fortnite mới</h3>
+                  <p>Cho đến khi hết hàng. Giao hàng từ ngày 10/1.</p>
+                </div>
+                <div class="card_box_btn">
+                  <a href="">Đặt hàng trước </a>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END LỰA CHỌN -->
+
+      <!-- START PRODUCT NỔI BẬT -->
+      <section class="product">
+        <div class="container">
+          <div class="title_home">
+            <h2>Sản phẩm nổi bật</h2>
+          </div>
+          <div class="owl-carousel owl-theme">
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag">Nổi bật</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <button
+                      class="outline-0 border-0 bg-white"
+                      onclick="showModalProduct()"
+                    >
+                      <i class="fa-regular fa-eye"></i>
+                    </button>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag">Nổi bật</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <button
+                      class="outline-0 border-0 bg-white"
+                      onclick="showModalProduct()"
+                    >
+                      <i class="fa-regular fa-eye"></i>
+                    </button>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag">Nổi bật</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <button
+                      class="outline-0 border-0 bg-white"
+                      onclick="showModalProduct()"
+                    >
+                      <i class="fa-regular fa-eye"></i>
+                    </button>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag">Nổi bật</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <button
+                      class="outline-0 border-0 bg-white"
+                      onclick="showModalProduct()"
+                    >
+                      <i class="fa-regular fa-eye"></i>
+                    </button>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END PRODUCT NỔI BẬT -->
+      <div id="modal_home" class="modal_product_main">
+        <div class="modal_product_content">
+          <div id="close_modal" class="modal_product_content_one">
+            <i class="fa-solid fa-xmark"></i>
+          </div>
+          <div class="modal_product_content_two">
+            <div class="" style="max-width: 400px">
+              <div class="modal_product_content_two_img">
+                <img src="img/city-product-1.webp" alt="" />
+              </div>
+              <div class="modal_product_left_img">
+                <div class="modal_product_left_img_item_res">
+                  <ul>
+                    <li>
+                      <div class="modal_product_left_img">
+                        <img src="img/city-product-5.webp" alt="" />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="modal_product_left_img">
+                        <img src="img/city-product-3.webp" alt="" />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="modal_product_left_img">
+                        <img src="img/city-product-1.webp" alt="" />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="modal_product_left_img">
+                        <img src="img/city-product-4.webp" alt="" />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="modal_product_left_img">
+                        <img src="img/city-product-5.webp" alt="" />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="modal_product_left_img">
+                        <img src="img/city-product-5.webp" alt="" />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="modal_product_left_img">
+                        <img src="img/city-product-5.webp" alt="" />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="modal_product_left_img">
+                        <img src="img/city-product-5.webp" alt="" />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="modal_product_left_img">
+                        <img src="img/city-product-5.webp" alt="" />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="modal_product_left_img">
+                        <img src="img/city-product-5.webp" alt="" />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="modal_product_content_two_content">
+              <div class=""><h2>Mô hình lego thành phố</h2></div>
+              <div class="product_box_price"><span>100.000đ</span>90.000đ</div>
+              <div class="detail_product_right_four py-3">
+                <div class="detail_product_right_four_item">
+                  <button class="right_four_item_decrease">-</button>
+                  <input type="text" class="right_four_item_number" value="1" />
+                  <button class="right_four_item_increase">+</button>
+                </div>
+                <div class="detail_product_right_four_span">
+                  <span>Giới hạn 5</span>
+                </div>
+              </div>
+              <div class="modal_btn">
+                <button class="modal_btn_item">Mua ngay</button>
+                <button class="modal_btn_item">Thêm vào giỏ hàng</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- START PRODUCT GIẢM GIÁ -->
+      <section class="product">
+        <div class="container">
+          <div class="title_home">
+            <h2>Sản phẩm giảm giá</h2>
+          </div>
+          <div class="owl-carousel owl-theme">
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag_sale">50%</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag_sale">50%</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag_sale">50%</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag_sale">50%</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END PRODUCT GIẢM GIÁ  -->
+
+      <div class="banner_home_main">
+        <div class="banner_home_theme">
+          <div class="banner_home_theme_main">
+            <img src="img/banner-category-home.webp" alt="" />
+          </div>
+          <div class="banner_home_theme_content">
+            <h2>Phép thuật ở mọi lứa tuổi</h2>
+            <span
+              >Khám phá bộ sản phẩm LEGO® | Disney mới dành cho trẻ em và những
+              người có tâm hồn trẻ thơ.</span
+            >
+            <a href="" class=""
+              >Mua ngay <i class="fa-solid fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="banner_home_theme_mobile">
+          <div class="banner_home_theme_main_mobile">
+            <img src="img/banner_category_home_mobie.webp" alt="" />
+          </div>
+          <div class="banner_home_theme_content_mobile">
+            <h2>Phép thuật ở mọi lứa tuổi</h2>
+            <span
+              >Khám phá bộ sản phẩm LEGO® | Disney mới dành cho trẻ em và những
+              người có tâm hồn trẻ thơ.</span
+            >
+            <a href="" class=""
+              >Mua ngay <i class="fa-solid fa-chevron-right"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <section class="section_product_theme">
+        <div class="container">
+          <div class="title_home">
+            <h2>Bộ LEGO® | Disney</h2>
+          </div>
+          <div class="owl-carousel owl-theme">
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                    <div class="product_box_content_soldout">
+                      <p>+100 lượt mua</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                    <div class="product_box_content_soldout">
+                      <p>+100 lượt mua</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                    <div class="product_box_content_soldout">
+                      <p>+100 lượt mua</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                    <div class="product_box_content_soldout">
+                      <p>+100 lượt mua</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- START PRODUCT BÁN CHẠY -->
+      <section class="product">
+        <div class="container">
+          <div class="title_home">
+            <h2>Sản phẩm bán chạy</h2>
+          </div>
+          <div class="owl-carousel owl-theme">
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag_soldout">Hot</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                    <div class="product_box_content_soldout">
+                      <p>+100 lượt mua</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag_soldout">Hot</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                    <div class="product_box_content_soldout">
+                      <p>+100 lượt mua</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag_soldout">Hot</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                    <div class="product_box_content_soldout">
+                      <p>+100 lượt mua</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag_soldout">Hot</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                    <div class="product_box_content_soldout">
+                      <p>+100 lượt mua</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END PRODUCT BÁN CHÁY-->
+
+      <!-- START PRODUCT HẾT HÀNG -->
+      <section class="product">
+        <div class="container">
+          <div class="title_home">
+            <h2>Sản phẩm hết hàng</h2>
+          </div>
+          <div class="owl-carousel owl-theme">
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag_soldout">Hết hàng</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image_black">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                    <div class="product_box_content_soldout">
+                      <p>+100 lượt mua</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag_soldout">Hết hàng</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image_black">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                    <div class="product_box_content_soldout">
+                      <p>+100 lượt mua</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag_soldout">Hết hàng</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image_black">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                    <div class="product_box_content_soldout">
+                      <p>+100 lượt mua</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="product_box">
+                <div class="product_box_effect">
+                  <div class="product_box_tag_soldout">Hết hàng</div>
+                  <div class="product_box_icon">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-eye"></i>
+                    <i class="fa-solid fa-bag-shopping"></i>
+                  </div>
+                  <div class="product_box_image_black">
+                    <img src="img/product-test.webp" alt="" />
+                  </div>
+                  <div class="product_box_content_out">
+                    <div class="product_box_content">
+                      <h3><a href="">Tên sản phẩm</a></h3>
+                    </div>
+                    <div class="product_box_price">
+                      <span>100.000đ</span>90.000đ
+                    </div>
+                    <div class="product_box_content_soldout">
+                      <p>+100 lượt mua</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END PRODUCT HẾT HÀNG -->
+
+      <!-- START BÀI VIẾT -->
+      <section>
+        <div class="container">
+          <div class="title_btn_blog">
+            <div class="title_home_blog">
+              <h2>Đọc tất cả về nó</h2>
+            </div>
+            <div class="btn_home_blog"><a href="">Xem tất cả bài viết</a></div>
+          </div>
+          <div class="owl-carousel owl-theme">
+            <div class="item">
+              <div class="blog_box">
+                <div class="blog_box_effect">
+                  <div class="blog_box_image">
+                    <img src="img/image_blog_1.webp" alt="" />
+                  </div>
+                  <div class="blog_box_content_out">
+                    <div class="blog_box_content">
+                      <h3>
+                        <a href="">Khám phá bộ LEGO® Technic™ McLaren P1™</a>
+                      </h3>
+                      <span
+                        >Một trong những chiếc xe được săn đón nhiều nhất trên
+                        thế giới hiện là một bộ LEGO®. Hãy cùng chúng tôi xem
+                        xét kỹ hơn siêu xe LEGO Technic™ McLaren P1™ mới.</span
+                      >
+                      <a href=""
+                        >Đọc thêm <i class="fa-solid fa-chevron-right"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="blog_box">
+                <div class="blog_box_effect">
+                  <div class="blog_box_image">
+                    <img src="img/image_blog_1.webp" alt="" />
+                  </div>
+                  <div class="blog_box_content_out">
+                    <div class="blog_box_content">
+                      <h3>
+                        <a href="">Khám phá bộ LEGO® Technic™ McLaren P1™</a>
+                      </h3>
+                      <span
+                        >Một trong những chiếc xe được săn đón nhiều nhất trên
+                        thế giới hiện là một bộ LEGO®. Hãy cùng chúng tôi xem
+                        xét kỹ hơn siêu xe LEGO Technic™ McLaren P1™ mới.</span
+                      >
+                      <a href=""
+                        >Đọc thêm <i class="fa-solid fa-chevron-right"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="blog_box">
+                <div class="blog_box_effect">
+                  <div class="blog_box_image">
+                    <img src="img/image_blog_1.webp" alt="" />
+                  </div>
+                  <div class="blog_box_content_out">
+                    <div class="blog_box_content">
+                      <h3>
+                        <a href="">Khám phá bộ LEGO® Technic™ McLaren P1™</a>
+                      </h3>
+                      <span
+                        >Một trong những chiếc xe được săn đón nhiều nhất trên
+                        thế giới hiện là một bộ LEGO®. Hãy cùng chúng tôi xem
+                        xét kỹ hơn siêu xe LEGO Technic™ McLaren P1™ mới.</span
+                      >
+                      <a href=""
+                        >Đọc thêm <i class="fa-solid fa-chevron-right"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="item">
+              <div class="blog_box">
+                <div class="blog_box_effect">
+                  <div class="blog_box_image">
+                    <img src="img/image_blog_1.webp" alt="" />
+                  </div>
+                  <div class="blog_box_content_out">
+                    <div class="blog_box_content">
+                      <h3>
+                        <a href="">Khám phá bộ LEGO® Technic™ McLaren P1™</a>
+                      </h3>
+                      <span
+                        >Một trong những chiếc xe được săn đón nhiều nhất trên
+                        thế giới hiện là một bộ LEGO®. Hãy cùng chúng tôi xem
+                        xét kỹ hơn siêu xe LEGO Technic™ McLaren P1™ mới.</span
+                      >
+                      <a href=""
+                        >Đọc thêm <i class="fa-solid fa-chevron-right"></i
+                      ></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- END BÀI VIẾT -->
+    </div>
+    <footer class="footer_home">
+      <div class="footer_home_main">
+        <div class="footer_main_column">
+          <div class="footer_main_column_item">
+            <div class="footer_main_column_item_img">
+              <img src="img/logo-ngang.png" alt="" />
+            </div>
+            <div class="footer_main_column_item_content">
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer_main_column">
+          <div class="footer_main_column_item">
+            <div class="footer_main_column_item_title">
+              <h3>Về chúng tôi</h3>
+            </div>
+            <div class="footer_main_column_item_content">
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer_main_column">
+          <div class="footer_main_column_item">
+            <div class="footer_main_column_item_title">
+              <h3>Về chúng tôi</h3>
+            </div>
+            <div class="footer_main_column_item_content">
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer_main_column">
+          <div class="footer_main_column_item">
+            <div class="footer_main_column_item_title">
+              <h3>Về chúng tôi</h3>
+            </div>
+            <div class="footer_main_column_item_content">
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+              <a href="">LEGO LEGO LEGO</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Jquery -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Owl Carousel -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+      integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/index.js"></script>
+    <script>
+      $(document).ready(function () {
+        $(".owl-carousel").owlCarousel({
+          loop: true,
+          margin: 10,
+          nav: true,
+          responsive: {
+            0: {
+              items: 1,
+            },
+            600: {
+              items: 3,
+            },
+            1000: {
+              items: 4,
+            },
+          },
+        });
+      });
+    </script>
+    <script>
+      // ------------------------- CLICK HEADER USER -----------------------
+
+      const userImg = document.querySelector(".header_user_img");
+      const userContent = document.querySelector(".header_user_content");
+      const headerUserClick = document.querySelector(".header_user_click");
+      userImg.addEventListener("click", function () {
+        userContent.style.opacity = 1;
+      });
+
+      window.addEventListener("click", function (event) {
+        if (!headerUserClick.contains(event.target)) {
+          //Hàm này kiểm tra xem phần tử được nhấp chuột có nằm trong header_user_click hay không. Nếu không, tức là bạn đã nhấp ra ngoài, và userContent sẽ được ẩn đi.
+          userContent.style.opacity = 0;
+        }
+      });
+    </script>
+    <script>
+      function showModalProduct() {
+        const modalHome = document.getElementById("modal_home");
+        modalHome.style.opacity = 1;
+        modalHome.style.pointerEvents = "auto"; // Cho phép tương tác khi hiển thị
+
+        const closeModal = document.getElementById("close_modal");
+        closeModal.onclick = function () {
+          modalHome.style.opacity = 0;
+        };
+      }
+
+      window.addEventListener("click", function (event) {
+        const modalHome = document.getElementById("modal_home");
+
+        // Kiểm tra nếu modalHome tồn tại và sự kiện xảy ra ngoài modal (chính modalHome)
+        if (event.target === modalHome) {
+          modalHome.style.opacity = 0;
+          modalHome.style.pointerEvents = "none"; // Ngăn tương tác khi ẩn
+        }
+      });
+    </script>
+    <script>
+      const largeImgHome = document.querySelector(
+        ".modal_product_content_two_img img"
+      );
+      const smallImgHome = document.querySelectorAll(
+        ".modal_product_left_img_item_res ul li img"
+      );
+
+      function updateLargeImageHome(i) {
+        largeImgHome.style.opacity = 0; // ẩn ảnh lớn
+
+        setTimeout(() => {
+          largeImgHome.src = smallImgHome[i].src; // Thay đổi hình ảnh lớn
+          largeImgHome.style.opacity = 1; // hiện ảnh lớn
+        }, 100);
+      }
+
+      // Sự kiện click vào hình ảnh nhỏ
+      smallImgHome.forEach((smallImg, i) => {
+        smallImg.addEventListener("click", function () {
+          console.log(`Clicked on image index: ${i}`); // Kiểm tra chỉ số hình ảnh
+          updateLargeImageHome(i);
+        });
+      });
+    </script>
+  </body>
+</html>
