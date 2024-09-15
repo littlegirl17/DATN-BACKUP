@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .alertSuccess {
+                position: relative;
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #4caf50;
+                /* Màu nền */
+                color: #fff;
+                /* Màu chữ */
+                padding: 15px;
+                border-radius: 10px;
+                width: 300px;
+                z-index: 1000;
+                overflow: hidden;
+            }
+
+            .progress-bar {
+                height: 5px;
+                background-color: #f1c40f;
+                /* Màu thanh chạy */
+                width: 0;
+                /* Bắt đầu từ 0% */
+                position: absolute;
+                bottom: 0;
+                /* Đặt thanh chạy ở dưới cùng */
+                left: 0;
+                /* Bắt đầu từ bên trái */
+                transition: width 5s linear;
+                /* Thời gian chạy thanh */
+            }
+        </style>
+    </head>
+    <body>
+        <div id="alertAction" class="alertSuccess">
+            <span class="alert-message">hhh</span>
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const alertBox = document.getElementById("alertAction");
+                const progressBar = document.getElementById("progress-bar");
+
+                // Bắt đầu thanh chạy
+                progressBar.style.width = "100%"; // Di chuyển thanh từ 0% đến 100%
+
+                // Sau 5 giây, ẩn alert
+                setTimeout(() => {
+                    alertBox.style.opacity = "0"; // Từ từ giảm độ mờ
+                    setTimeout(() => {
+                        alertBox.style.display = "none"; // Ẩn hoàn toàn
+                    }, 500); // Thời gian giảm độ mờ
+                }, 5000); // Thời gian thanh chạy
+            });
+        </script>
+    </body>
+</html>
