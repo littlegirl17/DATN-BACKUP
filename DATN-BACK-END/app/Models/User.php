@@ -20,6 +20,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'province',
+        'district',
+        'ward',
+        'status',
+        'image',
+        'verification_code',
+        'user_group_id'
     ];
 
     /**
@@ -43,5 +51,39 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public static function userGetAll()
+    {
+        return self::all();
+    }
+    public function carts()
+    {
+        return $this->hasMany(Cart::class, 'user_id');
+    }
+
+    public function userGroup()
+    {
+        return $this->belongsTo(UserGroup::class, 'user_group_id');
+    }
+
+    /*----------------------------------------------------------------------------------------------------------------------*/
+    public function checkAccount($email)
+    {
+        return $this->where('email', $email)->first();
+    }
+
+    public function searchUser($filter_email, $filter_status)
+    {
+        $query = $this->query();
+
+        if (!is_null($filter_email)) {
+            $query->where('email', 'LIKE', "%{$filter_email}%");
+        }
+
+        if (!is_null($filter_status)) {
+            $query->where('status', '=', (int)$filter_status);
+        }
+
+        return $query->paginate(10);
     }
 }

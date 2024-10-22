@@ -8,25 +8,38 @@ use Illuminate\Database\Eloquent\Model;
 class Categories extends Model
 {
     use HasFactory;
-
     protected $fillable = [
         'name',
-        'description',
         'image',
+        'slug',
+        'description',
         'sort_order',
         'status',
-        'slug',
         'parent_id'
     ];
-
-
-    public function products()
-    {
-        return $this->hasMany(Products::class, 'category_id');
-    } //1 category có nhiều product
 
     public function categories_children()
     {
         return $this->hasMany(Categories::class, 'parent_id');
-    } // 1 category có nhiều danh mục con
+    }
+
+    public function product()
+    {
+        return $this->hasMany(Product::class, 'category_id')->where('status', 1);
+    }
+
+    public function categoryAll()
+    {
+        return $this->orderBy('id', 'desc')->get();
+    }
+
+    public function categoryTotal()
+    {
+        return $this->whereNotNull('parent_id')->orderBy('id', 'desc')->get();
+    }
+
+    public function categoryChoose()
+    {
+        return $this->where('choose', 1)->orderBy('id', 'desc')->inRandomOrder()->limit(3)->get();
+    }
 }

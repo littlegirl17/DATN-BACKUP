@@ -553,6 +553,120 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
+      integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(document).ready(function () {
+        $(".owl-carousel").owlCarousel({
+          loop: true,
+          margin: 10,
+          nav: true,
+          responsive: {
+            0: {
+              items: 1,
+            },
+            600: {
+              items: 3,
+            },
+            1000: {
+              items: 4,
+            },
+          },
+        });
+      });
+    </script>
+    <script>
+      // ------------------------- CLICK HEADER USER -----------------------
+
+      const userImg = document.querySelector(".header_user_img");
+      const userContent = document.querySelector(".header_user_content");
+      const headerUserClick = document.querySelector(".header_user_click");
+      userImg.addEventListener("click", function () {
+        userContent.style.opacity = 1;
+      });
+
+      window.addEventListener("click", function (event) {
+        if (!headerUserClick.contains(event.target)) {
+          //Hàm này kiểm tra xem phần tử được nhấp chuột có nằm trong header_user_click hay không. Nếu không, tức là bạn đã nhấp ra ngoài, và userContent sẽ được ẩn đi.
+          userContent.style.opacity = 0;
+        }
+      });
+    </script>
+    <script>
+      function showModalProduct() {
+        const modalHome = document.getElementById("modal_home");
+        modalHome.style.opacity = 1;
+        modalHome.style.pointerEvents = "auto"; // Cho phép tương tác khi hiển thị
+
+        const closeModal = document.getElementById("close_modal");
+        closeModal.onclick = function () {
+          modalHome.style.opacity = 0;
+        };
+      }
+
+      window.addEventListener("click", function (event) {
+        const modalHome = document.getElementById("modal_home");
+
+        // Kiểm tra nếu modalHome tồn tại và sự kiện xảy ra ngoài modal (chính modalHome)
+        if (event.target === modalHome) {
+          modalHome.style.opacity = 0;
+          modalHome.style.pointerEvents = "none"; // Ngăn tương tác khi ẩn
+        }
+      });
+    </script>
+    <script>
+      const largeImgHome = document.querySelector(
+        ".modal_product_content_two_img img"
+      );
+      const smallImgHome = document.querySelectorAll(
+        ".modal_product_left_img_item_res ul li img"
+      );
+
+      function updateLargeImageHome(i) {
+        largeImgHome.style.opacity = 0; // ẩn ảnh lớn
+
+        setTimeout(() => {
+          largeImgHome.src = smallImgHome[i].src; // Thay đổi hình ảnh lớn
+          largeImgHome.style.opacity = 1; // hiện ảnh lớn
+        }, 100);
+      }
+
+      // Sự kiện click vào hình ảnh nhỏ
+      smallImgHome.forEach((smallImg, i) => {
+        smallImg.addEventListener("click", function () {
+          updateLargeImageHome(i);
+        });
+      });
+    </script>
+    <script>
+      window.onscroll = function () {
+        const navbar = document.querySelector(".nav_box");
+        const navbarItem = document.querySelector(".nav_box_item");
+        const navImgLogo = document.querySelector(".nav_img_logo");
+        const searchMobile = document.querySelector(
+          ".nav_box_menu_right_mobile"
+        );
+
+        if (
+          document.body.scrollTop > 50 ||
+          document.documentElement.scrollTop > 50
+        ) {
+          navbar.classList.add("shrink");
+          navbarItem.classList.add("shrink");
+          navImgLogo.classList.add("shrink");
+          searchMobile.classList.add("shrink");
+        } else {
+          navbar.classList.remove("shrink");
+          navbar.classList.remove("shrink");
+          navbarItem.classList.remove("shrink");
+          navImgLogo.classList.remove("shrink");
+          searchMobile.classList.remove("shrink");
+        }
+      };
+    </script>
     <script src="js/index.js"></script>
   </body>
 </html>
