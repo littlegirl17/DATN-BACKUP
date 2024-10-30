@@ -3,24 +3,25 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\Assembly;
-use App\Models\Employee;
 use App\Http\Controllers\Controller;
+use App\Models\Administration;
 use Illuminate\Http\Request;
 
 class AssemblyAdminController extends Controller
 {
     private $assemblyModel;
-    private $employeeModel;
+    private $administrationModel;
 
     public function __construct()
     {
         $this->assemblyModel = new Assembly();
-        $this->employeeModel = new Employee();
+        $this->administrationModel = new Administration();
     }
 
     public function assembly()
     {
-        $assemblys =   $this->assemblyModel->assemblyAll();
+        $assemblys = $this->assemblyModel->assemblyAll();
+
         return view('admin.assembly', compact('assemblys'));
     }
 
@@ -28,14 +29,16 @@ class AssemblyAdminController extends Controller
     {
         $assembly = $this->assemblyModel->findOrFail($id);
         $statusAssembly = $this->assemblyModel->statusAssembly();
+        $administrationAssembly = $this->administrationModel->administrationAssembly();
 
-        return view('admin.assemblyEdit', compact('assembly', 'statusAssembly'));
+        return view('admin.assemblyEdit', compact('assembly', 'statusAssembly', 'administrationAssembly'));
     }
 
     public function assemblyUpdate(Request $request, $id)
     {
 
         $assembly = Assembly::findOrFail($id); // Tìm người dùng theo ID
+        $assembly->admin_id = $request->admin_id ?? null;
         $statues = $request->status;
         switch ((int)$statues) {
             case 1:
@@ -49,7 +52,7 @@ class AssemblyAdminController extends Controller
                 }
                 break;
             case 3:
-                if ($assembly->status != 2) {
+                if ($assembly->status == 2) {
                     return redirect()->route('assembly')->with('error', 'Không thể chuyển về trạng thái "Hoàn thành lắp ráp"!');
                 }
                 break;

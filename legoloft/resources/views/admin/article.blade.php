@@ -46,13 +46,13 @@
                      @endif
                  </div>
                  <div class="">
-                     <button class="btn btnF1">
+                     <button type="button" class="btn btnF1">
                          <a href="{{ route('articleAdd') }}" class="text-decoration-none text-light">
                              <i class="pe-2 fa-solid fa-plus" style="color: #ffffff;"></i>Tạo bài viết
                          </a>
                      </button>
                      <!-- Nút xóa bài viết -->
-                     <button type="button" onclick="return confirm('Bạn có chắc chắn muốn xóa những bài viết đã chọn?')"
+                     <button type="button" onclick="submitForm('{{ route('articleBulkDelete') }}','post')"
                          class="btn btnF2">
                          <i class="pe-2 fa-solid fa-trash" style="color: #ffffff;"></i>Xóa bài viết đã chọn
                      </button>
@@ -94,7 +94,7 @@
                                  </td>
                                  <td>
                                      <div class="actionAdminProduct m-0 py-3">
-                                         <button class="btnActionProductAdmin2">
+                                         <button type="button" class="btnActionProductAdmin2">
                                              <a href="{{ route('articleEdit', $item->id) }}"
                                                  class="text-decoration-none text-light">
                                                  <i class="pe-2 fa-solid fa-pen" style="color: #ffffff;"></i>Sửa lại bài
@@ -107,15 +107,13 @@
                          @endforeach
                      </tbody>
                  </table>
+                 <nav class="navPhanTrang">
+                     {{ $atc->links() }}
+                 </nav>
              </div>
          </form>
 
 
-         <nav class="navPhanTrang">
-             <ul class="pagination">
-                 <li></li>
-             </ul>
-         </nav>
      </div>
 
 

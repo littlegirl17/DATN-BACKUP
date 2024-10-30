@@ -20,9 +20,10 @@
                     <thead class="table-header">
                         <tr class="">
                             <th class=" py-2"></th>
-                            <th class=" py-2">Nhân viên lắp ráp</th>
-                            <th class=" py-2">Sản phẩm</th>
-                            <th class=" py-2">Phí lắp ráp</th>
+                            <th class=" py-2" style="width:150px">Nhân viên lắp ráp</th>
+                            <th class=" py-2" style="width:250px">Sản phẩm</th>
+                            <th class=" py-2">Phí (lắp ráp + gói quà)</th>
+                            <th class=" py-2">Gói lắp ráp</th>
                             <th class=" py-2">Trạng thái</th>
                             <th class=" py-2">Hành động</th>
                         </tr>
@@ -36,10 +37,24 @@
                                     <p class=""></p>
                                 </td>
                                 <td class="nameAdmin">
-                                    <p>{{ $item->employee->username }}</p>
+                                    @if ($item->administration != null)
+                                        <span class="employyeeName">{{ $item->administration->fullname }}</span>
+                                    @else
+                                        <span class="employyeeNameRed">Chưa chọn nhân viên lắp ráp</span>
+                                    @endif
                                 </td>
-                                <td class="">{{ $item->product->name }}</td>
-                                <td class="">{{ number_format($item->fee, 0, ',', '.') . 'đ' }}</td>
+                                <td class="nameAdmin">
+                                    <p>{{ $item->product->name }}</p>
+                                </td>
+                                <td class="">
+                                    {{ number_format($item->assemblyPackage->price_assembly, 0, ',', '.') . 'đ' }} +
+                                    {{ number_format($item->assemblyPackage->fee, 0, ',', '.') . 'đ' }}</td>
+                                <td class="">
+                                    {{ $item->assemblyPackage->name }} <br>
+                                    <img src="{{ asset('img/' . $item->assemblyPackage->image) }}" alt=""
+                                        style="width: 50px; height: 50px; object-fit: cover;">
+                                </td>
+
                                 <td>
                                     @switch($item->status)
                                         @case(1)
@@ -74,6 +89,9 @@
 
                     </tbody>
                 </table>
+                <nav class="navPhanTrang">
+                    {{ $assemblys->links() }}
+                </nav>
             </div>
         </form>
     </div>

@@ -29,4 +29,14 @@ class Cart extends Model
     {
         return $this->where('user_id', $user_id)->count();
     }
+
+    public function statisticalCarts()
+    {
+        return $this->join('products', 'carts.product_id', '=', 'products.id')
+            ->selectRaw('carts.product_id,products.name as product_name, count(carts.product_id) as cart_count')
+            ->groupBy('carts.product_id')
+            ->orderBy('cart_count', 'desc')
+            ->limit(8)
+            ->get();
+    }
 }

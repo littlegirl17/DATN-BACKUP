@@ -181,6 +181,7 @@
                         @php
                             $percent = ceil((($item->products->price - $item->price) / $item->products->price) * 100);
                             $productImageCollect = $item->products->productImage->pluck('images'); // pluck lấy một tập hợp các giá trị của trường cụ thể
+                            $isFavourite = false;
                             if (Auth::check()) {
                                 $isFavourite = $item->products->favourite
                                     ->where('user_id', Auth::id())
@@ -203,7 +204,7 @@
                                         <button onclick="addFavourite('{{ $item->product_id }}')"
                                             class="outline-0 border-0" style="background-color: transparent">
                                             <i class="fa-solid fa-heart {{ $isFavourite ? 'red' : '' }}"
-                                                id="favourite-{{ $item->product_id }}"></i>
+                                                data-product-id="favourite-{{ $item->product_id }}"></i>
                                         </button>
                                         <button class="outline-0 border-0 " style="background-color: transparent"
                                             onclick="showModalProduct(event,'{{ $item->product_id }}','{{ $item->products->image }}','{{ $item->products->name }}','{{ $item->products->price }}','{{ $item->price }}','{{ json_encode($productImageCollect) }}')">
@@ -303,6 +304,7 @@
                                                     (($product->price - $priceDiscount) / $product->price) * 100,
                                                 );
                                                 $productImageCollect = $product->productImage->pluck('images'); // pluck lấy một tập hợp các giá trị của trường cụ thể
+                                                $isFavourite = false;
                                                 if (Auth::check()) {
                                                     $isFavourite = $product->favourite
                                                         ->where('user_id', Auth::id())
@@ -331,7 +333,7 @@
                                                                 class="outline-0 border-0"
                                                                 style="background-color: transparent">
                                                                 <i class="fa-solid fa-heart {{ $isFavourite ? 'red' : '' }}"
-                                                                    id="favourite-{{ $product->id }}"></i>
+                                                                    data-product-id="favourite-{{ $product->id }}"></i>
                                                             </button> <button class="outline-0 border-0 "
                                                                 style="background-color: transparent"
                                                                 onclick="showModalProduct(event,'{{ $product->id }}','{{ $product->image }}','{{ $product->name }}','{{ $product->price }}','{{ $priceDiscount }}','{{ json_encode($productImageCollect) }}')">
@@ -403,6 +405,7 @@
 
                             $percent = ceil((($item->price - $priceDiscount) / $item->price) * 100);
                             $productImageCollect = $item->productImage->pluck('images'); // pluck lấy một tập hợp các giá trị của trường cụ thể
+                            $isFavourite = false;
                             if (Auth::check()) {
                                 $isFavourite = $item->favourite
                                     ->where('user_id', Auth::id())
@@ -427,7 +430,7 @@
                                         <button onclick="addFavourite('{{ $item->id }}')" class="outline-0 border-0"
                                             style="background-color: transparent">
                                             <i class="fa-solid fa-heart {{ $isFavourite ? 'red' : '' }}"
-                                                id="favourite-{{ $item->id }}"></i>
+                                                data-product-id="favourite-{{ $item->id }}"></i>
                                         </button>
                                         <button class="outline-0 border-0" style="background-color: transparent"
                                             onclick="showModalProduct(event,'{{ $item->id }}','{{ $item->image }}','{{ $item->name }}','{{ $item->price }}','{{ $priceDiscount }}','{{ json_encode($productImageCollect) }}')">
@@ -513,89 +516,30 @@
                     <div class="title_home_blog">
                         <h2>Đọc tất cả về nó</h2>
                     </div>
-                    <div class="btn_home_blog"><a href="">Xem tất cả bài viết</a></div>
+                    <div class="btn_home_blog"><a href="{{ route('categoryArticleUser') }}">Xem tất cả bài viết</a></div>
                 </div>
-                <div class="owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="blog_box">
-                            <div class="blog_box_effect">
-                                <div class="blog_box_image">
-                                    <img src="img/image_blog_1.webp" alt="" />
-                                </div>
-                                <div class="blog_box_content_out">
-                                    <div class="blog_box_content">
-                                        <h3>
-                                            <a href="">Khám phá bộ LEGO® Technic™ McLaren P1™</a>
-                                        </h3>
-                                        <span>Một trong những chiếc xe được săn đón nhiều nhất trên
-                                            thế giới hiện là một bộ LEGO®. Hãy cùng chúng tôi xem
-                                            xét kỹ hơn siêu xe LEGO Technic™ McLaren P1™ mới.</span>
-                                        <a href="">Đọc thêm <i class="fa-solid fa-chevron-right"></i></a>
+                <div class="row">
+                    @foreach ($articles as $item)
+                        <div class="col-md-3 col-sm-4 col-12">
+                            <div class="blog_box">
+                                <div class="blog_box_effect">
+                                    <div class="blog_box_image">
+                                        <img src="{{ asset('img/' . $item->image) }}" alt="" />
+                                    </div>
+                                    <div class="blog_box_content_out">
+                                        <div class="blog_box_content">
+                                            <h3>
+                                                <a href="{{ route('articlesUser', $item->id) }}">{{ $item->title }}</a>
+                                            </h3>
+                                            <span> {!! $item->description_short !!}</span>
+                                            <a href="{{ route('articlesUser', $item->id) }}">Đọc thêm <i
+                                                    class="fa-solid fa-chevron-right"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="item">
-                        <div class="blog_box">
-                            <div class="blog_box_effect">
-                                <div class="blog_box_image">
-                                    <img src="img/image_blog_1.webp" alt="" />
-                                </div>
-                                <div class="blog_box_content_out">
-                                    <div class="blog_box_content">
-                                        <h3>
-                                            <a href="">Khám phá bộ LEGO® Technic™ McLaren P1™</a>
-                                        </h3>
-                                        <span>Một trong những chiếc xe được săn đón nhiều nhất trên
-                                            thế giới hiện là một bộ LEGO®. Hãy cùng chúng tôi xem
-                                            xét kỹ hơn siêu xe LEGO Technic™ McLaren P1™ mới.</span>
-                                        <a href="">Đọc thêm <i class="fa-solid fa-chevron-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="blog_box">
-                            <div class="blog_box_effect">
-                                <div class="blog_box_image">
-                                    <img src="img/image_blog_1.webp" alt="" />
-                                </div>
-                                <div class="blog_box_content_out">
-                                    <div class="blog_box_content">
-                                        <h3>
-                                            <a href="">Khám phá bộ LEGO® Technic™ McLaren P1™</a>
-                                        </h3>
-                                        <span>Một trong những chiếc xe được săn đón nhiều nhất trên
-                                            thế giới hiện là một bộ LEGO®. Hãy cùng chúng tôi xem
-                                            xét kỹ hơn siêu xe LEGO Technic™ McLaren P1™ mới.</span>
-                                        <a href="">Đọc thêm <i class="fa-solid fa-chevron-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="blog_box">
-                            <div class="blog_box_effect">
-                                <div class="blog_box_image">
-                                    <img src="img/image_blog_1.webp" alt="" />
-                                </div>
-                                <div class="blog_box_content_out">
-                                    <div class="blog_box_content">
-                                        <h3>
-                                            <a href="">Khám phá bộ LEGO® Technic™ McLaren P1™</a>
-                                        </h3>
-                                        <span>Một trong những chiếc xe được săn đón nhiều nhất trên
-                                            thế giới hiện là một bộ LEGO®. Hãy cùng chúng tôi xem
-                                            xét kỹ hơn siêu xe LEGO Technic™ McLaren P1™ mới.</span>
-                                        <a href="">Đọc thêm <i class="fa-solid fa-chevron-right"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
         </section>

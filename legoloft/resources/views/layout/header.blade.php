@@ -39,7 +39,7 @@
                     </li>
                     <li><a href="{{ route('policy') }}">Chính sách</a></li>
                     <li><a href="{{ route('contact') }}">Liên hệ</a></li>
-                    <li><a href="article.html">Bài viết </a></li>
+                    <li><a href="{{ route('categoryArticleUser') }}">Bài viết </a></li>
                 </ul>
             </div>
             <div class="nav_box_menu_right">
@@ -116,12 +116,12 @@
             </div>
         </div>
     </div>
-    <form action="{{ route('search') }}" method="get">
+    {{-- <form action="{{ route('search') }}" method="get">
         @csrf
         <div class="nav_box_menu_right_mobile">
             <input type="text" name="name" placeholder="Tìm kiếm tại đây..." />
         </div>
-    </form>
+    </form> --}}
     <div class="main_bar_menu_bg">
         <div class="main_bar_menu submenu">
             <div class="button_close_back">
@@ -140,7 +140,7 @@
                 </li>
                 <li><a href="{{ route('policy') }}">Chính sách</a></li>
                 <li><a href="{{ route('contact') }}">Liên hệ</a></li>
-                <li><a href="#">Bài viết </a></li>
+                <li><a href="{{ route('categoryArticleUser') }}">Bài viết </a></li>
             </ul>
             <ul class="main_bar_menu_list">
                 <li><a href="category.html">Xem tất cả chủ đề</a></li>
@@ -163,4 +163,10 @@
         </div>
     </div>
 </nav>
+<form action="{{ route('search') }}" method="get">
+    @csrf
+    <div class="nav_box_menu_right_mobile">
+        <input type="text" name="name" placeholder="Tìm kiếm tại đây..." />
+    </div>
+</form>
 <!-- END NAV -->

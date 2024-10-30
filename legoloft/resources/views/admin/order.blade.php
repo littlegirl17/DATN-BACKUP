@@ -78,7 +78,7 @@
                      </tr>
                  </thead>
                  <tbody>
-                     @foreach ($order as $order)
+                     @foreach ($orders as $order)
                          <!-- Chú ý: sử dụng 'orders' thay vì 'order' -->
                          <tr class="orderAdminTr" style="background: #fff">
                              <td class="">{{ $order->id }}</td>
@@ -141,7 +141,9 @@
                      @endforeach
 
              </table>
-
+             <nav class="navPhanTrang">
+                 {{ $orders->links() }}
+             </nav>
          </div>
      </div>
 

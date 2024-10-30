@@ -12,19 +12,22 @@
                     <h3>Hiển thị 99 sản phẩm</h3>
                 </div>
                 <div class="col-md-6 theme_category_summary_right">
-                    <select class="form-select" aria-label="Default select example">
-                        <option selected>Sắp xếp</option>
-                        <option value="1">Từ A -> Z</option>
-                        <option value="1">Từ Z -> A</option>
-                        <option value="1">Giá giảm dần</option>
-                        <option value="1">Giá tăng dần</option>
-                    </select>
+                    <form action="{{ route('categoryProduct', $categoryName->id) }}" method="get" id="sortForm">
+                        <select class="form-select" aria-label="Default select example" name="filter_sort"
+                            onchange="document.getElementById('sortForm').submit()">
+                            <option selected value="default">Sắp xếp</option>
+                            <option value="filter_az">Từ A -> Z</option>
+                            <option value="filter_za">Từ Z -> A</option>
+                            <option value="filter_desc">Giá giảm dần</option>
+                            <option value="filter_asc">Giá tăng dần</option>
+                        </select>
+                    </form>
                 </div>
             </div>
             <div class="category_product_main">
-                <aside>
+                <aside class="category_product_main_aside">
                     <div class="category_product_main_left">
-                        <div class="category_product_main_left_1">
+                        <div class="category_product_main_left_1 ">
                             <div class="accordion">
                                 <div class="accordion-header d-flex justify-content-between align-items-center">
                                     <p class="m-0 p-0">Tất cả chủ đề</p>
@@ -51,33 +54,51 @@
                                     <i class="fa-solid fa-plus"></i>
                                 </div>
                                 <div class="accordion-content">
-                                    <div class="accordion-content-item">
-                                        <input type="checkbox" name="" id="" />
-                                        <span>Dưới 100.000đ</span>
-                                    </div>
-                                    <div class="accordion-content-item">
-                                        <input type="checkbox" name="" id="" />
-                                        <span> 100.000đ - 200.000đ</span>
-                                    </div>
-                                    <div class="accordion-content-item">
-                                        <input type="checkbox" name="" id="" />
-                                        <span> 200.000đ - 300.000đ</span>
-                                    </div>
-                                    <div class="accordion-content-item">
-                                        <input type="checkbox" name="" id="" />
-                                        <span> 300.000đ - 400.000đ</span>
-                                    </div>
-                                    <div class="accordion-content-item">
-                                        <input type="checkbox" name="" id="" />
-                                        <span> Trên 500.000đ</span>
-                                    </div>
+                                    <form action="{{ route('categoryProduct', $categoryName->id) }}" method="get"
+                                        id="filterForm">
+                                        <div class="accordion-content-item"
+                                            onchange="document.getElementById('filterForm').submit()">
+                                            <input type="checkbox" name="price_range[]" value="0-500000" id="price1" />
+                                            <label for="price1">Dưới 500.000đ</label>
+                                        </div>
+                                        <div class="accordion-content-item"
+                                            onchange="document.getElementById('filterForm').submit()">
+                                            <input type="checkbox" name="price_range[]" value="500000-1000000"
+                                                id="price2" />
+                                            <label for="price2">500.000đ - 1.000.000đ</label>
+                                        </div>
+                                        <div class="accordion-content-item"
+                                            onchange="document.getElementById('filterForm').submit()">
+                                            <input type="checkbox" name="price_range[]" value="1000000-2000000"
+                                                id="price2" />
+                                            <label for="price2">1.000.000đ - 2.000.000đ</label>
+                                        </div>
+                                        <div class="accordion-content-item"
+                                            onchange="document.getElementById('filterForm').submit()">
+                                            <input type="checkbox" name="price_range[]" value="2000000-3000000"
+                                                id="price3" />
+                                            <label for="price3">2.000.000đ - 3.000.000đ</label>
+                                        </div>
+                                        <div class="accordion-content-item"
+                                            onchange="document.getElementById('filterForm').submit()">
+                                            <input type="checkbox" name="price_range[]" value="3000000-4000000"
+                                                id="price4" />
+                                            <label for="price4">3.000.000đ - 4.000.000đ</label>
+                                        </div>
+                                        <div class="accordion-content-item"
+                                            onchange="document.getElementById('filterForm').submit()">
+                                            <input type="checkbox" name="price_range[]" value="5000000-10000000"
+                                                id="price5" />
+                                            <label for="price5">Trên 5.000.000đ</label>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </aside>
                 <div class="category_product_main_right">
-                    <div class="row">
+                    <div class="row ">
                         @foreach ($productCategory as $item)
                             @php
                                 $priceDiscount = 0;
@@ -94,6 +115,7 @@
 
                                 $percent = ceil((($item->price - $priceDiscount) / $item->price) * 100);
                                 $productImageCollect = $item->productImage->pluck('images'); // pluck lấy một tập hợp các giá trị của trường cụ thể
+                                $isFavourite = false;
                                 if (Auth::check()) {
                                     $isFavourite = $item->favourite
                                         ->where('user_id', Auth::id())
@@ -120,7 +142,7 @@
                                             <button onclick="addFavourite('{{ $item->id }}')" class="outline-0 border-0"
                                                 style="background-color: transparent">
                                                 <i class="fa-solid fa-heart {{ $isFavourite ? 'red' : '' }}"
-                                                    id="favourite-{{ $item->id }}"></i>
+                                                    data-product-id="favourite-{{ $item->id }}"></i>
                                             </button>
                                             <button type="button" class="outline-0 border-0 "
                                                 style="background-color: transparent"
@@ -173,4 +195,15 @@
     <div id="modal_home" class="modal_product_main">
     </div>
     <!-- END MAIN -->
+    <script>
+        /*---------------------ACCORDING-------------- */
+        const headers = document.querySelectorAll(".accordion-header");
+        headers.forEach((header) => {
+            header.addEventListener("click", () => {
+                const content = header.nextElementSibling;
+                content.style.display =
+                    content.style.display === "block" ? "none" : "block";
+            });
+        });
+    </script>
 @endsection

@@ -71,11 +71,7 @@
 
             <div class="border p-2">
                 <h4 class="my-2"><i class="pe-2 fa-solid fa-list"></i>Danh Sách Danh Mục Bài Viết</h4>
-                @if (session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
+
                 <form id="deleteForm" action="{{ route('categoryArticleBulkDelete') }}" method="POST"
                     style="display:inline;">
                     @csrf
@@ -96,8 +92,14 @@
                                         <input type="checkbox" name="category_ids[]" value="{{ $item->id }}">
                                     </td>
                                     <td>
-                                        <img src="{{ asset('img/' . $item->image) }}" alt=""
-                                            style="width: 80px; height: 80px; object-fit: cover;">
+                                        @if ($item->image)
+                                            <img src="{{ asset('img/' . $item->image) }}" alt=""
+                                                style="width: 80px; height: 80px; object-fit: cover;">
+                                        @else
+                                            <img src="{{ asset('img/lf.png') }}"
+                                                alt=""style="width: 80px; height: 80px; object-fit: cover;">
+                                        @endif
+
                                     </td>
                                     <td>{{ $item->title }}</td>
                                     <td>
@@ -109,20 +111,16 @@
                                                 for="switch-{{ $item->id }}">{{ $item->status == 1 ? 'Bật' : 'Tắt' }}</label>
                                         </div>
                                     </td>
-                                    <td>
-                                        <div class="actionAdminProduct m-0 py-3">
-                                            <a href="{{ route('categoryArticleEdit', $item->id) }}"
-                                                class="btn btnActionProductAdmin2 text-decoration-none text-light">
-                                                <i class="pe-2 fa-solid fa-pen"></i>Sửa lại danh mục
-                                            </a>
-                                            <!-- Form xóa danh mục -->
-                                            {{-- <form action="{{ route('categoryArticleDel', ['id' => $item->id]) }}" method="POST" style="display:inline;">
-                                               @csrf
-                                               @method('DELETE')
-                                               <button onclick="return confirm('Bạn có chắc chắn muốn xóa?')" class="btn btn-danger">
-                                                   <i class="fa-solid fa-trash"></i> Xóa
-                                               </button>
-                                           </form> --}}
+
+                                    <td class="m-0 p-0">
+                                        <div class="actionAdminProduct">
+                                            <div class="buttonProductForm m-0 py-3">
+                                                <button type="button" class="btnActionProductAdmin2"><a
+                                                        href="{{ route('categoryArticleEdit', $item->id) }}"
+                                                        class="text-decoration-none text-light"><i
+                                                            class="pe-2 fa-solid fa-pen" style="color: #ffffff;"></i>Chỉnh
+                                                        sửa</a></button>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -134,14 +132,10 @@
         </div>
 
         </table>
-    </div>
-    </div>
+        <nav class="navPhanTrang">
+            {{ $CA->links() }}
+        </nav>
 
-    <nav class="navPhanTrang">
-        <ul class="pagination">
-            <li></li>
-        </ul>
-    </nav>
     </div>
 
 @endsection
@@ -159,7 +153,7 @@
 
         function updateStatusCategoryArticle(category_id, status, label) {
             $.ajax({
-                url: '{{ route('categoryUpdateStatus', ':id') }}'.replace(':id', category_id),
+                url: '{{ route('categoryArticleUpdateStatus', ':id') }}'.replace(':id', category_id),
                 type: 'PUT',
                 data: {
                     '_token': '{{ csrf_token() }}',

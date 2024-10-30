@@ -2,78 +2,89 @@
  @Section('title', 'Dashboard')
  @Section('content')
      <div class="container-fluid">
+
          <h3 class="title-page cssTitle">
              Bảng điều khiển
          </h3>
-         <div class="row cardDashboard">
-             <div class="col-md-3 col-sm-6 col-12 pb-3">
-                 <a class="sidebar-link" href="">
-                     <div class="cardDashboard_1">
-                         <div class="row backBlur">
-                             <div class="col-md-4 col-sm-4 col-4 iconDashboard">
-                                 <img width="30" height="30"
-                                     src="https://img.icons8.com/external-xnimrodx-lineal-xnimrodx/64/ff5370/external-categories-shopping-mall-xnimrodx-lineal-xnimrodx.png"
-                                     alt="external-categories-shopping-mall-xnimrodx-lineal-xnimrodx" />
-                             </div>
-                             <div class="col-md-8 col-sm-8 col-8">
-                                 <h4>Danh mục</h4>
-                                 <p class=""> danh mục</p>
-                             </div>
+         <div class="row dash_row my-3">
+             <div class="col-md-3 ">
+                 <div class="dash_product">
+                     <div class="dash_product_header">
+                         <span>Sản phẩm</span>
+                     </div>
+                     <div class="dash_product_main">
+                         <div class="dash_product_content">
+                             <span>Danh mục</span>
+                             <p>{{ $countCategory }}</p>
+                             <a href="{{ route('category') }}">Chi tiết</a>
+                         </div>
+                         <div class="dash_product_content">
+                             <span>Sản phẩm</span>
+                             <p>{{ $countProduct }}</p>
+                             <a href="{{ route('product') }}">Chi tiết</a>
                          </div>
                      </div>
-                 </a>
+                 </div>
              </div>
-             <div class="col-md-3 col-sm-6 col-12 pb-3 ">
-                 <a class="sidebar-link" href="">
-                     <div class="cardDashboard_2">
-                         <div class="row backBlur">
-                             <div class="col-md-4 col-sm-4 col-4 iconDashboard">
-                                 <img width="30" height="30"
-                                     src="https://img.icons8.com/ios-filled/64/4099ff/open-box.png" alt="open-box" />
-                             </div>
-                             <div class="col-md-8 col-sm-8 col-8">
-                                 <h4>Sản phẩm</h4>
-                                 <p> sản phẩm</p>
-                             </div>
+             <div class="col-md-3 ">
+                 <div class="dash_article">
+                     <div class="dash_article_header">
+                         <span>Bài viết</span>
+                     </div>
+                     <div class="dash_article_main">
+                         <div class="dash_article_content">
+                             <span>Danh mục</span>
+                             <p>{{ $countCategoryArticle }}</p>
+                             <a href="{{ route('categoryArticle') }}">Chi tiết</a>
+                         </div>
+                         <div class="dash_article_content">
+                             <span>Bài viết</span>
+                             <p>{{ $countArticle }}</p>
+                             <a href="{{ route('article') }}">Chi tiết</a>
                          </div>
                      </div>
-                 </a>
+                 </div>
              </div>
-             <div class="col-md-3 col-sm-6 col-12 pb-3 ">
-                 <a class="sidebar-link" href="">
-                     <div class="cardDashboard_3">
-                         <div class="row backBlur">
-                             <div class="col-md-4 col-sm-4 col-4 iconDashboard">
-                                 <img width="30" height="30"
-                                     src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/64/2ed8b6/external-user-social-media-ui-tanah-basah-glyph-tanah-basah.png"
-                                     alt="external-user-social-media-ui-tanah-basah-glyph-tanah-basah" />
-                             </div>
-                             <div class="col-md-8 col-sm-8 col-8">
-                                 <h4>Thành viên</h4>
-                                 <p> danh mục</p>
-                             </div>
+             <div class="col-md-3 ">
+                 <div class="dash_user">
+                     <div class="dash_user_header">
+                         <span>Khách hàng</span>
+                     </div>
+                     <div class="dash_user_main">
+                         <div class="dash_user_content">
+                             <span>Nhóm khách hàng</span>
+                             <p>{{ $countUserGroup }}</p>
+                             <a href="{{ route('userGroup') }}">Chi tiết</a>
+                         </div>
+                         <div class="dash_user_content">
+                             <span>Khách hàng</span>
+                             <p>{{ $countUser }}</p>
+                             <a href="{{ route('userAdmin') }}">Chi tiết</a>
                          </div>
                      </div>
-                 </a>
+                 </div>
              </div>
-             <div class="col-md-3 col-sm-6 col-12 pb-3 ">
-                 <div class="cardDashboard_4">
-                     <div class="row backBlur">
-                         <div class="col-md-4 col-sm-4 col-4  iconDashboard">
-                             <img width="30" height="30"
-                                 src="https://img.icons8.com/external-creatype-outline-colourcreatype/64/ffb64d/external-blog-user-interface-creatype-outline-colourcreatype.png"
-                                 alt="external-blog-user-interface-creatype-outline-colourcreatype" />
+             <div class="col-md-3 ">
+                 <div class="dash_admin">
+                     <div class="dash_admin_header">
+                         <span>Người dùng</span>
+                     </div>
+                     <div class="dash_admin_main">
+                         <div class="dash_admin_content">
+                             <span>Nhóm người dùng</span>
+                             <p>{{ $countAdministrationGroup }}</p>
+                             <a href="{{ route('adminstrationGroup') }}">Chi tiết</a>
                          </div>
-                         <div class="col-md-8 col-sm-8 col-8">
-                             <h4>Bài viêt</h4>
-                             <p>10 danh mục</p>
+                         <div class="dash_admin_content">
+                             <span>Người dùng</span>
+                             <p>{{ $countAdministration }}</p>
+                             <a href="{{ route('adminstration') }}">Chi tiết</a>
                          </div>
                      </div>
                  </div>
              </div>
          </div>
-
-         <div class="row mt-4 cardTwoDashboard">
+         {{-- <div class="row mt-4 cardTwoDashboard">
              <div class="col-md-3">
                  <div class="cardTwoDashboardItem">
                      <h6 class="text-black">
@@ -98,6 +109,185 @@
              </div>
              <div class="col-md-3"></div>
              <div class="col-md-3"></div>
+         </div> --}}
+         <div class="row bg_favourite_dash mt-3">
+             <div class="col-md-6">
+                 <canvas id="cartChart" width="400" height="290"></canvas>
+             </div>
+             <div class="col-md-6 py-2">
+                 <span class="">Top 8 sản phẩm thêm nhiều vào giỏ hàng</span>
+                 <div class="dashFavorite10_main">
+                     <ul>
+                         @foreach ($cartStatistical as $item)
+                             <li>
+                                 <a href="{{ route('detail', $item->product->slug) }}">
+                                     <div class="dashFavorite10">
+                                         <div class="dashFavorite10_img">
+                                             <img src="{{ asset('img/' . $item->product->image) }}" alt="">
+                                         </div>
+                                         <div class="dashFavorite10_content">
+                                             <span>{{ $item->product->name }}</span>
+                                         </div>
+                                     </div>
+                                 </a>
+                             </li>
+                         @endforeach
+                     </ul>
+                 </div>
+             </div>
+         </div>
+         <div class="row mt-5 bg_favourite_dash">
+
+             <div class="col-md-6 ">
+                 <canvas id="favouriteChart" width="400" height="290"></canvas>
+             </div>
+             <div class="col-md-6 py-2">
+                 <span class="">Top 8 sản phẩm yêu thích</span>
+                 <div class="dashFavorite10_main">
+                     <ul>
+                         @foreach ($favouriteStatistical as $item)
+                             <li>
+                                 <a href="{{ route('detail', $item->product->slug) }}">
+                                     <div class="dashFavorite10">
+                                         <div class="dashFavorite10_img">
+                                             <img src="{{ asset('img/' . $item->product->image) }}" alt="">
+                                         </div>
+                                         <div class="dashFavorite10_content">
+                                             <span>{{ $item->product->name }}</span>
+                                         </div>
+                                     </div>
+                                 </a>
+                             </li>
+                         @endforeach
+                     </ul>
+                 </div>
+             </div>
          </div>
      </div>
+
+ @endsection
+ @section('dashboardAdminScript')
+     <script>
+         const ctx = document.getElementById('favouriteChart').getContext('2d');
+         const favouriteChart = new Chart(ctx, {
+             type: 'line',
+             data: {
+                 labels: {!! json_encode($favouriteStatistical->pluck('product_name')) !!},
+                 datasets: [{
+                     label: 'Tổng yêu thích',
+                     data: {!! json_encode($favouriteStatistical->pluck('favourite_count')) !!},
+
+                     backgroundColor: [
+                         // Màu sắc cho các cột
+                         '#fff',
+
+                     ],
+                     borderColor: [
+                         'rgba(255, 99, 132, 1)',
+                         'rgba(54, 162, 235, 1)',
+                         'rgba(255, 206, 86, 1)',
+                         'rgba(75, 192, 192, 1)',
+                         'rgba(153, 102, 255, 1)',
+                         'rgba(54, 162, 235, 1)',
+                         'rgba(255, 206, 86, 1)',
+                         'rgba(153, 102, 255, 1)',
+
+                     ],
+                     borderWidth: 1
+                 }]
+             },
+             options: {
+                 legend: {
+                     display: false
+                 },
+                 title: {
+                     display: true,
+                     text: "Báo cáo top 8 sản phẩm yêu thích"
+                 },
+                 scales: {
+                     xAxes: [{
+                         ticks: {
+                             display: false // Ẩn tên sản phẩm trên trục x
+                         },
+                         gridLines: {
+                             display: false // Ẩn lưới trên trục x nếu cần
+                         }
+                     }],
+                     yAxes: [{
+                         ticks: {
+                             beginAtZero: true, // Bắt đầu từ 0
+                             callback: function(value) {
+                                 return Number.isInteger(value) ? value : ''; // Chỉ hiển thị số nguyên
+                             }
+                         }
+                     }]
+                 },
+
+
+                 plugins: {
+                     tooltip: {},
+
+                 }
+             }
+         });
+     </script>
+     <script>
+         console.log({!! json_encode($cartStatistical->pluck('cart_count')) !!});
+
+         const cartChart = document.getElementById('cartChart').getContext('2d');
+         const cartChartFunction = new Chart(cartChart, {
+             type: 'radar',
+             data: {
+
+                 labels: {!! json_encode($cartStatistical->pluck('product_name')) !!},
+                 datasets: [{
+                     label: 'Tổng sản phẩm trong giỏ hàng',
+                     data: {!! json_encode($cartStatistical->pluck('cart_count')) !!},
+                     backgroundColor: 'rgba(0, 0, 0, 0.2)', // Màu nền
+                     borderColor: [
+                         'rgba(255, 99, 132, 1)',
+                         'rgba(54, 162, 235, 1)',
+                         'rgba(255, 206, 86, 1)',
+                         'rgba(75, 192, 192, 1)',
+                         'rgba(153, 102, 255, 1)',
+                         'rgba(54, 162, 235, 1)',
+                         'rgba(255, 206, 86, 1)',
+                         'rgba(153, 102, 255, 1)',
+
+                     ],
+                     borderWidth: 1
+                 }]
+             },
+             options: {
+                 legend: {
+                     display: false
+                 },
+                 title: {
+                     display: true,
+                     text: "Báo cáo top 8 sản phẩm được thêm vào giỏ hàng nhiều nhất"
+                 },
+                 scale: {
+                     ticks: {
+                         beginAtZero: true,
+                         callback: function(value) {
+                             return Number.isInteger(value) ? value : '';
+                         }
+                     },
+                     gridLines: {
+                         color: '#e0e0e0' // Màu lưới
+                     }
+                 },
+                 tooltips: {
+                     callbacks: {
+                         label: function(tooltipItem, data) {
+                             const productName = data.labels[tooltipItem.index]; // Tên sản phẩm
+                             const count = tooltipItem.yLabel; // Số lượng sản phẩm
+                             return productName + ': ' + count; // Hiển thị tên và số lượng
+                         }
+                     }
+                 }
+             }
+         });
+     </script>
+
  @endsection

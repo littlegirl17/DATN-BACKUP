@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Http;
 
+
 class UserAdminController extends Controller
 {
 
@@ -82,14 +83,16 @@ class UserAdminController extends Controller
     {
         $userGroups = $this->userGroupModel->userGroupAll();
 
-        return view('admin.userAdd', compact('userGroups')); // Chuyển đến view thêm người dùng
+        return view('admin.userAdd',
+            compact('userGroups')); // Chuyển đến view thêm người dùng
 
     }
 
     public function userStore(Request $request)
     {
         // Fetch data from API
-        $response = Http::get('https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json');
+        $response
+            = Http::get('https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json');
         $dataFetch = $response->json();
         $provinceName = '';
         $districtName = '';
@@ -124,11 +127,11 @@ class UserAdminController extends Controller
         }
         // Xác thực dữ liệu
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'name'     => 'required|string|max:255',
+            'email'    => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'phone' => 'nullable|string|max:15',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'phone'    => 'nullable|string|max:15',
+            'image'    => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Tạo người dùng mới
@@ -137,8 +140,9 @@ class UserAdminController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
         $user->password = bcrypt($request->password);
-        $user->province = $provinceName ?: $request->province; // toán tử elvis kiểm tra xem  (không rỗng, không phải null, không phải false)
-        $user->district =  $districtName ?: $request->district;
+        $user->province = $provinceName
+            ?: $request->province; // toán tử elvis kiểm tra xem  (không rỗng, không phải null, không phải false)
+        $user->district = $districtName ?: $request->district;
         $user->ward = $wardName ?: $request->ward;
         $user->status = $request->status;
         $user->user_group_id = $request->user_group_id;
@@ -159,7 +163,8 @@ class UserAdminController extends Controller
 
         $user->save();
 
-        return redirect()->route('userAdmin')->with('success', 'Người dùng đã được thêm thành công.');
+        return redirect()->route('userAdmin')
+            ->with('success', 'Người dùng đã được thêm thành công.');
     }
 
     public function userEdit($id)
@@ -172,7 +177,8 @@ class UserAdminController extends Controller
     public function userUpdate(Request $request, $id)
     {
         // Fetch data from API
-        $response = Http::get('https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json');
+        $response
+            = Http::get('https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json');
         $dataFetch = $response->json();
         $provinceName = '';
         $districtName = '';
@@ -208,12 +214,13 @@ class UserAdminController extends Controller
 
         // Xác thực dữ liệu
         $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:8|confirmed',
-            'phone' => 'nullable|string|max:15',
+            'name'          => 'required|string|max:255',
+            'email'         => 'required|string|email|max:255|unique:users,email,'
+                .$id,
+            'password'      => 'nullable|string|min:8|confirmed',
+            'phone'         => 'nullable|string|max:15',
             'user_group_id' => 'required|exists:user_groups,id',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image'         => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         $user = User::findOrFail($id); // Tìm người dùng theo ID
@@ -238,13 +245,15 @@ class UserAdminController extends Controller
             $user->save();
         }
 
-        $user->province = $provinceName ?: $request->province; // toán tử elvis kiểm tra xem  (không rỗng, không phải null, không phải false)
-        $user->district =  $districtName ?: $request->district;
+        $user->province = $provinceName
+            ?: $request->province; // toán tử elvis kiểm tra xem  (không rỗng, không phải null, không phải false)
+        $user->district = $districtName ?: $request->district;
         $user->ward = $wardName ?: $request->ward;
         $user->status = $request->status;
         $user->save();
 
-        return redirect()->route('userAdmin')->with('success', 'Người dùng đã được cập nhật thành công.');
+        return redirect()->route('userAdmin')
+            ->with('success', 'Người dùng đã được cập nhật thành công.');
     }
 
     public function userDeleteCheckbox(Request $request)
@@ -256,15 +265,22 @@ class UserAdminController extends Controller
 
                 $user = $this->userModel->findOrFail($userId);
                 $countCart = $this->cartModel->countCart($userId);
-                $countFavourite = $this->favouriteModel->countFavourite($userId);
+                $countFavourite
+                    = $this->favouriteModel->countFavourite($userId);
                 $countOrder = $this->orderModel->countOrder($userId);
 
                 if ($countCart > 0) {
-                    return redirect()->route('userAdmin')->with('error', ' Cảnh báo: Khách hàng này không thể bị xóa vì nó hiện được chỉ định cho ' . $countCart . ' giỏ hàng!');
+                    return redirect()->route('userAdmin')->with('error',
+                        ' Cảnh báo: Khách hàng này không thể bị xóa vì nó hiện được chỉ định cho '
+                        .$countCart.' giỏ hàng!');
                 } elseif ($countFavourite > 0) {
-                    return redirect()->route('userAdmin')->with('error', ' Cảnh báo: Khách hàng này không thể bị xóa vì nó hiện được chỉ định cho ' . $countFavourite    . ' yêu thích!');
+                    return redirect()->route('userAdmin')->with('error',
+                        ' Cảnh báo: Khách hàng này không thể bị xóa vì nó hiện được chỉ định cho '
+                        .$countFavourite.' yêu thích!');
                 } elseif ($countOrder > 0) {
-                    return redirect()->route('userAdmin')->with('error', ' Cảnh báo: Khách hàng này không thể bị xóa vì nó hiện được chỉ định cho ' . $countOrder    . ' đơn hàng!');
+                    return redirect()->route('userAdmin')->with('error',
+                        ' Cảnh báo: Khách hàng này không thể bị xóa vì nó hiện được chỉ định cho '
+                        .$countOrder.' đơn hàng!');
                 } else {
                     $user->delete();
                 }
@@ -280,12 +296,71 @@ class UserAdminController extends Controller
 
     public function userGroup()
     {
-        return view('admin.userGroup');
+        $userGroups
+            = UserGroup::userGroupAll(); // Gọi hàm userGroupAll trực tiếp từ Model với phương thức tĩnh
+        return view('admin.userGroup', compact('userGroups'));
     }
 
-    public function userGroupAdd() {}
 
-    public function userGroupEdit() {}
+    public function userGroupAdd()
+    { // hien thi form them U_Gr
 
-    public function userGroupCheckboxDelete() {}
+        return view('admin.userGroupAdd');
+    }
+
+    public function createUserGroup(Request $request)
+    {
+        // Xác thực dữ liệu
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        // Tạo mới nhóm khách hàng
+        UserGroup::create([
+            'name' => $request->name,
+        ]);
+
+        // Chuyển hướng về trang danh sách nhóm khách hàng với thông báo thành công
+        return redirect()->route('userGroup')
+            ->with('success', 'Thêm nhóm khách hàng thành công!');
+    }
+
+    public function userGroupEdit($id) // hien thi form chinh sua
+    {
+        $userGroup = UserGroup::findOrFail($id);
+
+        return view('admin.userGroupEdit', compact('userGroup'));
+
+    }
+
+
+    public function updateUserGroup(Request $request, $id)
+    {
+        // Xác thực dữ liệu
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        // Tìm nhóm người dùng
+        $userGroup = UserGroup::findOrFail($id);
+
+        // Cập nhật tên nhóm người dùng
+        $userGroup->name = $request->input('name');
+        $userGroup->save();
+
+        // Chuyển hướng về trang danh sách nhóm người dùng
+        return redirect()->route('userGroup')->with('success', 'Cập nhật nhóm khách hàng thành công.');
+    }
+
+
+    public function userGroupCheckboxDelete(Request $request)
+    {
+        $request->validate([
+            'userGroup_id' => 'required|array',
+        ]);
+
+        UserGroup::destroy($request->userGroup_id); // Xóa nhóm khách hàng
+
+        return redirect()->route('userGroup')->with('success', 'Xóa nhóm khách hàng thành công!');
+    }
 }

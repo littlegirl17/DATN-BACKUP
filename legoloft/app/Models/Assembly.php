@@ -12,13 +12,26 @@ class Assembly extends Model
         'order_id',
         'user_id',
         'product_id',
-        'employee_id',
-        'fee'
+        'admin_id',
+        'assembly_package_id',
+        'quantity',
+        'status'
     ];
 
-    public function employee()
+
+    public function user()
     {
-        return $this->belongsTo(Employee::class, 'employee_id');
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function administration()
+    {
+        return $this->belongsTo(Administration::class, 'admin_id');
+    }
+
+    public function assemblyPackage()
+    {
+        return $this->belongsTo(AssemblyPackages::class, 'assembly_package_id');
     }
 
     public function product()
@@ -28,7 +41,7 @@ class Assembly extends Model
 
     public function assemblyAll()
     {
-        return $this->orderBy('id', 'desc')->get();
+        return $this->orderBy('id', 'desc')->paginate(8);
     }
 
     public function assmblyOrderId($order_id)

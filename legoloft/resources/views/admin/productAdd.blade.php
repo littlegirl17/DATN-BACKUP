@@ -3,19 +3,15 @@
  @Section('content')
 
      <div class="container-fluid">
-         <h3 class="title-page ">
-             Thêm sản phẩm
-         </h3>
+
 
          <form action="{{ route('addFormProduct') }}" method="post" class="formAdmin" enctype="multipart/form-data">
              @csrf
              <div class="buttonProductForm">
                  <div class="">
-                     @if ($errors->any())
-                         @foreach ($errors->all() as $error)
-                             <div id="alert-message" class="alertDanger">{{ $error }}</div>
-                         @endforeach
-                     @endif
+                     <h3 class="title-page ">
+                         Thêm sản phẩm
+                     </h3>
                  </div>
                  <div class="">
                      <button type="submit" class="btnFormAdd">
@@ -47,15 +43,31 @@
                          <label for="name" class="form-label">Tên sản phẩm</label>
                          <input type="text" class="form-control" onkeyup="ChangeToSlug();" id="slug" name="name"
                              placeholder="Nhập tên sản phẩm">
+                         @error('name')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
                      <div class="form-group mt-3">
-                         <label for="slug" class="form-label">Slug</label>
+                         <div class="d-flex">
+                             <label for="slug" class="form-label pe-2">Slug</label>
+                             <label class="containerSlug">
+                                 <input type="checkbox"id="off_slug" onclick="toggleSlug()">Tắt tự động
+                                 <div class="checkmarkSlug"></div>
+                             </label>
+                         </div>
+
                          <input type="text" class="form-control" id="convert_slug" name="slug"
                              placeholder="Nhập slug">
+                         @error('slug')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
                      <div class="form-group mt-3">
                          <label for="description" class="form-label">Nội dung chi tiết sản phẩm</label>
                          <textarea class="form-control" id="description" name="description" placeholder="Mô tả sản phẩm" rows="3"></textarea>
+                         @error('description')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
 
                      <div class="form-group mt-3">
@@ -72,16 +84,25 @@
                                  </div>
                              @endforeach
                          </select>
+                         @error('category_id')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
                      <div class="form-group mt-3">
                          <label for="price" class="form-label">Giá sản phẩm</label>
                          <input type="number" class="form-control" id="price" name="price"
                              placeholder="Giá sản phẩm">
+                         @error('price')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
                      <div class="form-group mt-3">
                          <label for="price" class="form-label">Lượt xem</label>
                          <input type="number" class="form-control" id="view" name="view"
                              placeholder="Lượt xem của sản phẩm">
+                         @error('view')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
                      <div class="form-group mt-3">
                          <label for="price" class="form-label">Nổi bật</label>
@@ -90,6 +111,9 @@
                              <option value="0">Tắt</option>
                              <option value="1">Bật</option>
                          </select>
+                         @error('outstanding')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
 
                      <div class="form-group mt-3">
@@ -99,6 +123,9 @@
                              <option value="0">Tắt</option>
                              <option value="1">Bật</option>
                          </select>
+                         @error('status')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
                  </div>
                  <div class="tab-pane fade" id="discount-tab-pane" role="tabpanel" aria-labelledby="discount-tab"
@@ -111,17 +138,6 @@
                                  <th></th>
                              </tr>
                          </thead>
-                         {{-- <tbody>
-                        <tr>
-                            <input type="hidden" name="user_group_id[{{ $item->id }}]" value="">
-                            <td></td>
-                            <td><input class="form-control" type="number" name="quantityUserGroup[{{ $item->id }}]">
-                            </td>
-                            <td>
-                                <input class="form-control" type="number" name="priceUserGroup[{{ $item->id }}]">
-                            </td>
-                        </tr>
-                    </tbody>  --}}
                          <tbody class="discount-product">
                              <tr>
                                  <td>

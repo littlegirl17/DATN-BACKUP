@@ -43,10 +43,11 @@
                         @endphp
 
 
-                        <div class="col-md-6 col-12 my-3">
+                        <div class="col-md-6 col-12 my-3" data-product_id="{{ $item['product_id'] }}">
                             <div class="favourite_box">
                                 <div class="favourite_close">
-                                    <i class="fa-solid fa-xmark"></i>
+                                    <a href="#" onclick="favouriteDeleteItem({{ $item['product_id'] }})"
+                                        class="text-black"><i class="fa-solid fa-xmark"></i></a>
                                 </div>
                                 <div class="favourite_main">
                                     <div class="favourite_left">
@@ -118,4 +119,47 @@
 
     </section>
     <!-- END MAIN -->
+    <script>
+        function favouriteDeleteItem(product_id) {
+            $.ajax({
+                url: '{{ route('favouriteDeleteItem') }}',
+                type: 'GET',
+                data: {
+                    product_id: product_id,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.success) {
+
+                        // Xóa sản phẩm khỏi danh sách yêu thích ngay lập tức
+                        $(`[data-product_id="${product_id}"]`).closest('.col-md-6').remove();
+                        // Hiển thị thông báo với SweetAlert
+                        Swal.fire({
+                            title: "Xóa sản phẩm!",
+                            html: "Sản phẩm đang được xóa sau <b></b> mili giây.",
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: () => {
+                                Swal.showLoading();
+                                const timer = Swal.getPopup().querySelector("b");
+                                timerInterval = setInterval(() => {
+                                    timer.textContent = `${Swal.getTimerLeft()}`;
+                                }, 100);
+                            },
+                            willClose: () => {
+                                clearInterval(timerInterval);
+                            }
+                        }).then((result) => {
+                            if (result.dismiss === Swal.DismissReason.timer) {
+                                console.log("Đã đóng thông báo sau khi đếm ngược");
+                            }
+                        });
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Error:', xhr);
+                }
+            });
+        }
+    </script>
 @endsection

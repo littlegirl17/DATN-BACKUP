@@ -25,20 +25,24 @@
                  <label for="title" class="form-label">Tiêu đề bài viết</label>
                  <input type="text" class="form-control" value="{{ old('title', $categoryArticle->title) }}"
                      name="title" placeholder="Nhập danh mục bài viết">
+                 @error('title')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
 
              <div class="form-group mt-3">
                  <label for="exampleInputFile" class="form-label">Ảnh danh mục</label>
-                 <div class="custom-file">
-                     <input type="file" name="image" id="HinhAnh">
-
-                     @if ($categoryArticle->image)
-                         <img src="{{ asset('img/' . $categoryArticle->image) }}" alt="Hình ảnh hiện tại"
-                             style="max-width: 100px; max-height: 100px;">
-                     @else
-                         <div id="preview"></div>
-                     @endif
+                 <div class="custom-file imageAdd p-3 ">
+                     <div class="imageFile">
+                         <img src="{{ asset('img/' . $categoryArticle->image) }}" alt="">
+                     </div>
+                     <div class="">
+                         <input type="file" name="image" id="HinhAnh" class="inputFile">
+                     </div>
                  </div>
+                 @error('image')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
 
              <div class="form-group mt-3">
@@ -59,6 +63,9 @@
                      <option value="0" {{ old('status', $categoryArticle->status) == 0 ? 'selected' : '' }}>Tắt
                      </option>
                  </select>
+                 @error('status')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
          </form>
 

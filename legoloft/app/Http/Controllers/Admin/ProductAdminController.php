@@ -10,6 +10,7 @@ use App\Models\ProductImages;
 use App\Models\ProductDiscount;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\ProductAdminRequest;
+use App\Http\Requests\admin\ProductEditRequest;
 
 class ProductAdminController extends Controller
 {
@@ -96,7 +97,7 @@ class ProductAdminController extends Controller
         return view('admin.productEdit', compact('product', 'productImages', 'userGroups', 'productDiscount'));
     }
 
-    public function productUpdate(ProductAdminRequest $request, $id)
+    public function productUpdate(ProductEditRequest $request, $id)
     {
         $product = $this->productModel->findOrFail($id);
         $product->name = $request->name;

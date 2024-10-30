@@ -4,18 +4,16 @@
 
      <div class="container-fluid">
 
-         <h3 class="title-page ">
-             Thêm danh mục bài viết
-         </h3>
+
 
 
          <form action="{{ route('categoryArticleAdd') }}" method="post" class="formAdmin" enctype="multipart/form-data">
              @csrf
              <div class="buttonProductForm">
                  <div class="">
-                     @if (session('error'))
-                         <div id="alert-message" class="alertDanger">{{ session('error') }}</div>
-                     @endif
+                     <h3 class="title-page ">
+                         Thêm danh mục bài viết
+                     </h3>
                  </div>
                  <div class="">
                      <button type="submit" class="btnFormAdd" id="submit-button">
@@ -26,13 +24,23 @@
              <div class="form-group mt-3">
                  <label for="title" class="form-label">Tiêu đề bài viết </label>
                  <input type="text" class="form-control" name="title" placeholder="Nhập tiêu đề danh mục" required>
+                 @error('title')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
              <div class="form-group mt-3">
                  <label for="exampleInputFile" class="form-label">Ảnh danh mục</label>
-                 <div class="custom-file">
-                     <input type="file" name="image" id="HinhAnh">
-                     <div id="preview"></div>
+                 <div class="custom-file imageAdd p-3 ">
+                     <div class="imageFile">
+                         <div id="preview"><img src="{{ asset('img/lf.png') }}" alt=""></div>
+                     </div>
+                     <div class="">
+                         <input type="file" name="image" id="HinhAnh" class="inputFile">
+                     </div>
                  </div>
+                 @error('image')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
 
              <div class="form-group mt-3">
@@ -52,6 +60,9 @@
                      <option value="1">Bật</option>
                      <option value="0">Tắt</option>
                  </select>
+                 @error('status')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
          </form>
      </div>

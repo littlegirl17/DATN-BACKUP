@@ -17,10 +17,11 @@ class UserGroup extends Model
         return $this->hasMany(User::class);
     }
 
-    public function userGroupAll()
+    public static function userGroupAll()
     {
-        return $this->orderBy('id', 'desc')->get();
+        return self::orderBy('id', 'desc')->get();
     }
+
 
 
     public function userEdit($id)
@@ -34,5 +35,10 @@ class UserGroup extends Model
     public function userGroupDefault()
     {
         return $this->where('id', 1)->first();
+    }
+
+    public function countUserGroupAll()
+    {
+        return $this->count();
     }
 }

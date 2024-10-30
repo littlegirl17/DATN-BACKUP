@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost:3306
--- Thời gian đã tạo: Th10 07, 2024 lúc 03:07 PM
+-- Thời gian đã tạo: Th10 25, 2024 lúc 04:12 PM
 -- Phiên bản máy phục vụ: 8.3.0
 -- Phiên bản PHP: 8.3.1
 
@@ -47,7 +47,8 @@ CREATE TABLE `administrations` (
 INSERT INTO `administrations` (`id`, `admin_group_id`, `fullname`, `username`, `email`, `password`, `image`, `status`, `created_at`, `updated_at`) VALUES
 (1, 10, 'Huynh Kha', 'khakha17', 'khakha5087@gmail.com', '$2y$12$9sUstnGn30lTWyH4sVrkmuaXHilrdi5mRk.lIr/NFic/ei2j7h8we', '1.png', 1, '2024-09-13 23:29:42', '2024-09-15 20:31:50'),
 (5, 11, 'Phạm Hữu Nghị', 'nghipham', 'nghipham@gmail.com', '$2y$12$J9B.zkEWO75vLZoj5wYhieWtZmSrgWn2C.StK7dP3rSUG/6A885Mq', '', 1, '2024-09-15 21:25:06', '2024-10-04 06:40:56'),
-(14, 18, 'Phát Tài', 'Phattai', 'nguyenchauphattai@gmail.com', '$2y$12$vLGQZyO4ouAUZqp/BPHtVeF2h98SerXhOM216.QOb3m5Jdcf12rmS', NULL, 1, '2024-10-06 20:19:27', '2024-10-06 20:19:27');
+(14, 18, 'Phát Tài', 'Phattai', 'nguyenchauphattai@gmail.com', '$2y$12$vLGQZyO4ouAUZqp/BPHtVeF2h98SerXhOM216.QOb3m5Jdcf12rmS', NULL, 1, '2024-10-06 20:19:27', '2024-10-06 20:19:27'),
+(17, 19, 'Duy Dang', 'duydang', 'duydang@gmail.com', '$2y$12$InMLXH2OMhYsGEFvIPMlYep11hxtrhpnxrpoKDYh3cc3/uFcTDgN.', NULL, 1, '2024-10-13 18:24:34', '2024-10-13 18:24:34');
 
 -- --------------------------------------------------------
 
@@ -68,9 +69,11 @@ CREATE TABLE `administration_groups` (
 --
 
 INSERT INTO `administration_groups` (`id`, `name`, `permission`, `created_at`, `updated_at`) VALUES
-(10, 'Quản trị cấp cao', '[\"product\",\"user\",\"userGroup\",\"administration\",\"administrationGroup\",\"categoryArticle\",\"article\",\"productAdd\",\"productEdit\",\"productCheckboxDelete\",\"userAdd\",\"userEdit\",\"userCheckboxDelete\",\"userGroupAdd\",\"userGroupEdit\",\"userGroupCheckboxDelete\",\"adminstrationAdd\",\"adminstrationEdit\",\"adminstrationCheckboxDelete\",\"adminstrationGroupAdd\",\"adminstrationGroupEdit\",\"adminstrationGroupCheckboxDelete\",\"categoryArticleAdd\",\"categoryArticleEdit\",\"categoryArticleCheckboxDelete\",\"articleAdd\",\"articleEdit\",\"articleCheckboxDelete\"]', '2024-09-13 04:55:18', '2024-10-06 19:52:01'),
+(10, 'Quản trị cấp cao', '[\"banner\",\"category\",\"product\",\"coupon\",\"order\",\"user\",\"userGroup\",\"administration\",\"administrationGroup\",\"comment\",\"categoryArticle\",\"article\",\"assembly\",\"employee\",\"favourite\",\"productAdd\",\"productEdit\",\"productCheckboxDelete\",\"userAdd\",\"userEdit\",\"userCheckboxDelete\",\"userGroupAdd\",\"userGroupEdit\",\"userGroupCheckboxDelete\",\"adminstrationAdd\",\"adminstrationEdit\",\"adminstrationCheckboxDelete\",\"adminstrationGroupAdd\",\"adminstrationGroupEdit\",\"adminstrationGroupCheckboxDelete\",\"commentAdd\",\"commentEdit\",\"commentCheckboxDelete\",\"categoryArticleAdd\",\"categoryArticleEdit\",\"categoryArticleCheckboxDelete\",\"articleAdd\",\"articleEdit\",\"articleCheckboxDelete\"]', '2024-09-13 04:55:18', '2024-10-23 22:49:24'),
 (11, 'khách hàng và nhóm khách hàng', '[\"user\",\"userGroup\",\"userAdd\",\"userEdit\",\"userCheckboxDelete\",\"userGroupAdd\",\"userGroupEdit\",\"userGroupCheckboxDelete\"]', '2024-09-15 06:54:09', '2024-10-04 06:39:52'),
-(18, 'Quản lý bài viết', '[\"categoryArticle\",\"article\",\"categoryArticleAdd\",\"categoryArticleEdit\",\"categoryArticleCheckboxDelete\",\"articleAdd\",\"articleEdit\",\"articleCheckboxDelete\"]', '2024-10-06 20:12:26', '2024-10-06 20:12:26');
+(18, 'Quản lý bài viết, đơn hàng', '[\"order\",\"categoryArticle\",\"article\",\"categoryArticleAdd\",\"categoryArticleEdit\",\"categoryArticleCheckboxDelete\",\"articleAdd\",\"articleEdit\",\"articleCheckboxDelete\"]', '2024-10-06 20:12:26', '2024-10-13 19:50:21'),
+(19, 'Quản lý bình luận', '[\"comment\",\"commentAdd\",\"commentEdit\",\"commentCheckboxDelete\"]', '2024-10-13 18:23:33', '2024-10-13 18:23:33'),
+(20, 'Nhóm nhân viên lắp ráp', '[\"assembly\",\"employee\"]', '2024-10-21 20:45:37', '2024-10-21 20:45:37');
 
 -- --------------------------------------------------------
 
@@ -89,6 +92,84 @@ CREATE TABLE `articles` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `articles`
+--
+
+INSERT INTO `articles` (`id`, `categoryArticle_id`, `title`, `image`, `description_short`, `description`, `status`, `created_at`, `updated_at`) VALUES
+(1, 3, 'Đồ chơi tốt nhất cho bé gái 12 tuổi', '1729869956.jpg', '<p>Từ những cảnh h&agrave;nh động th&uacute; vị đến những t&aacute;c phẩm hoa, một thế giới tưởng tượng đang chờ đ&oacute;n bạn trong bộ sưu tập đồ chơi LEGO&reg; d&agrave;nh cho b&eacute; g&aacute;i 12 tuổi của ch&uacute;ng t&ocirc;i.</p>', '<h1>Đồ chơi tốt nhất cho b&eacute; g&aacute;i 12 tuổi</h1>\r\n\r\n<p>Khi con g&aacute;i nhỏ của bạn tiếp tục lớn l&ecirc;n v&agrave; ph&aacute;t triển, sở th&iacute;ch v&agrave; th&uacute; vui của b&eacute; cũng sẽ ph&aacute;t triển theo.</p>\r\n\r\n<p><a href=\"https://www.lego.com/en-gb/toys-for-girls\" target=\"_self\">Cho d&ugrave; b&eacute; muốn kh&aacute;m ph&aacute; những khu vườn b&aacute;ch thảo xinh đẹp, những trận chiến ho&agrave;nh tr&aacute;ng, những lo&agrave;i động vật đ&aacute;ng y&ecirc;u hay tự thiết kế c&aacute;c bộ đồ chơi LEGO&reg; của ri&ecirc;ng m&igrave;nh, th&igrave; vẫn c&oacute; rất nhiều điều để kh&aacute;m ph&aacute; trong bộ sưu tập đồ chơi LEGO tuyệt vời d&agrave;nh cho b&eacute; g&aacute;i</a>&nbsp;12 tuổi của ch&uacute;ng t&ocirc;i&nbsp;.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3><strong>Zoey v&agrave; Zian, ch&uacute; c&uacute; m&egrave;o</strong><img src=\"https://www.lego.com/cdn/cs/set/assets/blt780fc348170a3b3d/71476_Lifestyle_04.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" style=\"height:100%; width:100%\" /></h3>\r\n\r\n<p>Biến giấc mơ th&agrave;nh hiện thực với bộ lắp gh&eacute;p&nbsp;<a href=\"https://www.lego.com/product/zoey-and-zian-the-cat-owl-71476\">LEGO&reg; DREAMZzz&trade; Zoey v&agrave; Zian the Cat-Owl</a>&nbsp;.</p>\r\n\r\n<p>Trẻ em sẽ du h&agrave;nh v&agrave;o&nbsp;<a href=\"https://www.lego.com/themes/dreamzzz\">thế giới giấc mơ</a>&nbsp;, c&ugrave;ng Zoey thực hiện nhiệm vụ giải cứu Zian khỏi nanh vuốt của Thợ săn đ&ecirc;m.</p>\r\n\r\n<p>Biến đổi Zian từ một ch&uacute; c&uacute; m&egrave;o c&oacute; c&aacute;nh th&agrave;nh một ch&uacute; c&ocirc;ng m&egrave;o c&oacute; đu&ocirc;i ấn tượng để c&oacute; 2 trải nghiệm x&acirc;y dựng th&uacute; vị. Sau khi x&acirc;y dựng xong, h&igrave;nh c&oacute; thể tạo d&aacute;ng đầu, ch&acirc;n v&agrave; đu&ocirc;i để chơi tương t&aacute;c.</p>\r\n\r\n<p>Bộ sản phẩm bao gồm 3 nh&acirc;n vật nhỏ: Zoey, Cooper v&agrave; Night Hunter, c&ugrave;ng với c&aacute;c tay sai Sneak v&agrave; Snivel. Trẻ em c&oacute; thể đắm m&igrave;nh v&agrave;o trải nghiệm chơi th&uacute; vị với c&aacute;c phụ kiện tuyệt vời như cung bắn của Zoey v&agrave;&nbsp;<a href=\"https://www.lego.com/categories/cars/motorbikes\">xe m&aacute;y</a>&nbsp;bay của Cooper .</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3><strong>C&ocirc;ng vi&ecirc;n giải tr&iacute; b&atilde;i biển</strong></h3>\r\n\r\n<p><img src=\"https://www.lego.com/cdn/cs/set/assets/blt8847a83c0b64d694/41737_Lifestyle_Cons_crop.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" style=\"height:100%; width:100%\" /></p>\r\n\r\n<p>H&atilde;y c&ugrave;ng đi đến b&atilde;i biển với&nbsp;<a href=\"https://www.lego.com/product/beach-amusement-park-41737\" target=\"_self\">C&ocirc;ng vi&ecirc;n giải tr&iacute; b&atilde;i biển LEGO&reg; Friends</a>&nbsp;tuyệt vời !</p>\r\n\r\n<p>Được thiết kế cho trẻ em từ 12 tuổi trở l&ecirc;n, c&ocirc;ng vi&ecirc;n giải tr&iacute; bổ &iacute;ch n&agrave;y chứa đầy đủ c&aacute;c chi tiết si&ecirc;u vui nhộn, cộng với c&aacute;c th&agrave;nh phần LEGO Technic&trade; cũng được bao gồm để tăng th&ecirc;m chuyển động v&agrave; t&iacute;nh ch&acirc;n thực. Trẻ em c&oacute; thể x&acirc;y dựng v&ograve;ng xoay ngựa gỗ c&oacute; chức năng xoay k&eacute;p, m&aacute;y tạo s&oacute;ng với người lướt s&oacute;ng đang di chuyển v&agrave; tr&ograve; chơi bắn s&uacute;ng với 2 h&agrave;ng mục ti&ecirc;u di chuyển từ b&ecirc;n n&agrave;y sang b&ecirc;n kia!</p>\r\n\r\n<p>Bộ sản phẩm bao gồm 4 nh&acirc;n vật Zac, Nova, Dia v&agrave; Charli, c&ugrave;ng với c&aacute;c đầu thay thế cho Zac v&agrave; Nova để trẻ em c&oacute; thể thay đổi biểu cảm t&ugrave;y theo c&acirc;u chuyện ch&uacute;ng muốn kể.</p>', 1, '2024-10-15 23:43:15', '2024-10-25 08:25:56'),
+(2, 3, 'Đồ chơi giáo dục tốt nhất cho trẻ em', '1729870600.jpg', '<p>Đồ chơi gi&aacute;o dục của ch&uacute;ng t&ocirc;i được thiết kế đặc biệt để gi&uacute;p trẻ em ph&aacute;t triển t&igrave;nh y&ecirc;u học tập, khuyến kh&iacute;ch sự t&ograve; m&ograve; về thế giới v&agrave; x&acirc;y dựng khả năng s&aacute;ng tạo.</p>', '<h1>Đồ chơi gi&aacute;o dục tốt nhất cho trẻ em</h1>\r\n\r\n<p>Niềm y&ecirc;u th&iacute;ch học hỏi bắt đầu từ khi c&ograve;n nhỏ v&agrave; biểu hiện dưới nhiều h&igrave;nh thức, từ sự t&ograve; m&ograve; về thế giới đến việc x&acirc;y dựng c&aacute;c dự &aacute;n n&acirc;ng cao để x&acirc;y dựng mối li&ecirc;n hệ t&igrave;nh cảm với những người xung quanh.</p>\r\n\r\n<p>Để hỗ trợ sự ph&aacute;t triển tự nhi&ecirc;n n&agrave;y v&agrave; khuyến kh&iacute;ch học tập th&ocirc;ng qua vui chơi, sau đ&acirc;y l&agrave; một số&nbsp;<a href=\"https://www.lego.com/themes/lego-education\" target=\"_self\">đồ chơi gi&aacute;o dục</a>&nbsp;tốt nhất m&agrave;&nbsp;<a href=\"https://www.lego.com/categories/age-4-plus-years\" target=\"_self\">trẻ em từ 4 tuổi trở l&ecirc;n</a>&nbsp;c&oacute; thể tự chơi hoặc chơi c&ugrave;ng người kh&aacute;c!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Học th&ocirc;ng qua vui chơi l&agrave; g&igrave;?</h2>\r\n\r\n<p>C&agrave;ng nghi&ecirc;n cứu về n&atilde;o bộ v&agrave; sự ph&aacute;t triển của trẻ em, ch&uacute;ng ta c&agrave;ng thấy nhiều bằng chứng cho thấy&nbsp;<a href=\"https://learningthroughplay.com/explore-the-research/the-scientific-case-for-learning-through-play\" target=\"_self\">trẻ em học tốt nhất th&ocirc;ng qua vui chơi</a>&nbsp;.</p>\r\n\r\n<p>Trẻ em học bằng c&aacute;ch thử nghiệm v&agrave; chơi với thế giới xung quanh ngay từ những năm đầu đời &ndash; h&atilde;y nghĩ đến một em b&eacute; v&ograve; giấy, hoặc một đứa trẻ&nbsp;<a href=\"https://www.lego.com/discover/benefits-of-pretend-play\" target=\"_self\">mới biết đi l&agrave;m đồ ăn giả</a>&nbsp;trong bếp đồ chơi. Những đứa trẻ n&agrave;y đang kh&aacute;m ph&aacute; c&aacute;ch thế giới của ch&uacute;ng vận h&agrave;nh v&agrave; ph&aacute;t triển c&aacute;c kỹ năng nhận thức, thể chất v&agrave; x&atilde; hội-cảm x&uacute;c quan trọng.</p>\r\n\r\n<p>Khi lớn l&ecirc;n, c&oacute; thể tập trung nhiều hơn v&agrave;o hướng dẫn học thuật, nhưng&nbsp;<a href=\"https://learningthroughplay.com/\" target=\"_self\">việc học vui chơi</a>&nbsp;vẫn cần thiết! Trẻ em c&oacute; thể tạo ra mối li&ecirc;n hệ c&oacute; &yacute; nghĩa giữa những trải nghiệm vui vẻ v&agrave; việc học của m&igrave;nh, tạo tiền đề để ch&uacute;ng trở th&agrave;nh những người học suốt đời với t&igrave;nh y&ecirc;u kh&aacute;m ph&aacute; v&agrave; t&igrave;m t&ograve;i.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3><strong>Xe s&aacute;ng tạo LEGO&reg; Classic</strong></h3>\r\n\r\n<p><img src=\"https://www.lego.com/cdn/cs/set/assets/bltec1f890dcffa66bf/CLASSIC.png?format=png&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Giới thiệu cho trẻ em từ 5 tuổi trở l&ecirc;n một thế giới s&aacute;ng tạo với bộ&nbsp;<a href=\"https://www.lego.com/product/creative-vehicles-11036\" target=\"_self\">LEGO&reg; Classic Creative Vehicles</a>&nbsp;đa năng !</p>\r\n\r\n<p>Với 900 vi&ecirc;n gạch x&acirc;y dựng, bao gồm c&aacute;c mảnh gh&eacute;p đặc biệt v&agrave; 52 b&aacute;nh xe, trẻ em c&oacute; mọi thứ cần thiết để x&acirc;y dựng 8 loại xe độc ​​đ&aacute;o &ndash; bao gồm xe cảnh s&aacute;t đồ chơi, xe chở kem, xe limousine v&agrave; nhiều loại kh&aacute;c.</p>\r\n\r\n<p>Th&ecirc;m v&agrave;o đ&oacute;, trẻ em c&oacute; thể ph&aacute;t triển kỹ năng x&acirc;y dựng s&aacute;ng tạo v&agrave; thử nghiệm với niềm vui x&acirc;y dựng lại hoặc x&acirc;y dựng tự do! Trẻ em c&oacute; thể x&acirc;y dựng một trong 10 &yacute; tưởng được đưa v&agrave;o v&agrave; sử dụng hướng dẫn x&acirc;y dựng lại gi&agrave;u tr&iacute; tưởng tượng để tăng cường sự tự tin s&aacute;ng tạo của m&igrave;nh. Trẻ em cũng c&oacute; thể x&acirc;y dựng tự do v&agrave; biến những thiết kế của ri&ecirc;ng m&igrave;nh th&agrave;nh hiện thực.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3><strong>Bộ kh&aacute;m ph&aacute; kh&ocirc;ng gian th&agrave;nh phố LEGO&reg;</strong></h3>\r\n\r\n<h3><img src=\"https://www.lego.com/cdn/cs/set/assets/blt366546beb8e548f9/CITY_60441_Lifestyle_cons_2.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></h3>\r\n\r\n<p>C&aacute;c phi h&agrave;nh gia tương lai&nbsp;<a href=\"https://www.lego.com/categories/age-6-plus-years\" target=\"_self\">từ 6 tuổi trở l&ecirc;n</a>&nbsp;sẽ th&iacute;ch t&igrave;m hiểu mọi thứ về th&aacute;m hiểm li&ecirc;n thi&ecirc;n h&agrave; với Bộ&nbsp;<a href=\"https://www.lego.com/product/space-explorers-pack-60441\" target=\"_self\">LEGO&reg; City Space Explorers Pack</a>&nbsp;! Với 3 bộ sao trong một hộp, Bộ Space Explorers Pack chứa đầy c&aacute;c t&iacute;nh năng ho&agrave;nh tr&aacute;ng v&agrave; chi tiết tuyệt vời để truyền cảm hứng cho những cuộc phi&ecirc;u lưu ngo&agrave;i thế giới n&agrave;y.</p>\r\n\r\n<p>Với&nbsp;<a href=\"https://www.lego.com/product/space-construction-mech-60428\" target=\"_self\">Space Construction Mech</a>&nbsp;(60428), trẻ em c&oacute; thể x&acirc;y dựng một bộ đồ chơi mech để kh&aacute;m ph&aacute; thế giới mới. Ngo&agrave;i ra c&ograve;n c&oacute; một&nbsp;<a href=\"https://www.lego.com/product/interstellar-spaceship-60430\" target=\"_self\">Interstellar Spaceship</a>&nbsp;(60430) để di chuyển giữa c&aacute;c h&agrave;nh tinh.</p>\r\n\r\n<p>Mỗi bản dựng đều tr&agrave;n ngập c&aacute;c chi tiết v&agrave; phụ kiện th&uacute; vị, hứa hẹn mang đến nhiều giờ vui vẻ cho trẻ em y&ecirc;u th&iacute;ch&nbsp;<a href=\"https://www.lego.com/space\" target=\"_self\">kh&ocirc;ng gian</a>&nbsp;!</p>', 1, '2024-10-25 08:32:05', '2024-10-25 08:36:40'),
+(3, 3, 'Hàng đầu dành cho trẻ em và thanh thiếu niên', NULL, '<p>&nbsp;&trade; tuyệt vời nhất d&agrave;nh cho trẻ em v&agrave; thanh thiếu ni&ecirc;n để x&acirc;y dựng v&agrave; chơi. T&aacute;i hiện những khoảnh khắc mang t&iacute;nh biểu tượng từ c&aacute;c bộ phim v&agrave; chương tr&igrave;nh!</p>', '<h1><em>&Yacute; tưởng qu&agrave; tặng Star Wars</em>&nbsp;&trade; tốt nhất&nbsp;cho trẻ em v&agrave; thanh thiếu ni&ecirc;n</h1>\r\n\r\n<p>Thi&ecirc;n h&agrave;&nbsp;<em>Star Wars</em>&nbsp;&trade; c&oacute; đầy đủ&nbsp;<a href=\"https://www.lego.com/themes/star-wars/characters\">c&aacute;c nh&acirc;n vật</a>&nbsp;mang t&iacute;nh biểu tượng , bối cảnh huyền thoại v&agrave; địa điểm đ&aacute;ng nhớ. Nếu con bạn mới được giới thiệu về&nbsp;&nbsp;<em>Star Wars</em>&nbsp;, việc t&igrave;m một m&oacute;n qu&agrave; hấp dẫn c&oacute; thể rất kh&oacute; khăn. Ch&uacute;ng t&ocirc;i đ&atilde; chọn lọc một số m&oacute;n qu&agrave; th&uacute; vị v&agrave; độc đ&aacute;o d&agrave;nh cho trẻ em, ho&agrave;n hảo cho&nbsp;&nbsp;<a href=\"https://www.lego.com/gifts/birthday-gifts\">sinh nhật</a>&nbsp;hoặc thậm ch&iacute; l&agrave;&nbsp;<a href=\"https://www.lego.com/page/star-wars-day-deals\">&nbsp;Ng&agrave;y&nbsp;</a><a href=\"https://www.lego.com/page/star-wars-day-deals\"><em>Star Wars</em></a>&nbsp;!</p>\r\n\r\n<h3><strong>Kẻ x&acirc;m nhập Sith của Darth Maul&trade;</strong></h3>\r\n\r\n<h3><img src=\"https://www.lego.com/cdn/cs/set/assets/bltb774d71657ceb54d/75383_Lifestyle_Cons_crop.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></h3>\r\n\r\n<p>T&aacute;i hiện cuộc truy đuổi đầy h&agrave;nh động của Qui-Gon Jinn từ&nbsp;<em><em>Star Wars</em>&nbsp;: The Phantom Menace</em>&nbsp;&trade; với LEGO&reg;&nbsp;<em>Star Wars</em>&nbsp;&trade; Darth Maul&#39;s Sith Infiltrator&trade; (73583). C&aacute;c Jedi&nbsp;<a href=\"https://www.lego.com/categories/age-9-plus-years\" target=\"_self\">từ 9 tuổi trở l&ecirc;n</a>&nbsp;sẽ th&iacute;ch những yếu tố vui nhộn như 2 khẩu s&uacute;ng l&ograve; xo v&agrave; đ&ocirc;i c&aacute;nh c&oacute; thể gập lại khi ch&uacute;ng tạo ra những c&acirc;u chuyện ly kỳ của ri&ecirc;ng m&igrave;nh.</p>\r\n\r\n<p>Bộ sản phẩm cũng đi k&egrave;m bốn nh&acirc;n vật nhỏ bao gồm Darth Maul với thanh Lightsaber&trade; hai lưỡi, Qui-Gon Jinn với thanh Lightsaber&trade;, Anakin Skywalker v&agrave; một nh&acirc;n vật nhỏ Saw Gerrera độc quyền c&oacute; gi&aacute; đỡ trưng b&agrave;y. Kết hợp với c&aacute;c t&agrave;u&nbsp;<em>Star Wars</em>&nbsp;kh&aacute;c v&agrave; tạo ra trận chiến của ri&ecirc;ng bạn!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3><strong>BARC Speeder&trade; Tho&aacute;t hiểm</strong></h3>\r\n\r\n<p><img src=\"https://www.lego.com/cdn/cs/set/assets/bltc6cf11cdc7a892c3/75378_Lifestyle_cons_2.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Người h&acirc;m mộ chương tr&igrave;nh Disney+&nbsp;<em>The Mandalorian</em>&nbsp;c&oacute; thể sống lại hồi tưởng đầy cảm x&uacute;c về Order 66 từ m&ugrave;a 3 với bộ LEGO&reg;&nbsp;<em>Star Wars</em>&nbsp;&trade; BARC Speeder&trade; Escape (75378) LEGO. Cảnh n&agrave;y đưa người h&acirc;m mộ trở lại với lệnh t&agrave;n bạo của Ho&agrave;ng đế Palpatine nhằm ti&ecirc;u diệt tất cả Jedi, cho ch&uacute;ng ta thấy quan điểm của Grogu.</p>\r\n\r\n<p>Phi&ecirc;n bản t&aacute;i tạo bằng gạch của BARC Speeder&trade; n&agrave;y bao gồm c&aacute;c chi tiết x&aacute;c thực từ chiếc xe đạp tốc độ, bao gồm buồng l&aacute;i của một nh&acirc;n vật nhỏ, 2 s&uacute;ng bắn đinh v&agrave; xe đẩy bay của Grogu c&oacute; thể được gắn v&agrave;o th&ugrave;ng xe c&oacute; thể th&aacute;o rời.</p>\r\n\r\n<p>Bộ sản phẩm cũng bao gồm cảnh quan v&agrave; 3 m&ocirc; h&igrave;nh LEGO nhỏ của Kelleran Beq với thanh kiếm &aacute;nh s&aacute;ng&trade; m&agrave;u ​​xanh lam v&agrave; xanh lục c&ugrave;ng hai&nbsp;<a href=\"https://www.lego.com/en-gb/themes/star-wars/clone-troopers\" target=\"_self\">chiến binh Clone Troopers</a>&nbsp;501 , mỗi người cầm một khẩu s&uacute;ng bắn tia, c&ugrave;ng với một m&ocirc; h&igrave;nh LEGO của Grogu.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3><strong>L&ecirc;n t&agrave;u&nbsp;<em>Tantive IV</em>&nbsp;&trade;</strong></h3>\r\n\r\n<p><img src=\"https://www.lego.com/cdn/cs/set/assets/blt532a0b6997f938f3/75387_Lifestyle_envr.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>X&acirc;y dựng v&agrave; t&aacute;i hiện lại cuộc tiếp quản th&ugrave; địch của Darth Vader đối với t&agrave;u vận tải của C&ocirc;ng ch&uacute;a Leia từ bộ phim&nbsp;<em><em>Star Wars</em>&nbsp;: A New Hope</em>&nbsp;&trade; với m&ocirc; h&igrave;nh&nbsp;<a href=\"https://www.lego.com/product/boarding-the-tantive-iv-75387\" target=\"_self\">LEGO&reg;&nbsp;<em>Star Wars</em>&nbsp;&trade; L&ecirc;n t&agrave;u&nbsp;<em>Tantive IV</em>&nbsp;&trade; (75387)</a>&nbsp;. Bộ n&agrave;y c&oacute; tiềm năng chơi tuyệt vời với c&aacute;c th&agrave;nh phần c&oacute; thể điều chỉnh c&oacute; thể mở cửa v&agrave; lật đổ kẻ th&ugrave; khiến n&oacute; trở th&agrave;nh lựa chọn tuyệt vời cho trẻ em v&agrave; người lớn chơi c&ugrave;ng nhau. N&oacute; cũng đi k&egrave;m với 7 nh&acirc;n vật nhỏ bao gồm Darth Vader&trade;, hai Stormtroopers, hai Rebel Fleet Troopers, Captain Antilles v&agrave; nhiều hơn nữa!</p>\r\n\r\n<p>Bộ n&agrave;y đi k&egrave;m với c&aacute;c đầu nối, v&igrave; vậy bạn c&oacute; thể x&acirc;y dựng nhiều bộ v&agrave; kết nối ch&uacute;ng lại với nhau để tạo ra một cảnh chiến đấu huyền thoại. Nhờ thiết kế độc đ&aacute;o của bộ, n&oacute; cũng c&oacute; thể được trưng b&agrave;y như một vật trang tr&iacute; nh&agrave; cửa - ho&agrave;n hảo cho bất kỳ người h&acirc;m mộ&nbsp;<em>Star Wars</em>&nbsp;n&agrave;o muốn t&ocirc;n vinh bộ phim.</p>', 1, '2024-10-25 08:50:48', '2024-10-25 08:58:36'),
+(4, 3, 'Bộ LEGO® NINJAGO® tốt nhất', '4.webp', '<p>Kh&aacute;m ph&aacute; những bộ LEGO&reg; NINJAGO&reg; h&agrave;ng đầu của ch&uacute;ng t&ocirc;i v&agrave; đắm m&igrave;nh v&agrave;o thế giới Spinjitzu theo c&aacute;ch chưa từng c&oacute;! T&igrave;m bộ LEGO NINJAGO ho&agrave;n hảo d&agrave;nh cho bạn.</p>', '<h1>Bộ LEGO&reg; NINJAGO&reg; tốt nhất</h1>\r\n\r\n<p>H&atilde;y chuẩn bị bước v&agrave;o cuộc phi&ecirc;u lưu ninja ho&agrave;nh tr&aacute;ng!</p>\r\n\r\n<p>Kh&aacute;m ph&aacute; bộ sưu tập LEGO&reg; NINJAGO&reg; của ch&uacute;ng t&ocirc;i v&agrave; t&igrave;m ra những c&aacute;ch mới để đắm m&igrave;nh v&agrave;o thế giới Spinjitzu, tạo ra phương tiện ninja, hang ổ b&iacute; mật v&agrave; những trận chiến ho&agrave;nh tr&aacute;ng để gi&agrave;nh chiến thắng.</p>\r\n\r\n<p>Cho d&ugrave; bạn l&agrave; người h&acirc;m mộ Kai, Jay, Cole, Zane, Lloyd hay Nya, th&igrave; vẫn c&oacute; một bộ NINJAGO d&agrave;nh cho mọi người đam m&ecirc; ninja!</p>\r\n\r\n<h2>Mặt nạ s&oacute;i Shadow Dojo</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt199a274c21b2eb9c/71813_Lifestyle_cons.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Đưa việc huấn luyện ninja l&ecirc;n một tầm cao mới đầy th&uacute; vị với bộ Wolf Mask Shadow Dojo!</p>\r\n\r\n<p>Những chiến binh trẻ từ 9 tuổi trở l&ecirc;n c&oacute; thể sống lại những trận chiến ho&agrave;nh tr&aacute;ng từ m&ugrave;a 2 của chương tr&igrave;nh truyền h&igrave;nh&nbsp;<a href=\"https://www.lego.com/themes/ninjago/dragons-rising\" target=\"_self\">NINJAGO&reg; Dragons Rising</a>&nbsp;với bộ 2 tầng th&uacute; vị n&agrave;y. Cho d&ugrave; họ nhập vai chiến đấu tr&ecirc;n kh&ocirc;ng trong s&acirc;n, kh&aacute;m ph&aacute; bẫy b&iacute; mật hay gi&uacute;p ninja di chuyển tr&ecirc;n m&oacute;c của họ, th&igrave; vẫn c&oacute; niềm vui bất tận.</p>\r\n\r\n<p>Bộ x&acirc;y dựng v&otilde; đường tuyệt đẹp n&agrave;y đi k&egrave;m với 8 nh&acirc;n vật NINJAGO để tham gia v&agrave;o h&agrave;nh động, bao gồm Climber Kai, Climber Lloyd, Climber Nya v&agrave; Climber Zane, tất cả đều được trang bị m&oacute;c leo n&uacute;i v&agrave; phụ kiện katana. V&agrave; đừng qu&ecirc;n những nh&acirc;n vật phản diện để c&aacute;c anh h&ugrave;ng ninja đ&aacute;nh bại, như Ch&uacute;a tể Ras v&agrave; một Chiến binh vuốt mặt nạ s&oacute;i độc &aacute;c!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Rồng NINJAGO&reg;</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt31b775416e16de19/DRAGONS_71815_Lifestyle_cons.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Bạn c&oacute; thể chịu được sức n&oacute;ng của những con rồng hung dữ đ&aacute;ng sợ n&agrave;y kh&ocirc;ng?</p>\r\n\r\n<p>Người h&acirc;m mộ chương tr&igrave;nh truyền h&igrave;nh NINJAGO&reg; Dragons Rising c&oacute; thể thổi hồn v&agrave;o những sinh vật y&ecirc;u th&iacute;ch của m&igrave;nh với bộ sưu tập&nbsp;<a href=\"https://www.lego.com/categories/dragons\" target=\"_self\">đồ chơi rồng</a>&nbsp;LEGO&reg; NINJAGO của ch&uacute;ng t&ocirc;i . Từ những m&ocirc; h&igrave;nh khổng lồ với c&aacute;c chi c&oacute; thể tạo d&aacute;ng cho đến những m&ocirc; h&igrave;nh nhỏ hơn, dễ di chuyển hơn, lu&ocirc;n c&oacute; một ch&uacute; rồng d&agrave;nh cho mọi người đam m&ecirc; ninja!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><strong>Đền Đ&aacute; Rồng</strong></p>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt07b77a20723c2a69/71819_Lifestyle_cons_2.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /><img src=\"https://www.lego.com/cdn/cs/set/assets/blt07b77a20723c2a69/71819_Lifestyle_cons_2.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Kh&aacute;m ph&aacute; tr&ograve; chơi vừa chơi vừa trưng b&agrave;y mới n&agrave;y, ho&agrave;n hảo cho&nbsp;<a href=\"https://www.lego.com/toys-for-boys\" target=\"_self\">cả b&eacute; trai</a>&nbsp;v&agrave;&nbsp;<a href=\"https://www.lego.com/toys-for-girls\" target=\"_self\">b&eacute; g&aacute;i&nbsp;</a><a href=\"https://www.lego.com/categories/age-13-plus-years\" target=\"_self\">từ 13 tuổi trở l&ecirc;n</a>&nbsp;!</p>\r\n\r\n<p>Trẻ em c&oacute; thể tham gia c&ugrave;ng c&aacute;c nh&acirc;n vật nhỏ NINJAGO&reg; của những anh h&ugrave;ng y&ecirc;u th&iacute;ch của m&igrave;nh, bao gồm Master Lloyd, Master Wu, Nya v&agrave; Kai, khi ch&uacute;ng kh&aacute;m ph&aacute; những đặc điểm quyến rũ của Đền thờ Đ&aacute; Rồng. Chi&ecirc;m ngưỡng th&aacute;c nước v&agrave; c&acirc;y hoa anh đ&agrave;o, d&agrave;nh thời gian tr&ecirc;n tảng đ&aacute; thiền định với Master Wu, nghi&ecirc;n cứu c&aacute;c cuộn giấy trong thư viện (v&agrave; kh&aacute;m ph&aacute; căn ph&ograve;ng b&iacute; mật của thư viện) hoặc d&agrave;n dựng những trận chiến ho&agrave;nh tr&aacute;ng trong khu vực luyện tập di động. Bộ sản phẩm đầy đủ t&iacute;nh năng n&agrave;y hứa hẹn nhiều giờ giải tr&iacute; v&agrave; tạo n&ecirc;n m&agrave;n tr&igrave;nh diễn ấn tượng!</p>', 1, '2024-10-25 08:54:08', '2024-10-25 08:58:18'),
+(5, 4, '10 điều cần khám phá bên trong biệt thự X-Men', '.webp', '<p>H&atilde;y c&ugrave;ng ch&uacute;ng t&ocirc;i xem qua bộ Marvel X-men mới c&oacute; rất nhiều quả trứng Phục sinh</p>', '<h1>10 điều cần kh&aacute;m ph&aacute; b&ecirc;n trong biệt thự X-Men</h1>\r\n\r\n<p>Theo d&otilde;i cuộc sống của những dị nh&acirc;n c&oacute; đặc điểm di truyền được gọi l&agrave; gen X gi&uacute;p họ c&oacute; được si&ecirc;u năng lực, X-Men đ&atilde; xuất hiện trong truyện tranh, phim ảnh, phim hoạt h&igrave;nh v&agrave; nhiều nội dung kh&aacute;c.</p>\r\n\r\n<p>B&acirc;y giờ, ch&uacute;ng xuất hiện trong bộ LEGO&reg; mới&nbsp;<sup>dựa</sup>&nbsp;tr&ecirc;n X-Mansion, trụ sở của Học viện Gi&aacute;o dục Đại học Xavier.</p>\r\n\r\n<p>Khi ch&uacute;ng ta ch&agrave;o đ&oacute;n bộ sản phẩm si&ecirc;u mới n&agrave;y, sau đ&acirc;y l&agrave; mọi th&ocirc;ng tin bạn cần biết về LEGO Marvel X-Men: The X-Mansion.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>1. N&oacute; được thiết kế bởi hai người h&acirc;m mộ cuồng nhiệt của X-Men</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/bltc988051978d5d8ca/02-Article-Image-SH-ProjectX.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>C&aacute;c nh&agrave; thiết kế LEGO l&agrave; Justin Ramsden v&agrave; Mark Tranter l&agrave; th&agrave;nh vi&ecirc;n của nh&oacute;m tạo ra bộ sản phẩm n&agrave;y v&agrave; đối với cả hai người, đ&acirc;y đều l&agrave; giấc mơ trở th&agrave;nh hiện thực.</p>\r\n\r\n<p>&ldquo;T&ocirc;i l&agrave; một người h&acirc;m mộ truyện tranh Marvel gần như cả cuộc đời m&igrave;nh,&rdquo; Mark n&oacute;i, v&agrave; Justin gật đầu đồng t&igrave;nh.</p>\r\n\r\n<p>&ldquo;X-Men: The Animated Series l&agrave; một phần cực kỳ lớn trong th&oacute;i quen s&aacute;ng thứ bảy của t&ocirc;i khi c&ograve;n nhỏ,&rdquo; anh ấy n&oacute;i th&ecirc;m. &ldquo;T&ocirc;i xem phim hoạt h&igrave;nh v&agrave; trở n&ecirc;n &aacute;m ảnh với vũ trụ n&agrave;y.&rdquo;</p>\r\n\r\n<h2>2. N&oacute; chủ yếu dựa tr&ecirc;n một loạt phim kinh điển</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt38bf907546b730ee/03-Article-Image-SH-ProjectX.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>&ldquo;Bộ phim chủ yếu dựa tr&ecirc;n loạt phim hoạt h&igrave;nh, được t&ocirc;n vinh trong X-Men &#39;97&rdquo;, Justin n&oacute;i, &aacute;m chỉ đến bảng m&agrave;u tươi s&aacute;ng của bộ phim sẽ ngay lập tức đưa người h&acirc;m mộ ho&agrave;i niệm trở về thập ni&ecirc;n 90.</p>\r\n\r\n<p>&ldquo;Ch&uacute;ng t&ocirc;i đ&atilde; l&agrave;m việc chặt chẽ với nh&oacute;m tại Marvel để đưa v&agrave;o những t&agrave;i liệu tham khảo về to&agrave;n bộ vũ trụ X-Men, cả truyện tranh v&agrave; phim ảnh&rdquo;, &ocirc;ng n&oacute;i tiếp.</p>\r\n\r\n<h2>3. C&oacute; c&aacute;c ph&ograve;ng v&agrave; địa điểm cổ điển</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt4e484c513a23ae54/04-Article-Image-SH-ProjectX.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Việc lựa chọn những căn ph&ograve;ng n&agrave;o để đưa v&agrave;o một bộ như thế n&agrave;y kh&ocirc;ng phải l&agrave; điều dễ d&agrave;ng v&agrave; c&aacute;c nh&agrave; thiết kế thừa nhận rằng c&oacute; những lựa chọn kh&oacute; khăn cần phải đưa ra.</p>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt0b8eb7734b7d0f83/05-Article-Image-SH-ProjectX.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>&ldquo;Thật kh&ocirc;ng may, ch&uacute;ng t&ocirc;i kh&ocirc;ng thể đưa tất cả v&agrave;o được, nhưng ch&uacute;ng t&ocirc;i vẫn đưa được rất nhiều v&agrave;o&rdquo;, Mark cười n&oacute;i.</p>\r\n\r\n<p>Tầng tr&ecirc;n l&agrave; ph&ograve;ng th&iacute; nghiệm của Gi&aacute;o sư X, một ph&ograve;ng k&yacute; t&uacute;c x&aacute; c&oacute; giường của Wolverine v&agrave; ph&ograve;ng x&eacute;t nghiệm y khoa, trong khi tầng trệt l&agrave; sảnh, ph&ograve;ng học, thư viện v&agrave; cơ sở đ&agrave;o tạo Ph&ograve;ng nguy hiểm.</p>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt34200f169080f490/06-Article-Image-SH-ProjectX.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<h2>4. N&oacute; chứa đầy t&iacute;nh tương t&aacute;c</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt6e3fcec9f57e487a/07-Article-Image-SH-ProjectX.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Sẵn s&agrave;ng cho nhiều giờ nhập vai, c&aacute;c t&iacute;nh năng tương t&aacute;c của bộ đồ chơi bao gồm tường v&agrave; cửa trượt, c&ugrave;ng m&aacute;i nh&agrave; c&oacute; thể bị ph&aacute; hủy bằng c&aacute;ch k&iacute;ch hoạt c&ocirc;ng tắc.</p>\r\n\r\n<p>&ldquo;Ch&uacute;ng t&ocirc;i đ&atilde; c&oacute; rất nhiều niềm vui với n&oacute; v&agrave; cố gắng l&agrave;m cho n&oacute; trở n&ecirc;n th&uacute; vị hơn,&rdquo; Justin n&oacute;i.</p>\r\n\r\n<h2>5. C&oacute; RẤT NHIỀU quả trứng Phục sinh</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt4a5c8849bab66744/08-Article-Image-SH-ProjectX.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>V&agrave; đối với những người h&acirc;m mộ cuồng nhiệt, n&oacute; c&oacute; đầy đủ th&ocirc;ng tin tham khảo.</p>\r\n\r\n<p>&ldquo;Ch&uacute;ng t&ocirc;i c&oacute; 46 nh&atilde;n d&aacute;n,&rdquo; Mark n&oacute;i. &ldquo;Vậy l&agrave; c&oacute; &iacute;t nhất 46 tham chiếu đến nhiều vũ trụ X-Men kh&aacute;c nhau.&rdquo;</p>\r\n\r\n<p>Sẽ mất qu&aacute; nhiều thời gian để liệt k&ecirc; tất cả, nhưng những thứ được y&ecirc;u th&iacute;ch nhất bao gồm một cuốn lịch b&atilde;i biển, một &iacute;t kẹo cao su b&iacute; mật v&agrave; một nh&acirc;n vật n&agrave;o đ&oacute; đang nằm tr&ecirc;n giường nh&igrave;n v&agrave;o một bức ảnh.</p>\r\n\r\n<h2>6. Đội ngũ thiết kế đ&atilde; hợp t&aacute;c trực tiếp với Marvel</h2>\r\n\r\n<p>&quot;Ch&uacute;ng t&ocirc;i đ&atilde; l&agrave;m việc rất chặt chẽ với Marvel để quyết định bối cảnh sẽ tr&ocirc;ng như thế n&agrave;o&quot;, Justin n&oacute;i. &quot;Họ đ&atilde; gửi cho ch&uacute;ng t&ocirc;i rất nhiều t&agrave;i liệu tham khảo v&igrave; r&otilde; r&agrave;ng l&agrave; c&oacute; rất nhiều c&aacute;ch kh&aacute;c nhau để m&ocirc; tả dinh thự. Điều đ&oacute; c&oacute; nghĩa l&agrave; c&oacute; nhiều hướng thiết kế m&agrave; ch&uacute;ng t&ocirc;i c&oacute; thể thực hiện&quot;.</p>\r\n\r\n<h2>7. N&oacute; đi k&egrave;m với 10 nh&acirc;n vật X-Men</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/bltda013cd8d61b0af1/09-Article-Image-SH-ProjectX.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Nh&acirc;n vật l&agrave; một phần kh&ocirc;ng thể thiếu của vũ trụ X-Men v&agrave; bộ n&agrave;y c&oacute; rất nhiều nh&acirc;n vật, bao gồm Gi&aacute;o sư X, Wolverine, Jean Grey, Cyclops, Storm, Gambit, Rogue, Iceman, Bishop v&agrave; Magneto. Lần đầu ti&ecirc;n một số nh&acirc;n vật n&agrave;y xuất hiện dưới dạng minifigure.</p>\r\n\r\n<p>Giống như ph&ograve;ng nghỉ, với rất nhiều trang phục lịch sử để lựa chọn, việc chọn ra diện mạo cuối c&ugrave;ng kh&ocirc;ng hề dễ d&agrave;ng.</p>\r\n\r\n<p>&ldquo;Wolverine mặc đồ v&agrave;ng v&agrave; đen,&rdquo; Mark n&oacute;i. &ldquo;Đ&oacute; l&agrave; diện mạo mang t&iacute;nh biểu tượng nhất của anh ấy. Nhưng sau đ&oacute; khi t&ocirc;i nh&igrave;n v&agrave;o, chẳng hạn như Bishop hoặc Iceman, t&ocirc;i nh&igrave;n v&agrave;o c&aacute;c t&agrave;i liệu tham khảo truyện tranh, trong khi vẫn muốn n&oacute; dễ nhận biết. Thực ra, chỉ l&agrave; t&igrave;m ra sự c&acirc;n bằng v&igrave; bạn kh&ocirc;ng muốn n&oacute; qu&aacute; mơ hồ.&rdquo;</p>\r\n\r\n<h2>8. Đ&acirc;y l&agrave; bộ LEGO&reg; X-Men lớn nhất từ ​​trước đến nay</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/bltc9ebaf46752f6b67/10-Article-Image-SH-ProjectX.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Với 3.093 mảnh gh&eacute;p, bộ n&agrave;y l&agrave; bộ X-Men lớn nhất của ch&uacute;ng t&ocirc;i cho đến nay. N&oacute; ho&agrave;n hảo để chơi hoặc trưng b&agrave;y, cao hơn 10,5 in. (27 cm), rộng 16 in. (40 cm) v&agrave; s&acirc;u 10 in. (25 cm) khi được lắp r&aacute;p ho&agrave;n chỉnh.</p>\r\n\r\n<h2>9. Đ&acirc;y l&agrave; sản phẩm mới nhất trong d&ograve;ng m&ocirc;-đun Super Hero</h2>\r\n\r\n<p>&ldquo;Ch&uacute;ng t&ocirc;i muốn gắn n&oacute; v&agrave;o con phố m&ocirc;-đun Si&ecirc;u anh h&ugrave;ng của ch&uacute;ng t&ocirc;i,&rdquo; Justin n&oacute;i. &ldquo;Giống như Sanctum Sanctorum, The Daily Bugle v&agrave; The Avengers Tower.&rdquo;</p>\r\n\r\n<p>Cho d&ugrave; bạn đ&atilde; sở hữu những bộ n&agrave;y hay đang muốn bắt đầu bộ sưu tập của m&igrave;nh, LEGO&reg; Marvel X-Men: The X-Mansion sẽ l&agrave; lựa chọn ho&agrave;n hảo.</p>\r\n\r\n<h2>10. Chắc chắn sẽ g&acirc;y ấn tượng với người h&acirc;m mộ X-Men</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt3fc26aaabfd6da1b/11-Article-Image-SH-ProjectX.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>X-Men rất được ưa chuộng tr&ecirc;n to&agrave;n thế giới v&agrave; ch&uacute;ng t&ocirc;i phải hỏi Justin v&agrave; Mark tại sao họ lại nghĩ như vậy.</p>\r\n\r\n<p>&quot;N&oacute; hấp dẫn một loại đối tượng kh&aacute;n giả kh&aacute;c&quot;, Justin n&oacute;i. &quot;Họ l&agrave; những người ngo&agrave;i x&atilde; hội, nhưng họ tập hợp lại để tạo th&agrave;nh một đội tuyệt vời&quot;.</p>\r\n\r\n<p>Mark đồng &yacute;, thậm ch&iacute; tin rằng Đội thiết kế LEGO&nbsp;<sup>&reg;</sup>&nbsp;chia sẻ một số đặc điểm đ&oacute;, &ldquo;Sự hợp t&aacute;c v&agrave; l&agrave;m việc nh&oacute;m giữa c&aacute;c anh h&ugrave;ng khiến họ trở th&agrave;nh một gia đ&igrave;nh lớn v&agrave; họ lu&ocirc;n c&ugrave;ng nhau l&agrave;m việc để ho&agrave;n th&agrave;nh mọi việc. Giống như ch&uacute;ng t&ocirc;i vậy!&rdquo;</p>\r\n\r\n<p>&copy; 2024 MARVEL</p>\r\n\r\n<p>&nbsp;</p>', 1, '2024-10-25 09:01:55', '2024-10-25 09:04:07'),
+(6, 4, 'Ý tưởng quà tặng Star Wars ™ tốt nhất cho người lớn', '.webp', '<p>H&atilde;y tự tay x&acirc;y dựng người bạn đồng h&agrave;nh người m&aacute;y v&agrave;ng của ri&ecirc;ng bạn với nh&acirc;n vật.</p>', '<p>Săn qu&agrave; c&oacute; thể rất kh&oacute;. Bạn c&oacute; thể cảm thấy như m&igrave;nh đang t&igrave;m kiếm ở thi&ecirc;n h&agrave; xa x&ocirc;i, rất xa, cố gắng t&igrave;m m&oacute;n qu&agrave; ho&agrave;n hảo cho bạn b&egrave;, người th&acirc;n hoặc ch&iacute;nh bạn. Kh&ocirc;ng cần t&igrave;m kiếm nữa!</p>\r\n\r\n<p>Nếu bạn biết họ th&iacute;ch&nbsp;<a href=\"https://www.lego.com/themes/star-wars\"><em>Star Wars</em>&nbsp;&trade;</a>&nbsp;, bạn thật may mắn. Cho d&ugrave; bạn đang t&igrave;m kiếm một m&oacute;n qu&agrave; nhỏ với ng&acirc;n s&aacute;ch thấp hay muốn chi ti&ecirc;u nhiều hơn, th&igrave; vẫn c&oacute; rất nhiều lựa chọn.</p>\r\n\r\n<p>Ch&uacute;ng t&ocirc;i đ&atilde; tuyển chọn c&aacute;c m&ocirc; h&igrave;nh v&agrave; bộ LEGO&reg; lấy cảm hứng từ vũ trụ&nbsp;<em>Star Wars</em>&nbsp;, rất th&uacute; vị khi lắp r&aacute;p v&agrave; thậm ch&iacute; c&ograve;n ấn tượng hơn khi trưng b&agrave;y. Biến mỗi ng&agrave;y&nbsp;<a href=\"https://www.lego.com/page/star-wars-day-deals\">th&agrave;nh Ng&agrave;y&nbsp;</a><a href=\"https://www.lego.com/page/star-wars-day-deals\"><em>Star Wars</em></a>&nbsp;.</p>\r\n\r\n<h3><strong>Thuyền buồm của Jabba&trade;</strong></h3>\r\n\r\n<h3><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/bltd4298d69915081bb/75397_Lifestyle_Cons_02_.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></h3>\r\n\r\n<p>H&atilde;y x&acirc;y dựng con đường đến một thi&ecirc;n h&agrave; xa x&ocirc;i với bộ&nbsp;<a href=\"https://www.lego.com/product/jabba-s-sail-barge-75397\" target=\"_self\">LEGO&reg;&nbsp;<em>Star Wars</em>&nbsp;&trade; Jabba&#39;s Sail Barge&trade;</a>&nbsp;(75397) tuyệt đỉnh n&agrave;y!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p><a href=\"https://www.lego.com/categories/ultimate-collector-series\" target=\"_self\">Bộ sưu tập Ultimate Collector Series</a>&nbsp;đồ sộ n&agrave;y&nbsp;cho ph&eacute;p người h&acirc;m mộ&nbsp;<a href=\"https://www.lego.com/categories/adults-welcome\" target=\"_self\">trưởng th&agrave;nh</a>&nbsp;t&aacute;i hiện những cảnh mang t&iacute;nh biểu tượng từ&nbsp;<em><em>Star Wars</em>&nbsp;: Return of the Jedi</em>&nbsp;với độ chi tiết đ&aacute;ng kinh ngạc. Mở c&aacute;nh buồm c&oacute; thể điều chỉnh v&agrave; kh&aacute;m ph&aacute; nội thất chi tiết chứa đầy những điều bất ngờ ẩn giấu, từ ph&ograve;ng giam đến kho vũ kh&iacute;. Bộ sản phẩm thậm ch&iacute; c&ograve;n đi k&egrave;m 11 nh&acirc;n vật&nbsp;<em>Star Wars</em>&nbsp;, bao gồm một R2-D2&trade; đặc biệt đội tr&ecirc;n một chiếc b&agrave;n quầy bar, giống như trong phim.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>Th&ecirc;m&nbsp;<a href=\"https://www.lego.com/product/desert-skiff-sarlacc-pit-75396\" target=\"_self\">Desert Skiff &amp; Sarlacc Pit</a>&nbsp;(bộ 75396 &ndash; b&aacute;n ri&ecirc;ng) để t&aacute;i hiện cảnh trốn tho&aacute;t ho&agrave;nh tr&aacute;ng &ndash; hoặc chỉ cần trưng b&agrave;y kiệt t&aacute;c của bạn c&ugrave;ng với tấm bảng th&ocirc;ng tin đi k&egrave;m v&agrave; g&acirc;y ấn tượng với những người h&acirc;m mộ&nbsp;<em>Star Wars</em>&nbsp;!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3><strong>C-3PO&trade;</strong></h3>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/bltb2b45aff0f20f8a5/75398_Lifestyle_Cons_02.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>H&atilde;y tự tay x&acirc;y dựng người bạn đồng h&agrave;nh người m&aacute;y v&agrave;ng của ri&ecirc;ng bạn với nh&acirc;n vật&nbsp;<a href=\"https://www.lego.com/product/c-3po-75398\" target=\"_self\">LEGO&reg;&nbsp;<em>Star Wars</em>&nbsp;&trade; C-3PO (75398)</a>&nbsp;n&agrave;y !</p>\r\n\r\n<p>M&ocirc; h&igrave;nh đ&aacute;ng kinh ngạc n&agrave;y nắm bắt mọi chi tiết của ch&uacute; robot giao thức đ&aacute;ng y&ecirc;u, từ cơ thể v&agrave;ng &oacute;ng đến c&aacute;i đầu biểu cảm m&agrave; bạn c&oacute; thể xoay. Bạn thậm ch&iacute; c&oacute; thể tạo d&aacute;ng cho ch&uacute; theo những c&aacute;ch quen thuộc, giống như trong phim! Bộ sưu tập n&agrave;y cũng bao gồm một gi&aacute; đỡ trưng b&agrave;y với một tấm bảng th&ocirc;ng tin C-3PO vui nhộn v&agrave; một vi&ecirc;n gạch kỷ niệm 25 năm LEGO&nbsp;<em>Star Wars</em>&nbsp;đặc biệt .</p>\r\n\r\n<p>V&agrave; để c&oacute; m&agrave;n tr&igrave;nh diễn thực sự ấm l&ograve;ng, h&atilde;y đo&agrave;n tụ C-3PO với người bạn th&acirc;n nhất&nbsp;<a href=\"https://www.lego.com/product/r2-d2-75308\" target=\"_self\">R2-D2&trade;</a>&nbsp;(bộ 75379 &ndash; b&aacute;n ri&ecirc;ng) v&agrave; điều chỉnh c&aacute;nh tay của C-3PO để xoa đầu ch&uacute; robot thi&ecirc;n văn n&agrave;y!</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h3><strong>Chim ưng đen</strong></h3>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/bltfdeb0258a6de93c8/75389_Lifestyle_envr.jpg?format=jpg&amp;quality=80&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Thắt d&acirc;y an to&agrave;n, bọn bu&ocirc;n lậu!&nbsp;<a href=\"https://www.lego.com/product/the-dark-falcon-75389\" target=\"_self\">LEGO&reg;&nbsp;<em>Star Wars</em>&nbsp;&trade; The Dark Falcon (75389)</a>&nbsp;đ&atilde; hạ c&aacute;nh v&agrave; đang l&agrave;m đảo lộn cả thi&ecirc;n h&agrave;!</p>\r\n\r\n<p>Phi thuyền c&oacute; thể x&acirc;y dựng n&agrave;y l&agrave; một phi&ecirc;n bản đen tối của Millennium Falcon kinh điển, như đ&atilde; thấy trong&nbsp;<em>LEGO&nbsp;<em>Star Wars</em>&nbsp;: Rebuild the Galaxy</em>&nbsp;Disney+ đặc biệt. C&oacute; mọi thứ từ trung t&acirc;m giải tr&iacute; đến ph&ograve;ng ngai v&agrave;ng của Darth Jar Jar, c&ugrave;ng với s&uacute;ng bắn l&ograve; xo, ph&aacute;o xoay v&agrave; trụ s&uacute;ng c&oacute; thể th&aacute;o rời, bộ n&agrave;y chứa đầy những pha h&agrave;nh động th&uacute; vị.</p>\r\n\r\n<p>Ngo&agrave;i ra, sản phẩm c&ograve;n đi k&egrave;m 6 nh&acirc;n vật nhỏ, bao gồm Darth Jar Jar, Beach Luke v&agrave; Jedi Vader. H&atilde;y sẵn s&agrave;ng cho một số cuộc phi&ecirc;u lưu thi&ecirc;n h&agrave; ho&agrave;n to&agrave;n kỳ lạ!</p>', 1, '2024-10-25 09:08:29', '2024-10-25 09:08:50'),
+(7, 4, 'Mọi thứ bạn cần biết về LEGO® Star Wars ™ Jabba\'s Sail Barge™', '.webp', '<p>Bộ trưng b&agrave;y LEGO&nbsp;<em>Star Wars</em>&nbsp;Jabba&#39;s Sail Barge&trade; Ultimate Collector Series chắc chắn sẽ l&agrave;m h&agrave;i l&ograve;ng những người h&acirc;m mộ bộ ba phim gốc, cũng như h&agrave;ng triệu người h&acirc;m mộ&nbsp;<em>Star Wars</em>&nbsp;đ&atilde; tập hợp được kể từ khi ph&aacute;t h&agrave;nh.</p>', '<p>Trong bộ phim&nbsp;<em><em>Star Wars</em>&nbsp;: Return of the Jedi</em>&nbsp;&trade; năm 1983, anh h&ugrave;ng Luke Skywalker đ&atilde; su&yacute;t nữa sống s&oacute;t sau thử th&aacute;ch đầy cay đắng khi t&ecirc;n gangster Jabba the Hutt ra lệnh rằng phần thưởng của anh l&agrave; bị n&eacute;m xuống hố Sarlacc c&ugrave;ng với Han Solo v&agrave; Chewbacca.</p>\r\n\r\n<p>Chiếc thuyền buồm sang trọng, tuyệt đẹp m&agrave; Jabba d&ugrave;ng để vận chuyển t&ugrave; nh&acirc;n của m&igrave;nh đến nơi qu&aacute;i vật sống trong c&aacute;t l&agrave; bộ sản phẩm mới nhất gia nhập Bộ sưu tập LEGO&reg;&nbsp;<em>Star Wars</em>&nbsp;&trade; Ultimate Collector Series (UCS).</p>\r\n\r\n<p>Bộ trưng b&agrave;y LEGO&nbsp;<em>Star Wars</em>&nbsp;Jabba&#39;s Sail Barge&trade; Ultimate Collector Series chắc chắn sẽ l&agrave;m h&agrave;i l&ograve;ng những người h&acirc;m mộ bộ ba phim gốc, cũng như h&agrave;ng triệu người h&acirc;m mộ&nbsp;<em>Star Wars</em>&nbsp;đ&atilde; tập hợp được kể từ khi ph&aacute;t h&agrave;nh.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>T&aacute;i hiện lại trận chiến gi&agrave;nh Sarlacc</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt3766059bd85f01f1/02_StarWars_Article-image.png?format=png&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Cuộc chiến gi&agrave;nh Sarlacc l&agrave; trận chiến quan trọng ở đầu&nbsp;<em><em>phim Star Wars</em>&nbsp;: Return of the Jedi</em>&nbsp;, chứng kiến ​​nhiều nh&acirc;n vật ng&atilde; xuống v&agrave; bị con qu&aacute;i vật đ&aacute;ng sợ dưới c&aacute;t ăn thịt.</p>\r\n\r\n<p>B&acirc;y giờ, bạn c&oacute; thể nhớ lại những cảnh nổi tiếng đ&atilde; diễn ra ngay trước đ&oacute;, với m&ocirc; h&igrave;nh ấn tượng gồm 3.942 mảnh n&agrave;y c&oacute; chiều d&agrave;i hơn 30,5 in. (77 cm). N&oacute; bao gồm c&aacute;c c&aacute;nh buồm bằng vải c&oacute; thể điều chỉnh, một s&agrave;n tr&ecirc;n c&ugrave;ng c&oacute; thể nhấc l&ecirc;n v&agrave; c&aacute;c mặt b&ecirc;n c&oacute; thể gập xuống để lộ phần b&ecirc;n trong chi tiết.</p>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blta089feeb03879478/03_StarWars_Article-image.png?format=png&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>B&ecirc;n trong bao gồm buồng l&aacute;i, ph&ograve;ng giam, kho vũ kh&iacute; v&agrave; ph&ograve;ng giải tr&iacute; được trang bị giường của Jabba c&ugrave;ng nhiều thứ kh&aacute;c.</p>\r\n\r\n<p>Bộ sản phẩm n&agrave;y được thiết kế để trưng b&agrave;y v&agrave; đi k&egrave;m với gi&aacute; đỡ trưng b&agrave;y được thiết kế đặc biệt, c&oacute; chỗ cho nh&acirc;n vật LEGO Jabba the Hutt, một tấm bảng th&ocirc;ng tin v&agrave; một vi&ecirc;n gạch kỷ niệm&nbsp;25&nbsp;<sup>năm LEGO&nbsp;</sup><em>Star Wars</em>&nbsp;.</p>\r\n\r\n<h2>Đội qu&acirc;n hỗn tạp của Jabba gồm những th&agrave;nh vi&ecirc;n băng đảng</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt3e0c5f06fa70430d/04_StarWars_Article-image.png?format=png&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>R&otilde; r&agrave;ng ngay từ đầu Jabba the Hutt l&agrave; một nh&acirc;n vật đ&aacute;ng ngờ, n&ecirc;n kh&ocirc;ng c&oacute; g&igrave; ngạc nhi&ecirc;n khi cung điện v&agrave; thuyền buồm của hắn chứa đầy những kẻ v&ocirc; lại nguy hiểm.</p>\r\n\r\n<p>Trong bộ LEGO&nbsp;<em>Star Wars</em>&nbsp;Jabba&#39;s Sail Barge, ch&uacute;ng t&ocirc;i đ&atilde; t&aacute;i tạo một c&aacute;ch trung thực 11 nh&acirc;n vật nhỏ đ&aacute;ng kinh ngạc, bao gồm Jabba the Hutt, Bib Fortuna, Salacious Crumb, Max Rebo, Kithaba, Vizam, Wooof v&agrave; một vệ binh Gamorrean.</p>\r\n\r\n<p>Nhưng kh&ocirc;ng chỉ c&oacute; những nh&acirc;n vật phản diện, bộ sản phẩm c&ograve;n c&oacute; C&ocirc;ng ch&uacute;a Leia, C-3PO v&agrave; R2-D2 đội một chiếc b&agrave;n quầy bar giống như trong&nbsp;<em><em>Star Wars</em>&nbsp;: Return of the Jedi</em>&nbsp;.</p>\r\n\r\n<h2>Một sự bổ sung mới đ&aacute;ng hoan ngh&ecirc;nh đang tiến v&agrave;o UCS</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt9e4b4cbbbd33eff9/05_StarWars_Article-image.png?format=png&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Trong 25 năm qua, UCS đ&atilde; chứng kiến ​​một số kh&iacute;a cạnh mang t&iacute;nh biểu tượng nhất của vũ trụ&nbsp;<em>Star Wars</em>&nbsp;được biến th&agrave;nh một trong những bộ lớn nhất v&agrave; chi tiết nhất hiện c&oacute;.</p>\r\n\r\n<p>Người h&acirc;m mộ đ&atilde; rất vui mừng với những c&ocirc;ng tr&igrave;nh ho&agrave;nh tr&aacute;ng như TIE Interceptor, X-wing Starfighter v&agrave;&nbsp;<em>Millennium Falcon</em>&nbsp;&trade;. Giờ đ&acirc;y, LEGO&nbsp;<em>Star Wars</em>&nbsp;Jabba&#39;s Sail Barge l&agrave; sản phẩm mới nhất gia nhập đội h&igrave;nh.</p>\r\n\r\n<p>Nhưng những người tinh mắt sẽ biết rằng đ&acirc;y kh&ocirc;ng phải l&agrave; lần đầu ti&ecirc;n phương tiện n&agrave;y xuất hiện dưới dạng bộ LEGO. Năm 2007, một bộ 781 mảnh gh&eacute;p đ&atilde; được ra mắt, v&agrave; năm 2013, một bộ lớn hơn một ch&uacute;t gồm 850 mảnh gh&eacute;p đ&atilde; được ph&aacute;t h&agrave;nh, bao gồm c&aacute;c nh&acirc;n vật nhỏ Jabba the Hutt, R2-D2 v&agrave; C&ocirc;ng ch&uacute;a Leia.</p>\r\n\r\n<p>V&agrave;o năm 2017, ch&uacute;ng t&ocirc;i cũng đ&atilde; ph&aacute;t h&agrave;nh LEGO&nbsp;<em>Star Wars</em>&nbsp;Desert Skiff Escape, mặc d&ugrave; bộ sản phẩm n&agrave;y tập trung v&agrave;o phương tiện nhỏ hơn đi c&ugrave;ng s&agrave; lan buồm v&agrave; bao gồm c&aacute;c nh&acirc;n vật nhỏ như Han Solo, Boba Fett v&agrave; Chewbacca.</p>\r\n\r\n<h2>Kỷ niệm t&igrave;nh y&ecirc;u d&agrave;nh cho&nbsp;<em>Star Wars</em>&nbsp;&trade;</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/bltd79e29fb9a6f9ee6/07_StarWars_Article-image.png?format=png&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p><em>Star Wars</em>&nbsp;đ&atilde; mang đến cho ch&uacute;ng ta một số c&acirc;u chuyện, nh&acirc;n vật v&agrave; phương tiện đ&aacute;ng nhớ nhất mọi thời đại, v&agrave; ch&uacute;ng t&ocirc;i rất vinh dự khi được chia sẻ di sản đ&oacute; với đ&ocirc;ng đảo người h&acirc;m mộ tr&ecirc;n to&agrave;n thế giới.</p>\r\n\r\n<p>Nếu bạn l&agrave; một fan cuồng&nbsp;<em>của Star Wars</em>&nbsp;đang t&igrave;m kiếm bộ đồ chơi hoặc bộ trưng b&agrave;y tiếp theo, hoặc nếu bạn đang t&igrave;m kiếm một m&oacute;n qu&agrave; cho người h&acirc;m mộ đ&atilde; c&oacute; mọi thứ, th&igrave; tại sao kh&ocirc;ng thử đi tr&ecirc;n chiếc thuyền buồm của Jabba?</p>\r\n\r\n<p>Chỉ cần cẩn thận đừng để ng&atilde; khỏi th&agrave;nh.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Ch&agrave;o mừng kỳ nghỉ lễ</h2>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt9b58346a4c762ed0/06_StarWars_Article-image.png?format=png&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Bộ LEGO&nbsp;<em>Star Wars</em>&nbsp;Jabba&#39;s Sail Barge sẽ l&agrave; m&oacute;n qu&agrave; tuyệt vời cho người h&acirc;m mộ&nbsp;<em>Star Wars</em>&nbsp;. V&agrave; khi ch&uacute;ng ta đang n&oacute;i về chủ đề qu&agrave; tặng, th&igrave; kh&ocirc;ng bao giờ l&agrave; qu&aacute; sớm để mua lịch mừng lễ của bạn.</p>\r\n\r\n<p>Kỷ niệm 25 năm ra mắt LEGO&nbsp;<em>Star Wars</em>&nbsp;, Lịch M&ugrave;a Vọng LEGO&nbsp;<em>Star Wars</em>&nbsp;2024 l&agrave; một bữa tiệc lễ hội d&agrave;nh cho người h&acirc;m mộ&nbsp;<em><em>Star Wars</em></em>&nbsp;. Bộ sưu tập bao gồm năm nh&acirc;n vật LEGO&nbsp;<em>Star Wars</em>&nbsp;v&agrave; một nh&acirc;n vật LEGO bao gồm Holiday Princess Leia, Holiday Luke Skywalker, Ahsoka Tano, 501st Clone Trooper v&agrave; một Praetorian Guard, c&ugrave;ng với một Super Battle Droid.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<p>&nbsp;</p>', 1, '2024-10-25 09:09:27', '2024-10-25 09:10:49');
+INSERT INTO `articles` (`id`, `categoryArticle_id`, `title`, `image`, `description_short`, `description`, `status`, `created_at`, `updated_at`) VALUES
+(8, 4, 'Bộ LEGO® The Legend of Zelda™ được thiết kế như thế nào', '.webp', NULL, '<p>Ra mắt lần đầu ti&ecirc;n v&agrave;o năm 1986 bởi Nintendo, c&ocirc;ng ty cũng ph&aacute;t triển Super Mario&trade;, tr&ograve; chơi The Legend of Zelda&trade; đ&atilde; chiếm được cảm t&igrave;nh của h&agrave;ng triệu người chơi tr&ecirc;n to&agrave;n thế giới.</p>\r\n\r\n<p>V&agrave; trong một thời gian d&agrave;i, những người y&ecirc;u th&iacute;ch bộ LEGO&reg; đ&atilde; tự hỏi khi n&agrave;o Link, C&ocirc;ng ch&uacute;a Zelda v&agrave; thế giới Hyrule sẽ xuất hiện dưới dạng những vi&ecirc;n gạch LEGO.</p>\r\n\r\n<p>Thời gian chờ đợi đ&atilde; kết th&uacute;c!</p>\r\n\r\n<p>Bộ LEGO The Legend of Zelda đầu ti&ecirc;n đ&atilde; c&oacute; mặt.</p>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/bltf7e2810a2a8f953e/_utf-8_B_MDItQXJ0aWNsZS1JbWFnZS1BZHVsdHNXZWxjb21lLUhvdy1UaGUtTGVnZW5kLW9mLVplbGRh4oSiLUxFR0_Cri1zZXQtd2FzLWRlc2lnbmVkLmpwZw_?format=png&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Để biết được c&acirc;u chuyện b&ecirc;n trong về c&aacute;ch tạo ra bộ tr&ograve; chơi, ch&uacute;ng t&ocirc;i đ&atilde; n&oacute;i chuyện với c&aacute;c nh&agrave; thiết kế (v&agrave; l&agrave; người h&acirc;m mộ cuồng nhiệt của The Legend of Zelda) Wes Talbott v&agrave; Austin William Carlson.</p>\r\n\r\n<p>&nbsp;</p>\r\n\r\n<h2>Một qu&aacute; tr&igrave;nh nghi&ecirc;n cứu k&eacute;o d&agrave;i h&agrave;ng thập kỷ</h2>\r\n\r\n<p>&ldquo;T&ocirc;i được giới thiệu về Zelda th&ocirc;ng qua The Legend of Zelda: Ocarina of Time v&agrave; đ&atilde; y&ecirc;u ngay lập tức!&rdquo; Wes n&oacute;i. &ldquo;Giờ đ&acirc;y, t&ocirc;i đ&atilde; chơi v&agrave; ho&agrave;n th&agrave;nh mọi tr&ograve; chơi ch&iacute;nh.&rdquo;</p>\r\n\r\n<p>The Legend of Zelda: Ocarina of Time được ra mắt tr&ecirc;n Nintendo 64 v&agrave; đ&atilde; trở th&agrave;nh một trong những tr&ograve; chơi được y&ecirc;u th&iacute;ch nhất mọi thời đại.</p>\r\n\r\n<p>Austin cũng chơi tr&ograve; n&agrave;y v&agrave; gắn b&oacute; với bộ truyện kể từ đ&oacute;.</p>\r\n\r\n<p>&ldquo;Đ&oacute; l&agrave; một c&acirc;u chuyện vượt thời gian,&rdquo; Austin n&oacute;i, đưa ra &yacute; kiến ​​của m&igrave;nh về sức hấp dẫn của tr&ograve; chơi. &ldquo;Đ&oacute; l&agrave; một thế giới c&oacute; cảm gi&aacute;c rất quen thuộc, nhưng c&oacute; thể được kể lại theo nhiều c&aacute;ch. Điều n&agrave;y l&agrave;m cho mỗi c&acirc;u chuyện v&agrave; trải nghiệm tr&ograve; chơi trở n&ecirc;n độc đ&aacute;o, nhưng quen thuộc v&agrave; ấm &aacute;p. V&agrave; đ&oacute; l&agrave; l&yacute; do tại sao t&ocirc;i vẫn quay trở lại v&ugrave;ng đất Hyrule.&rdquo;</p>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt372632c24415a562/_utf-8_B_MDMtQXJ0aWNsZS1JbWFnZS1BZHVsdHNXZWxjb21lLUhvdy1UaGUtTGVnZW5kLW9mLVplbGRh4oSiLUxFR0_Cri1zZXQtd2FzLWRlc2lnbmVkLmpwZw_?format=png&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<h2>Chọn nh&acirc;n vật ch&iacute;nh của ch&uacute;ng ta</h2>\r\n\r\n<p>V&igrave; vậy, khi Tập đo&agrave;n LEGO bắt đầu thực hiện một bộ dựa tr&ecirc;n The Legend of Zelda, r&otilde; r&agrave;ng l&agrave; Wes v&agrave; Austin đ&atilde; sẵn s&agrave;ng thực hiện nhiệm vụ n&agrave;y.</p>\r\n\r\n<p>Nhưng việc lựa chọn ch&iacute;nh x&aacute;c yếu tố n&agrave;o của Hyrule m&agrave; bộ n&agrave;y n&ecirc;n c&oacute; l&agrave; rất kh&oacute;. X&eacute;t cho c&ugrave;ng, cho đến nay đ&atilde; c&oacute; hơn 20 tr&ograve; chơi, mỗi tr&ograve; chơi đều cung cấp nhiều khả năng hấp dẫn.</p>\r\n\r\n<p>Hợp t&aacute;c với Nintendo, ch&uacute;ng t&ocirc;i đ&atilde; quyết định rằng bộ Great Deku Tree 2 trong 1 sẽ l&agrave; chủ đề ho&agrave;n hảo.</p>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/bltbee68e7a6bd06153/_utf-8_B_MDQtQXJ0aWNsZS1JbWFnZS1BZHVsdHNXZWxjb21lLUhvdy1UaGUtTGVnZW5kLW9mLVplbGRh4oSiLUxFR0_Cri1zZXQtd2FzLWRlc2lnbmVkLmpwZw_?format=png&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>&ldquo;C&acirc;y Deku vĩ đại rất to v&agrave; đẹp, đồng thời cũng l&agrave; một nh&acirc;n vật thường xuy&ecirc;n xuất hiện, điều n&agrave;y rất quan trọng với t&ocirc;i,&rdquo; Wes n&oacute;i.</p>\r\n\r\n<p>C&acirc;y Deku vĩ đại đ&atilde; xuất hiện trong nhiều tr&ograve; chơi The Legend of Zelda, bao gồm lần đầu ti&ecirc;n trong The Legend of Zelda: Ocarina of Time v&agrave; lần nữa trong The Legend of Zelda: Breath of the Wild.</p>\r\n\r\n<p>C&oacute; rất nhiều chi tiết được ẩn giấu kh&eacute;o l&eacute;o trong bộ sản phẩm, từ nấm v&agrave; củ cải cho đến Khi&ecirc;n Hylian v&agrave; Thanh kiếm Master huyền thoại.</p>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt9b0a7b8c896fe1e3/_utf-8_B_MDUtQXJ0aWNsZS1JbWFnZS1BZHVsdHNXZWxjb21lLUhvdy1UaGUtTGVnZW5kLW9mLVplbGRh4oSiLUxFR0_Cri1zZXQtd2FzLWRlc2lnbmVkLmpwZw_?format=png&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>Trong khi Wes cố gắng đưa mọi chi tiết c&oacute; thể v&agrave;o bộ sản phẩm, Austin đảm nhiệm kh&acirc;u thiết kế c&aacute;c m&ocirc; h&igrave;nh nhỏ.</p>\r\n\r\n<h2>Một anh h&ugrave;ng huyền thoại v&agrave; một c&ocirc;ng ch&uacute;a th&ocirc;ng th&aacute;i</h2>\r\n\r\n<p>&ldquo;C&acirc;u hỏi th&uacute;c đẩy t&ocirc;i l&agrave;: l&agrave;m sao ch&uacute;ng ta c&oacute; thể cung cấp thứ g&igrave; đ&oacute; độc đ&aacute;o v&agrave; đặc biệt m&agrave; kh&ocirc;ng ai kh&aacute;c c&oacute; thể l&agrave;m được? V&agrave; c&acirc;u trả lời đơn giản v&agrave; r&otilde; r&agrave;ng l&agrave;, x&acirc;y dựng!&rdquo; Austin n&oacute;i.</p>\r\n\r\n<p>Nhưng với qu&aacute; nhiều trang phục v&agrave; &aacute;o gi&aacute;p để lựa chọn, l&agrave;m sao bạn c&oacute; thể chọn được trang phục v&agrave; &aacute;o gi&aacute;p n&agrave;o để đưa v&agrave;o?</p>\r\n\r\n<p>V&acirc;ng, h&oacute;a ra l&agrave; bạn đ&atilde; hợp t&aacute;c với c&aacute;c chuy&ecirc;n gia ban đầu.</p>\r\n\r\n<p>&ldquo;Ch&uacute;ng t&ocirc;i đ&atilde; l&agrave;m việc với nh&oacute;m Nintendo,&rdquo; Wes n&oacute;i tiếp. &ldquo;Việc l&ecirc;n &yacute; tưởng c&ugrave;ng họ thực sự giống như ch&uacute;ng t&ocirc;i đang tạo ra sự kết hợp ho&agrave;n hảo giữa The Legend of Zelda v&agrave; những vi&ecirc;n gạch LEGO!&rdquo;</p>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt14079a9d1c210324/_utf-8_B_MDYtQXJ0aWNsZS1JbWFnZS1BZHVsdHNXZWxjb21lLUhvdy1UaGUtTGVnZW5kLW9mLVplbGRh4oSiLUxFR0_Cri1zZXQtd2FzLWRlc2lnbmVkLmpwZw_?format=png&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<p>N&oacute;i về sự ra mắt của bộ sản phẩm, Eiji Aonuma, Nh&agrave; sản xuất của series The Legend of Zelda tại Nintendo Co., Ltd, cho biết: &ldquo;T&ocirc;i thực sự rất vui mừng khi The Legend of Zelda gia nhập thế giới gạch LEGO, nơi đ&atilde; th&uacute;c đẩy sự s&aacute;ng tạo của rất nhiều người ở mọi lứa tuổi. Great Deku Tree l&agrave; yếu tố đầu ti&ecirc;n từ The Legend of Zelda m&agrave; ch&uacute;ng t&ocirc;i muốn thể hiện bằng gạch LEGO. Bộ sản phẩm n&agrave;y cho ph&eacute;p bạn x&acirc;y dựng hai phi&ecirc;n bản kh&aacute;c nhau của Deku Tree từ The Legend of Zelda: Ocarina of Time v&agrave; The Legend of Zelda: Breath of the Wild với c&aacute;c t&iacute;nh năng độc đ&aacute;o ph&ugrave; hợp tuyệt vời với bản chất của series. T&ocirc;i rất mong mọi người c&oacute; cơ hội tự tay x&acirc;y dựng phần n&agrave;y của thế giới The Legend of Zelda.&rdquo;</p>\r\n\r\n<p><img decoding=\"async\" loading=\"lazy\" src=\"https://www.lego.com/cdn/cs/set/assets/blt35d6c8dac1d2d386/_utf-8_B_MDctQXJ0aWNsZS1JbWFnZS1BZHVsdHNXZWxjb21lLUhvdy1UaGUtTGVnZW5kLW9mLVplbGRh4oSiLUxFR0_Cri1zZXQtd2FzLWRlc2lnbmVkLmpwZw_?format=png&amp;width=700&amp;dpr=1?fit=crop&amp;quality=80&amp;width=700&amp;dpr=1\" /></p>\r\n\r\n<h2>Một bộ huyền thoại d&agrave;nh cho người h&acirc;m mộ cũ v&agrave; mới</h2>\r\n\r\n<p>Cho d&ugrave; bộ truyện n&agrave;y gợi cho bạn nhớ đến những trải nghiệm chơi game ban đầu hay bạn đ&atilde; đến với những tr&ograve; chơi ngo&agrave;i trời phong ph&uacute;, th&igrave; bộ tr&ograve; chơi n&agrave;y đều được những người h&acirc;m mộ cuồng nhiệt chế t&aacute;c một c&aacute;ch tỉ mỉ v&agrave; chứa đầy những chi tiết m&agrave; bạn sẽ th&iacute;ch.</p>\r\n\r\n<p>C&oacute; thể phải chờ đợi kh&aacute; l&acirc;u, nhưng ch&uacute;ng t&ocirc;i chắc chắn rằng bạn sẽ đồng &yacute; rằng bộ LEGO The Legend of Zelda Great Deku Tree 2 trong 1 n&agrave;y ho&agrave;n to&agrave;n xứng đ&aacute;ng.</p>\r\n\r\n<p>&copy; Nintendo</p>\r\n\r\n<p>&nbsp;</p>', 1, '2024-10-25 09:12:15', '2024-10-25 09:12:15');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `assemblies`
+--
+
+CREATE TABLE `assemblies` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `employee_id` bigint UNSIGNED NOT NULL,
+  `fee` decimal(15,0) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '1: đơn mới, 2: Đang trong quá trình lắp ráp, 3: hoàn thành lắp ráp, 4: hủy đơn ráp\r\n',
+  `order_id` bigint UNSIGNED NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `assemblies`
+--
+
+INSERT INTO `assemblies` (`id`, `user_id`, `product_id`, `employee_id`, `fee`, `created_at`, `updated_at`, `status`, `order_id`) VALUES
+(3, 1, 3, 3, 50000, '2024-10-22 01:16:11', '2024-10-22 22:21:34', 3, 194);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `blocks`
+--
+
+CREATE TABLE `blocks` (
+  `id` bigint UNSIGNED NOT NULL,
+  `position_x` double NOT NULL,
+  `position_y` double NOT NULL,
+  `position_z` double NOT NULL,
+  `color` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `blocks`
+--
+
+INSERT INTO `blocks` (`id`, `position_x`, `position_y`, `position_z`, `color`, `created_at`, `updated_at`) VALUES
+(47, -0.6337838728672, 0.97067834733784, -0.46039555239917, '#e1cba1', '2024-10-21 03:19:00', '2024-10-21 03:19:00'),
+(48, 0.73493691501759, -1.4703489070727, 0.5872975205636, '#9856f5', '2024-10-21 03:28:38', '2024-10-21 03:28:38'),
+(49, -0.60337011120419, 0.8286781874573, -0.38511631788227, '#1de099', '2024-10-21 03:29:09', '2024-10-21 03:29:09'),
+(50, 1.735625003225, -1.9005218640232, -0.026018814908557, '#967e27', '2024-10-21 03:29:27', '2024-10-21 03:29:27'),
+(51, 0.47200661024376, -1.5107574750052, 0.62416179205229, '#a477b4', '2024-10-21 03:32:19', '2024-10-21 03:32:19'),
+(52, -1.6339944645961, 1.4724311071639, -0.96985123913702, '#5ea659', '2024-10-21 06:45:43', '2024-10-21 06:45:43'),
+(53, 0.11226820904656, -1.9987090025304, 0.33794501909073, '#a004fb', '2024-10-21 06:45:43', '2024-10-21 06:45:43'),
+(54, -0.24424433165929, 0.55390740465976, 1.0495920479414, '#769d3a', '2024-10-21 06:45:44', '2024-10-21 06:45:44'),
+(55, 1.107275814992, -0.82428309640516, -0.81499348915503, '#33cb90', '2024-10-21 06:45:44', '2024-10-21 06:45:44'),
+(56, -1.095646860759, 0.045918712882157, 1.3275196252432, '#b0c9e7', '2024-10-21 06:45:52', '2024-10-21 06:45:52'),
+(57, 0.62247324092736, -1.3846979481246, -1.9326898959039, '#25298e', '2024-10-21 06:45:53', '2024-10-21 06:45:53'),
+(58, 1.3483554383859, 1.9216928771851, 1.9056929745764, '#a4bb3b', '2024-10-21 06:45:53', '2024-10-21 06:45:53'),
+(59, -1.4382213331751, 0.19261703319975, 0.84116225400217, '#fa3a48', '2024-10-21 06:45:53', '2024-10-21 06:45:53'),
+(60, -1.4012439335666, -1.47902733477, 1.133498578439, '#4bc4b9', '2024-10-21 06:45:53', '2024-10-21 06:45:53'),
+(61, -0.78555290993336, -0.44362455251371, 0.3128021846552, '#373c98', '2024-10-21 06:46:01', '2024-10-21 06:46:01'),
+(62, -1.1975378948506, -1.7750910645224, 1.5030364339383, '#388a7c', '2024-10-21 06:46:01', '2024-10-21 06:46:01');
 
 -- --------------------------------------------------------
 
@@ -129,6 +210,14 @@ CREATE TABLE `carts` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `carts`
+--
+
+INSERT INTO `carts` (`id`, `product_id`, `user_id`, `quantity`, `created_at`, `updated_at`) VALUES
+(191, 242, 14, 3, '2024-10-21 05:49:58', '2024-10-21 06:42:07'),
+(192, 3, 14, 1, '2024-10-21 05:50:14', '2024-10-21 05:50:14');
+
 -- --------------------------------------------------------
 
 --
@@ -145,30 +234,31 @@ CREATE TABLE `categories` (
   `status` tinyint NOT NULL DEFAULT '1',
   `parent_id` bigint UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `choose` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `categories`
 --
 
-INSERT INTO `categories` (`id`, `name`, `image`, `slug`, `description`, `sort_order`, `status`, `parent_id`, `created_at`, `updated_at`) VALUES
-(1, 'Mô hình trẻ em', NULL, 'mo-hinh-nguoi-lon', NULL, 1, 0, NULL, NULL, NULL),
-(2, 'Mô hình người lớn\r\n', NULL, 'mo-hinh-tre-em', NULL, 2, 0, NULL, NULL, NULL),
-(3, 'Mô hình con gái\r\n', NULL, 'mo-hinh-con-gai', NULL, 3, 1, NULL, NULL, NULL),
-(5, 'Mô hình đơn giản\r\n', 'mo-hinh-don-gian.webp', 'danh-muc-tre-em-1', 'LEGO® SERIOUS PLAY® là một quy trình sáng tạo, mang tính trải nghiệm được thiết kế để nâng cao tính sáng tạo và hiệu suất kinh doanh. Dựa trên nghiên cứu cho thấy loại hình học tập thực hành, thực tế này tạo ra sự hiểu biết sâu sắc hơn, có ý nghĩa hơn về thế giới và các khả năng của nó, LEGO SERIOUS PLAY® đào sâu quá trình phản ánh và hỗ trợ đối thoại hiệu quả – cho mọi người trong tổ chức.\r\n', 1, 0, 1, NULL, NULL),
-(6, 'Mô hình DUPLO', 'mo-hinh-duplo.webp', 'mo-hinh-duplo', 'Khi trẻ nhỏ có trí tưởng tượng lớn, các khối xây dựng LEGOLOFT® DUPLO® sẽ giải phóng sự sáng tạo của trẻ thông qua quá trình học tập phát triển. Những bộ đồ chơi này mang đến niềm vui mở, khả năng thể hiện bản thân và khám phá thú vị vào tay trẻ nhỏ.', 1, 0, 1, NULL, NULL),
-(7, 'Mô hình cổ điển', 'mo-hinh-co-dien.webp', 'mo-hinh-co-dien', 'Phát triển khả năng sáng tạo của trẻ em với LEGOLOFT® CỔ ĐIỂN. Các bộ sản phẩm chứa đựng những ý tưởng giúp trẻ bắt đầu, trong khi những mảnh ghép đặc biệt cùng với những viên gạch LEGOLOFT cổ điển truyền cảm hứng hơn nữa. Và vì LEGOLOFT CỔ ĐIỂN dành cho nhiều nhóm tuổi khác nhau nên có niềm vui cho cả gia đình và trí tưởng tượng cho mọi thế hệ.', 1, 0, 1, NULL, NULL),
-(8, 'Mô hình thiếu niên', 'mo-hinh-thieu-nien.webp', 'mo-hinh-thieu-nien', 'Bộ LEGO thiếu niên của chúng tôi được thiết kế dành cho những người khiếm thị, giới thiệu cho trẻ em và người lớn cách học chữ nổi một cách vui nhộn và thú vị. Khám phá bộ LEGOLOFT® THIẾU NIÊN có nhiều ngôn ngữ.', 1, 0, 1, NULL, NULL),
-(9, 'Mô hình kỹ thuật ', 'mo-hinh-ky-thuat-viet-nam.webp\r\n', 'mo-hinh-ky-thuat', 'Bộ LEGO® KỸ THUẬT™ cung cấp trải nghiệm xây dựng tiên tiến và phức tạp dựa trên các phương tiện thực tế lớn và nhỏ như xe thể thao, xe máy và xe xây dựng. Chúng chứa đầy đủ các tính năng đích thực như hộp số, bánh xe và trục hoạt động.', 1, 0, 2, NULL, NULL),
-(10, 'Mô hình động cơ điện', 'mo-hinh-dong-co-dien.webp', 'mo-hinh-dong-co-dien', 'Động cơ hóa các bộ LEGO® và tăng giá trị chơi của chúng bằng chức năng Powered UP.', 1, 0, 2, NULL, NULL),
-(11, 'Mô hình chuyên gia tạo hình', 'mo-hinh-chuyen-gia-tao-hinh.webp', 'mo-hinh-chuyen-gia-tao-hinh', 'Tạo một khu vườn hoặc tặng một món quà là những bông hoa vĩnh cửu với bộ sưu tập các loại hoa có thể tạo hình, cây cảnh vui tươi, cây mọng nước ngọt ngào và nhiều loại khác. Từ những bó hoa đầy màu sắc đến những kỳ quan hoa dại, cây ăn thịt đến những cây cảnh có ý thức, bạn chắc chắn sẽ tìm ra cách để sự sáng tạo nở rộ.', 1, 0, 2, NULL, NULL),
-(12, 'Mô hình phương tiện trong thành phố', 'mo-hinh-phuong-tien-trong-thanh-pho.webp', 'mo-hinh-phuong-tien-trong-thanh-pho', 'Theo truyền thống được phát triển cho môi trường trường học, các giải pháp Giáo dục LEGO® khơi dậy sự tò mò tự nhiên của học sinh và giúp các em phát triển các kỹ năng thiết yếu của thế kỷ 21.', 1, 0, 2, NULL, NULL),
-(13, 'Mô hình kiến trúc', 'mo-hinh-kien-truc.webp', 'mo-hinh-kien-truc', 'Ghi lại vẻ đẹp và phong cách trang trí của một số địa danh nổi bật nhất trên thế giới với bộ LEGO® KIẾN TRÚC. Từ đường chân trời mang tính biểu tượng của thành phố đến các công trình lịch sử ngoạn mục, thỏa mãn niềm đam mê của bất kỳ người đam mê kiến ​​trúc nào với những mô hình ấn tượng này.', 1, 0, 2, NULL, NULL),
-(14, 'Mô hình những người bạn', 'mo-hinh-nhung-nguoi-ban.webp', 'mo-hinh-nhung-nguoi-ban', 'Kỷ niệm tình bạn với một nhóm các cô gái gắn bó chia sẻ những cuộc phiêu lưu ở Heartlake City bao gồm các bộ có nhân vật mới. Những người xây dựng trẻ có thể tạo ra những câu chuyện thú vị trong khi phát triển các kỹ năng giao tiếp và nhận thức cảm xúc thông qua trò chơi nhập vai.', 1, 0, 3, NULL, NULL),
-(15, 'Mô hình công chúa, lâu đài công chúa', 'mo-hinh-cong-chua-lau-dai-cong-chua.webp', 'mo-hinh-cong-chua-lau-dai-cong-chua', 'Kỷ niệm 100 năm kỳ quan kỳ diệu với bộ LEGO® | Disney có các nhân vật mang tính biểu tượng. Người hâm mộ có thể sống lại những cảnh Disney đáng nhớ, xây dựng lâu đài quyến rũ và tái tạo các điểm tham quan trong công viên giải trí. Tham gia cùng Mickey và Friends, các nhân vật Disney Princess và nhiều nhân vật khác để vui chơi, sáng tạo.', 1, 1, 3, NULL, NULL),
-(16, 'Mô hình yêu tinh(nữ)', 'mo-hinh-yeu-tinh-nu.webp', 'mo-hinh-yeu-tinh-nu', 'Thách thức trọng lực với những bối cảnh mới tuyệt đẹp dựa trên và lấy cảm hứng từ thế giới được tạo ra trong sự kiện điện ảnh Wicked.', 1, 0, 3, NULL, NULL),
-(17, 'Mô hình nữ siêu anh hùng', 'mo-hinh-nu-sieu-anh-hung.webp', 'mo-hinh-nu-sieu-anh-hung', 'Hãy bước vào thế giới giấc mơ cùng những người bạn Mateo, Izzie, Cooper, Logan và Zoey khi họ sử dụng sức mạnh của trí tưởng tượng để chống lại Vua ác mộng độc ác. Dựa trên loạt phim truyền hình LEGO® DREAMZzz™, những bộ sản phẩm này có các phương tiện kỳ ​​ảo, các tòa nhà kỳ quái và những sinh vật kỳ diệu.', 1, 0, 3, NULL, NULL);
+INSERT INTO `categories` (`id`, `name`, `image`, `slug`, `description`, `sort_order`, `status`, `parent_id`, `created_at`, `updated_at`, `choose`) VALUES
+(1, 'Mô hình trẻ em', NULL, 'mo-hinh-nguoi-lon', NULL, 1, 0, NULL, NULL, NULL, 0),
+(2, 'Mô hình người lớn\r\n', NULL, 'mo-hinh-tre-em', NULL, 2, 0, NULL, NULL, NULL, 0),
+(3, 'Mô hình con gái\r\n', NULL, 'mo-hinh-con-gai', NULL, 3, 1, NULL, NULL, NULL, 0),
+(5, 'Mô hình đơn giản', 'mo-hinh-don-gian.webp', 'danh-muc-tre-em-1', 'LEGO® SERIOUS PLAY® là một quy trình sáng tạo, mang tính trải nghiệm được thiết kế để nâng cao tính sáng tạo và hiệu suất kinh doanh. Dựa trên nghiên cứu cho thấy loại hình học tập thực hành, thực tế này tạo ra sự hiểu biết sâu sắc hơn, có ý nghĩa hơn về thế giới và các khả năng của nó, LEGO SERIOUS PLAY® đào sâu quá trình phản ánh và hỗ trợ đối thoại hiệu quả – cho mọi người trong tổ chức.', 1, 0, 1, NULL, '2024-10-23 20:20:31', 1),
+(6, 'Mô hình DUPLO', 'mo-hinh-duplo.webp', 'mo-hinh-duplo', 'Khi trẻ nhỏ có trí tưởng tượng lớn, các khối xây dựng LEGOLOFT® DUPLO® sẽ giải phóng sự sáng tạo của trẻ thông qua quá trình học tập phát triển. Những bộ đồ chơi này mang đến niềm vui mở, khả năng thể hiện bản thân và khám phá thú vị vào tay trẻ nhỏ.', 1, 0, 1, NULL, NULL, 0),
+(7, 'Mô hình cổ điển', 'mo-hinh-co-dien.webp', 'mo-hinh-co-dien', 'Phát triển khả năng sáng tạo của trẻ em với LEGOLOFT® CỔ ĐIỂN. Các bộ sản phẩm chứa đựng những ý tưởng giúp trẻ bắt đầu, trong khi những mảnh ghép đặc biệt cùng với những viên gạch LEGOLOFT cổ điển truyền cảm hứng hơn nữa. Và vì LEGOLOFT CỔ ĐIỂN dành cho nhiều nhóm tuổi khác nhau nên có niềm vui cho cả gia đình và trí tưởng tượng cho mọi thế hệ.', 1, 0, 1, NULL, NULL, 0),
+(8, 'Mô hình thiếu niên', 'mo-hinh-thieu-nien.webp', 'mo-hinh-thieu-nien', 'Bộ LEGO thiếu niên của chúng tôi được thiết kế dành cho những người khiếm thị, giới thiệu cho trẻ em và người lớn cách học chữ nổi một cách vui nhộn và thú vị. Khám phá bộ LEGOLOFT® THIẾU NIÊN có nhiều ngôn ngữ.', 1, 0, 1, NULL, NULL, 1),
+(9, 'Mô hình kỹ thuật ', 'mo-hinh-ky-thuat-viet-nam.webp\r\n', 'mo-hinh-ky-thuat', 'Bộ LEGO® KỸ THUẬT™ cung cấp trải nghiệm xây dựng tiên tiến và phức tạp dựa trên các phương tiện thực tế lớn và nhỏ như xe thể thao, xe máy và xe xây dựng. Chúng chứa đầy đủ các tính năng đích thực như hộp số, bánh xe và trục hoạt động.', 1, 0, 2, NULL, NULL, 0),
+(10, 'Mô hình động cơ điện', 'mo-hinh-dong-co-dien.webp', 'mo-hinh-dong-co-dien', 'Động cơ hóa các bộ LEGO® và tăng giá trị chơi của chúng bằng chức năng Powered UP.', 1, 0, 2, NULL, NULL, 0),
+(11, 'Mô hình chuyên gia tạo hình', 'mo-hinh-chuyen-gia-tao-hinh.webp', 'mo-hinh-chuyen-gia-tao-hinh', 'Tạo một khu vườn hoặc tặng một món quà là những bông hoa vĩnh cửu với bộ sưu tập các loại hoa có thể tạo hình, cây cảnh vui tươi, cây mọng nước ngọt ngào và nhiều loại khác. Từ những bó hoa đầy màu sắc đến những kỳ quan hoa dại, cây ăn thịt đến những cây cảnh có ý thức, bạn chắc chắn sẽ tìm ra cách để sự sáng tạo nở rộ.', 1, 0, 2, NULL, NULL, 0),
+(12, 'Mô hình phương tiện trong thành phố', 'mo-hinh-phuong-tien-trong-thanh-pho.webp', 'mo-hinh-phuong-tien-trong-thanh-pho', 'Theo truyền thống được phát triển cho môi trường trường học, các giải pháp Giáo dục LEGO® khơi dậy sự tò mò tự nhiên của học sinh và giúp các em phát triển các kỹ năng thiết yếu của thế kỷ 21.', 1, 0, 2, NULL, NULL, 0),
+(13, 'Mô hình kiến trúc', 'mo-hinh-kien-truc.webp', 'mo-hinh-kien-truc', 'Ghi lại vẻ đẹp và phong cách trang trí của một số địa danh nổi bật nhất trên thế giới với bộ LEGO® KIẾN TRÚC. Từ đường chân trời mang tính biểu tượng của thành phố đến các công trình lịch sử ngoạn mục, thỏa mãn niềm đam mê của bất kỳ người đam mê kiến ​​trúc nào với những mô hình ấn tượng này.', 1, 0, 2, NULL, NULL, 1),
+(14, 'Mô hình những người bạn', 'mo-hinh-nhung-nguoi-ban.webp', 'mo-hinh-nhung-nguoi-ban', 'Kỷ niệm tình bạn với một nhóm các cô gái gắn bó chia sẻ những cuộc phiêu lưu ở Heartlake City bao gồm các bộ có nhân vật mới. Những người xây dựng trẻ có thể tạo ra những câu chuyện thú vị trong khi phát triển các kỹ năng giao tiếp và nhận thức cảm xúc thông qua trò chơi nhập vai.', 1, 0, 3, NULL, NULL, 0),
+(15, 'Mô hình công chúa, lâu đài công chúa', 'mo-hinh-cong-chua-lau-dai-cong-chua.webp', 'mo-hinh-cong-chua-lau-dai-cong-chua', 'Kỷ niệm 100 năm kỳ quan kỳ diệu với bộ LEGO® | Disney có các nhân vật mang tính biểu tượng. Người hâm mộ có thể sống lại những cảnh Disney đáng nhớ, xây dựng lâu đài quyến rũ và tái tạo các điểm tham quan trong công viên giải trí. Tham gia cùng Mickey và Friends, các nhân vật Disney Princess và nhiều nhân vật khác để vui chơi, sáng tạo.', 1, 1, 3, NULL, NULL, 0),
+(16, 'Mô hình yêu tinh(nữ)', 'mo-hinh-yeu-tinh-nu.webp', 'mo-hinh-yeu-tinh-nu', 'Thách thức trọng lực với những bối cảnh mới tuyệt đẹp dựa trên và lấy cảm hứng từ thế giới được tạo ra trong sự kiện điện ảnh Wicked.', 1, 0, 3, NULL, NULL, 0),
+(17, 'Mô hình nữ siêu anh hùng', 'mo-hinh-nu-sieu-anh-hung.webp', 'mo-hinh-nu-sieu-anh-hung', 'Hãy bước vào thế giới giấc mơ cùng những người bạn Mateo, Izzie, Cooper, Logan và Zoey khi họ sử dụng sức mạnh của trí tưởng tượng để chống lại Vua ác mộng độc ác. Dựa trên loạt phim truyền hình LEGO® DREAMZzz™, những bộ sản phẩm này có các phương tiện kỳ ​​ảo, các tòa nhà kỳ quái và những sinh vật kỳ diệu.', 1, 0, 3, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -186,6 +276,45 @@ CREATE TABLE `category_articles` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `category_articles`
+--
+
+INSERT INTO `category_articles` (`id`, `title`, `image`, `description_short`, `description`, `status`, `created_at`, `updated_at`) VALUES
+(3, 'Lựa chọn đồ chơi cho trẻ em', '3.jpg', '<p>Lựa chọn đồ chơi cho trẻ em</p>', '<p>Lựa chọn đồ chơi cho trẻ em</p>', 1, '2024-10-15 23:36:56', '2024-10-25 08:18:30'),
+(4, 'Tin tức mới nhất với Người lớn chào đón', '4.jpg', '<p>Tin tức mới nhất với Người lớn ch&agrave;o đ&oacute;n</p>', '<p>Tin tức mới nhất với Người lớn ch&agrave;o đ&oacute;n</p>', 1, '2024-10-16 08:37:46', '2024-10-25 08:15:35');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `comments`
+--
+
+CREATE TABLE `comments` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `content` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rating` tinyint NOT NULL,
+  `status` tinyint NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `product_id`, `content`, `rating`, `status`, `created_at`, `updated_at`) VALUES
+(1, 1, 234, 'aaaaaaaaa', 5, 0, '2024-10-14 05:42:06', '2024-10-14 05:42:06'),
+(2, 1, 234, 's', 5, 0, '2024-10-14 05:42:20', '2024-10-14 05:42:20'),
+(3, 1, 234, 'xxxxxxxxxxxxxxxxxx', 4, 0, '2024-10-14 05:44:03', '2024-10-14 05:44:03'),
+(4, 1, 234, 'ssssssss', 4, 0, '2024-10-14 05:44:58', '2024-10-14 05:44:58'),
+(5, 1, 234, 'sssss', 4, 0, '2024-10-14 05:48:03', '2024-10-14 05:48:03'),
+(6, 1, 234, 'ư', 5, 0, '2024-10-14 05:49:00', '2024-10-14 05:49:00'),
+(7, 1, 234, 's', 4, 1, '2024-10-14 05:49:41', '2024-10-24 00:06:02'),
+(8, 1, 234, 'x', 5, 1, '2024-10-14 05:49:58', '2024-10-24 00:06:01');
 
 -- --------------------------------------------------------
 
@@ -212,7 +341,38 @@ CREATE TABLE `coupons` (
 --
 
 INSERT INTO `coupons` (`id`, `name_coupon`, `code`, `type`, `total`, `date_start`, `date_end`, `discount`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'kha', 1234, 0, 500000, NULL, NULL, 5, 1, NULL, NULL);
+(1, 'kha', 1234, 1, 500000, NULL, NULL, 50000, 1, NULL, NULL),
+(2, 'kha', 5678, 0, 500000, NULL, NULL, 5, 1, NULL, '2024-10-24 02:58:28');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `employees`
+--
+
+CREATE TABLE `employees` (
+  `id` bigint UNSIGNED NOT NULL,
+  `fullname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` int NOT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` longtext COLLATE utf8mb4_unicode_ci,
+  `status` tinyint NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `admin_group_id` bigint UNSIGNED NOT NULL,
+  `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `employees`
+--
+
+INSERT INTO `employees` (`id`, `fullname`, `email`, `phone`, `password`, `image`, `status`, `created_at`, `updated_at`, `admin_group_id`, `username`) VALUES
+(1, 'Anh Tèo', 'teo123@gmail.com', 153123771, '$2y$12$u8tUWPfO39XSgdE8tBsfUuVIZ7ABBy7upls6xjSlWFCPTXM5UIMRu', 'employee1.jpg', 1, NULL, '2024-10-21 21:37:43', 20, 'anhteo'),
+(2, 'Anh Tí', 'ti123@gmail.com', 253123771, '$2y$10$o1LfhGbWrbi/DUUYEDHTnOjDxUARgbkJ7OGrKcNEuMnXYWr09Beri', 'employee2.jpg', 1, NULL, NULL, 10, 'anhti'),
+(3, 'Anh Tủn', 'tun123@gmail.com', 553123771, '$2y$10$o1LfhGbWrbi/DUUYEDHTnOjDxUARgbkJ7OGrKcNEuMnXYWr09Beri', 'employee3.jpg', 1, NULL, '2024-10-23 04:21:22', 10, 'anhtun'),
+(4, 'Anh Sún', 'sun123@gmail.com', 453123771, '$2y$10$o1LfhGbWrbi/DUUYEDHTnOjDxUARgbkJ7OGrKcNEuMnXYWr09Beri', 'employee4.jpg', 1, NULL, NULL, 10, 'anhsun');
 
 -- --------------------------------------------------------
 
@@ -229,6 +389,39 @@ CREATE TABLE `failed_jobs` (
   `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `favourites`
+--
+
+CREATE TABLE `favourites` (
+  `id` bigint UNSIGNED NOT NULL,
+  `user_id` bigint UNSIGNED NOT NULL,
+  `product_id` bigint UNSIGNED NOT NULL,
+  `status` tinyint NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `favourites`
+--
+
+INSERT INTO `favourites` (`id`, `user_id`, `product_id`, `status`, `created_at`, `updated_at`) VALUES
+(102, 2, 249, 0, '2024-10-23 23:00:40', '2024-10-23 23:33:43'),
+(104, 2, 3, 1, '2024-10-23 23:00:55', '2024-10-23 23:00:55'),
+(106, 2, 4, 1, '2024-10-23 23:01:07', '2024-10-23 23:01:07'),
+(108, 1, 234, 1, '2024-10-23 23:01:53', '2024-10-23 23:01:53'),
+(109, 1, 204, 1, '2024-10-23 23:01:57', '2024-10-23 23:01:57'),
+(110, 1, 203, 1, '2024-10-23 23:01:59', '2024-10-23 23:01:59'),
+(111, 1, 189, 1, '2024-10-23 23:02:07', '2024-10-23 23:02:07'),
+(112, 1, 202, 1, '2024-10-23 23:02:12', '2024-10-23 23:02:12'),
+(113, 1, 2, 1, '2024-10-23 23:02:14', '2024-10-23 23:02:14'),
+(114, 1, 245, 1, '2024-10-23 23:02:16', '2024-10-23 23:02:16'),
+(115, 1, 246, 1, '2024-10-23 23:02:22', '2024-10-23 23:02:22'),
+(116, 1, 3, 1, '2024-10-23 23:03:28', '2024-10-23 23:09:13');
 
 -- --------------------------------------------------------
 
@@ -299,7 +492,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (20, '2024_10_02_115535_create_coupons_table', 13),
 (21, '2024_10_07_015053_create_category_articles_table', 14),
 (22, '2024_10_07_015602_create_articles_table', 15),
-(23, '2024_10_07_063255_create_personal_access_tokens_table', 16);
+(23, '2024_10_07_063255_create_personal_access_tokens_table', 16),
+(25, '2024_10_14_005838_create_comments_table', 17),
+(26, '2024_10_15_065955_create_favourites_table', 18),
+(27, '2024_10_20_135128_create_blocks_table', 19),
+(29, '2024_10_21_110829_create_employees_table', 21),
+(30, '2024_10_21_133538_create_assemblies_table', 22);
 
 -- --------------------------------------------------------
 
@@ -317,8 +515,8 @@ CREATE TABLE `orders` (
   `district` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ward` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `total` decimal(15,0) NOT NULL,
-  `payment` tinyint NOT NULL,
-  `status` tinyint NOT NULL,
+  `payment` tinyint(1) NOT NULL,
+  `status` tinyint NOT NULL COMMENT '1: chờ xác nhận, 2: Đã xác nhận, 3: Đang vận chuyển, 4: Hoàn thành, 5: Đã hủy\r\n',
   `coupon_code` int DEFAULT NULL,
   `order_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -331,8 +529,17 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `user_id`, `name`, `email`, `phone`, `province`, `district`, `ward`, `total`, `payment`, `status`, `coupon_code`, `order_code`, `note`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Huỳnh Kha', 'kvl@gmail.com', 1234567899, 'Quang nam', 'Can nam', 'Dong Tay', 214060000, 1, 1, NULL, 'LEGOLOFT-957603', 'đ', '2024-10-03 12:17:10', '2024-10-04 22:17:49'),
-(2, 1, 'Khách vãng lai 2', 'kvl@gmail.com', 1234567899, 'Quang nam', 'Can nam', 'Dong Tay', 240000, 1, 5, NULL, '', 'đ', '2024-10-04 15:57:10', '2024-10-04 22:22:37');
+(120, 1, 'kha', 'khakha5087@gmail.com', 353123771, 'Tỉnh Bình Định', 'Thị xã Hoài Nhơn', 'Phường Tam Quan Bắc', 113727280, 1, 1, NULL, 'LEGOLOFT-189699', NULL, '2024-10-12 22:19:36', '2024-10-12 22:19:36'),
+(121, 1, 'kha', 'khakha5087@gmail.com', 353123771, 'Tỉnh Bình Định', 'Thị xã Hoài Nhơn', 'Phường Tam Quan Bắc', 92200500, 1, 1, NULL, 'LEGOLOFT-696989', NULL, '2024-10-12 22:21:09', '2024-10-12 22:21:09'),
+(122, 1, 'kha', 'khakha5087@gmail.com', 353123771, 'Tỉnh Bình Định', 'Thị xã Hoài Nhơn', 'Phường Tam Quan Bắc', 191825010, 1, 1, NULL, 'LEGOLOFT-515895', NULL, '2024-10-12 22:23:18', '2024-10-12 22:23:18'),
+(123, 1, 'kha', 'khakha5087@gmail.com', 353123771, 'Tỉnh Bình Định', 'Thị xã Hoài Nhơn', 'Phường Tam Quan Bắc', 191825010, 1, 1, NULL, 'LEGOLOFT-297984', NULL, '2024-10-12 22:23:45', '2024-10-12 22:23:45'),
+(178, 2, 'xaaaa', 'khahps31506@fpt.edu.vn', 378872732, 'Tỉnh Quảng Ninh', 'Huyện Vân Đồn', 'Thị trấn Cái Rồng', 2459008, 2, 4, NULL, 'LEGOLOFT-398174', NULL, '2024-10-17 04:36:43', '2024-10-20 06:36:32'),
+(179, 2, 'xaaaa', 'khahps31506@fpt.edu.vn', 353123111, 'Tỉnh Quảng Ninh', 'Huyện Vân Đồn', 'Xã Đông Xá', 4672312, 1, 3, NULL, 'LEGOLOFT-852814', 'Gói hàng cẩn thận', '2024-10-17 21:07:34', '2024-10-17 21:07:34'),
+(180, 2, 'xaaaa', 'khahps31506@fpt.edu.vn', 353553991, 'Tỉnh Bắc Giang', 'Huyện Việt Yên', 'Xã Ninh Sơn', 2350000, 1, 4, NULL, 'LEGOLOFT-104388', NULL, '2024-10-17 21:08:10', '2024-10-17 21:08:10'),
+(181, 2, 'xaaaa', 'khahps31506@fpt.edu.vn', 353123111, 'Tỉnh Phú Thọ', 'Huyện Thanh Sơn', 'Xã Khả Cửu', 2951154, 1, 4, NULL, 'LEGOLOFT-195635', NULL, '2024-10-17 21:09:23', '2024-10-20 06:35:53'),
+(182, 2, 'xaaaa', 'khahps31506@fpt.edu.vn', 383331822, 'Tỉnh Tuyên Quang', 'Huyện Na Hang', 'Xã Năng Khả', 7741438, 1, 2, NULL, 'LEGOLOFT-734610', NULL, '2024-10-17 21:12:13', '2024-10-22 21:44:03'),
+(194, 1, 'kha', 'khakha5087@gmail.com', 353123771, 'Tỉnh Bình Định', 'Thị xã Hoài Nhơn', 'Phường Tam Quan Bắc', 890579, 1, 3, NULL, 'LEGOLOFT-755679', NULL, '2024-10-22 01:16:11', '2024-10-22 22:21:58'),
+(195, 14, 'hihihi', 'quahuynh@gmail.com', 383331822, 'Thành phố Hà Nội', 'Thị xã Sơn Tây', 'Phường Trung Hưng', 12296270, 1, 1, NULL, 'LEGOLOFT-581655', NULL, '2024-10-22 23:30:19', '2024-10-22 23:30:19');
 
 -- --------------------------------------------------------
 
@@ -357,13 +564,21 @@ CREATE TABLE `order_products` (
 --
 
 INSERT INTO `order_products` (`id`, `order_id`, `product_id`, `name`, `price`, `quantity`, `total`, `created_at`, `updated_at`) VALUES
-(1, 1, 17, 'san pham F', 255000, 110, 28050000, NULL, NULL),
-(2, 1, 12, 'san pham A', 195000, 135, 26325000, NULL, NULL),
-(3, 1, 16, 'san pham E', 245000, 146, 35770000, NULL, NULL),
-(4, 1, 13, 'san pham B', 215000, 150, 32250000, NULL, NULL),
-(5, 1, 14, 'san pham C', 225000, 200, 45000000, NULL, NULL),
-(6, 1, 15, 'san pham D', 235000, 179, 42065000, NULL, NULL),
-(7, 2, 15, 'san pham D', 235000, 1, 235000, NULL, NULL);
+(107, 120, 215, 'Thuyền tìm đường của Moana', 836230, 136, 113727280, '2024-10-12 22:19:36', '2024-10-12 22:19:36'),
+(108, 121, 184, 'Quán cà phê Heartlake City', 737604, 125, 92200500, '2024-10-12 22:21:09', '2024-10-12 22:21:09'),
+(109, 122, 189, 'Công viên giải trí bãi biển', 2951154, 65, 191825010, '2024-10-12 22:23:18', '2024-10-12 22:23:18'),
+(110, 123, 189, 'Công viên giải trí bãi biển', 2951154, 65, 191825010, '2024-10-12 22:23:45', '2024-10-12 22:23:45'),
+(188, 178, 245, 'Trường trung học siêu anh hùng', 1229504, 2, 2459008, '2024-10-17 04:36:43', '2024-10-17 04:36:43'),
+(189, 179, 249, 'Ký túc xá Harley Quinn™', 1229504, 1, 1229504, '2024-10-17 21:07:34', '2024-10-17 21:07:34'),
+(191, 179, 204, 'Lâu đài Disney Ariel thu nhỏ', 983554, 1, 983554, '2024-10-17 21:07:34', '2024-10-17 21:07:34'),
+(192, 180, 17, 'Lâu đài ma thuật 3 trong 1', 2350000, 1, 2350000, '2024-10-17 21:08:10', '2024-10-17 21:08:10'),
+(193, 181, 189, 'Công viên giải trí bãi biển', 2951154, 1, 2951154, '2024-10-17 21:09:23', '2024-10-17 21:09:23'),
+(194, 182, 184, 'Quán cà phê Heartlake City', 737604, 2, 1475208, '2024-10-17 21:12:13', '2024-10-17 21:12:13'),
+(195, 182, 215, 'Thuyền tìm đường của Moana', 836230, 1, 836230, '2024-10-17 21:12:13', '2024-10-17 21:12:13'),
+(196, 182, 16, 'Chuyến đi thuyền Peppa Pig', 730000, 1, 730000, '2024-10-17 21:12:13', '2024-10-17 21:12:13'),
+(197, 182, 17, 'Lâu đài ma thuật 3 trong 1', 2350000, 2, 4700000, '2024-10-17 21:12:13', '2024-10-17 21:12:13'),
+(209, 194, 3, 'Bữa tiệc trong vườn của nàng tiên mèo', 840579, 1, 890579, '2024-10-22 01:16:11', '2024-10-22 01:16:11'),
+(210, 195, 203, 'Cuộc phiêu lưu ở chợ công chúa Disney', 2459254, 5, 12296270, '2024-10-22 23:30:19', '2024-10-22 23:30:19');
 
 -- --------------------------------------------------------
 
@@ -437,7 +652,7 @@ INSERT INTO `products` (`id`, `name`, `slug`, `image`, `category_id`, `price`, `
 (13, 'Tàu sinh nhật Mickey & Minnie', 'tau-sinh-nhat-mickey-&-minnie', 'tau-sinh-nhat-mickey-&-minnie.webp', 5, 737604, 0, 0, 1, 'Kỷ niệm sinh nhật của trẻ mới biết đi theo phong cách riêng với LEGO® DUPLO® ǀ Disney Mickey & Minnie Birthday Train (10941) thú vị. Được đóng gói với các hoạt động phát triển và có các nhân vật Disney yêu thích, bộ đồ chơi xây dựng cao cấp này là cách hoàn hảo để giới thiệu cho trẻ mẫu giáo về các con số, xây dựng sáng tạo và phép thuật Disney!\n\nHọc tập vui tươi cho tâm hồn trẻ thơ\nTrẻ mới biết đi tham gia cùng Chuột Mickey, Chuột Minnie và Pluto của Disney khi chúng lái tàu sinh nhật, dừng lại để chơi và học với các hoạt động trên tàu. Bộ xây dựng đầy màu sắc này cải thiện các kỹ năng vận động tinh khi trẻ lắp ráp tàu và xếp các viên gạch số; truyền cảm hứng sáng tạo khi trẻ trang trí toa xe; và phát triển các kỹ năng xã hội khi trẻ nhập vai với các nhân vật Disney đáng yêu.\n\nPhát triển kỹ năng với các nhân vật Disney nổi tiếng\nTất cả các bộ xây dựng LEGO DUPLO │ Disney đều được thiết kế chuyên nghiệp với các tính năng sáng tạo và các nhân vật mang tính biểu tượng để cha mẹ và trẻ mới biết đi có thể chia sẻ trò chơi bất tận và các cột mốc phát triển quý giá.\n\nLEGO® DUPLO® ǀ Disney Mickey & Minnie Birthday Train (10941) là bộ đồ chơi xây dựng cao cấp dành cho trẻ mẫu giáo, chứa đầy các hoạt động phát triển, khả năng chơi tưởng tượng và phép thuật Disney!\nBao gồm các nhân vật Disney mang tính biểu tượng là Mickey Mouse, Minnie Mouse và Pluto, một đoàn tàu có thể xây dựng 3 phần, bánh sinh nhật có thể xây dựng với nến, 5 viên gạch số có thể xếp chồng lên nhau và các phụ kiện.\nTrẻ em phát triển các kỹ năng vận động tinh khi chúng xây dựng và chơi với đoàn tàu; nhận biết các con số khi chúng xếp các viên gạch; và xây dựng nhận thức xã hội và cảm xúc khi chúng nhập vai với các nhân vật Disney.\nDành cho trẻ từ 2 tuổi trở lên. Món quà nổi bật này sẽ biến sinh nhật của bất kỳ trẻ mới biết đi nào thành một lễ kỷ niệm đáng nhớ.\nTàu cao hơn 6 in. (15,5 cm), dài 14 in. (35,5 cm) và rộng 5,5 in. (13,5 cm). Đồ chơi xây dựng đa năng, thân thiện với trẻ mới biết đi này có thể được chơi theo nhiều cách giải trí khác nhau.\nĐược thiết kế chuyên nghiệp với các thành phần dễ dàng cho đôi tay nhỏ nhặt và đặt, cùng các phụ kiện thú vị khuyến khích nhập vai: đàn ghi-ta, bóng bay mềm dẻo, quà tặng và váy vải của Minnie.\nHướng dẫn in đơn giản giúp cha mẹ dễ dàng chia sẻ trải nghiệm xây dựng thú vị với con nhỏ của mình.\nTất cả các bộ đồ chơi xây dựng LEGO® DUPLO® │ Disney đều được thiết kế chuyên nghiệp với các tính năng sáng tạo và các nhân vật quen thuộc, vì vậy cha mẹ và trẻ mới biết đi có thể tận hưởng trò chơi bất tận và chia sẻ các cột mốc phát triển.\nCác thành phần của LEGO® DUPLO® đáp ứng các tiêu chuẩn nghiêm ngặt của ngành để đảm bảo rằng chúng dễ dàng cho các ngón tay nhỏ nhặt, đặt và tháo rời - và điều đó đã như vậy kể từ năm 1969.\nCác viên gạch và mảnh ghép của LEGO® DUPLO® được thả, nung nóng, nghiền nát, xoắn và phân tích để đảm bảo chúng đáp ứng các tiêu chuẩn an toàn nghiêm ngặt cho trẻ em.', '2024-09-23 11:34:48', '2024-09-23 12:15:17'),
 (14, 'Ngôi nhà búp bê của Gabby', 'ngoi-nha-bup-be-cua-gabby', 'ngoi-nha-bup-be-cua-gabby.webp', 5, 1967354, 0, 0, 1, 'LEGO® Gabby’s Dollhouse (10788) chứa đầy các hoạt động và niềm vui trên sân thượng dành cho trẻ em từ 4 tuổi trở lên. Hãy tặng một người hâm mộ chương trình truyền hình hoạt hình DreamWorks một ngôi nhà 8 phòng của riêng họ.\n\nCó nhiều thứ để khám phá ở mỗi tầng\nGabby’s Dollhouse có 8 phòng đầy màu sắc được kết nối bằng thang máy trượt. Mỗi phòng đều có nhiều hoạt động. Ví dụ, trẻ em có thể nướng bánh trong bếp, sử dụng cầu trượt trong phòng vui chơi, sáng tạo trong phòng nghệ thuật, chơi piano trong phòng nhạc, nuông chiều bản thân trong phòng tắm, ngủ trưa trong phòng ngủ hoặc lên sân thượng để dự tiệc trên sàn nhảy xoay. Trẻ em chia sẻ cuộc phiêu lưu của mình với 4 nhân vật nổi tiếng trong chương trình: Gabby, Pandy Paws, Cakey và MerCat. Có hướng dẫn xây dựng theo câu chuyện bằng hình ảnh và ứng dụng LEGO Builder có các công cụ thu phóng và xoay trực quan. Một viên gạch khởi đầu lớn đảm bảo niềm vui xây dựng bắt đầu ngay lập tức.\n\nNiềm vui cho gia đình khi chia sẻ\nBộ 4+ là cách hoàn hảo để người lớn chia sẻ niềm vui xây dựng và chơi cũng như các mốc phát triển với trẻ nhỏ.\n\nNhà chơi 8 phòng – Người hâm mộ chương trình truyền hình hoạt hình DreamWorks từ 4 tuổi trở lên có thể khám phá ngôi nhà của riêng mình với LEGO® Gabby’s Dollhouse (10788), có các nhân vật nổi tiếng và phụ kiện chính hãng\n4 nhân vật mang tính biểu tượng – Trẻ em tham gia vui chơi với búp bê mini Gabby, cùng với các nhân vật Pandy Paws, MerCat và Cakey\nPhụ kiện chính hãng – Bao gồm chuối, quả mọng, bánh nướng nhỏ, cốc, bát, chai, kéo, cọ vẽ, bảng màu, lược chải tóc, chai dầu gội, sách, hoa, micrô, đàn ghi ta, kèn saxophone và nhiều thứ khác\nNhiều thứ để khám phá – Trẻ em có thể nướng bánh trong bếp, trượt trong phòng chơi, sáng tạo trong phòng nghệ thuật, chơi nhạc cụ trong phòng nhạc, thư giãn trong phòng tắm, ngủ trưa trong phòng ngủ hoặc tiệc tùng trên mái nhà\nQuà tặng cho người hâm mộ Gabby – Với một viên gạch khởi đầu và các bước xây dựng đơn giản, trẻ em đam mê Gabby’s Dollhouse sẽ phát triển các kỹ năng chính khi chúng tận hưởng trò chơi tưởng tượng bất tận\nĐược đóng gói đến tận mái nhà với niềm vui – Ngôi nhà búp bê có kích thước hơn 13,5 in. (34 cm) cao, 12,5 in. (31 cm) rộng và 3,5 in. (9 cm) sâu\nHướng dẫn xây dựng thú vị – Hướng dẫn hình ảnh được in cho thấy mục đích của từng bước xây dựng và ứng dụng LEGO® Builder cung cấp các công cụ thu phóng kỹ thuật số và xoay để trẻ em có thể hình dung mô hình của mình khi xây dựng\nMở rộng sự thú vị – Nhiều bộ LEGO® 4+ giới thiệu cho trẻ em một vũ trụ gồm các nhân vật phim yêu thích, nhân vật truyền hình và anh hùng đời thường\nChất lượng được đảm bảo – Các thành phần LEGO® đáp ứng các tiêu chuẩn chất lượng nghiêm ngặt của ngành để đảm bảo chúng đồng nhất, tương thích và kết nối trơn tru mọi lúc\nĐảm bảo an toàn – Các thành phần LEGO® được thả, nung nóng, nghiền nát, xoắn và phân tích để đảm bảo chúng đáp ứng các tiêu chuẩn an toàn toàn cầu nghiêm ngặt', '2024-09-23 11:34:48', '2024-09-23 12:15:17'),
 (15, 'Kỳ lân ma thuật', 'ky-lan-ma-thuat\n', 'ky-lan-ma-thuat.webp', 5, 245704, 0, 0, 1, 'Trẻ em giàu trí tưởng tượng từ 7 tuổi trở lên có thể được đưa đến một vùng đất thần thoại để tham gia vào hành động hấp dẫn với bộ xây dựng Kỳ lân kỳ diệu 3 trong 1 (31140) này. Bộ đồ chơi có một con kỳ lân với sừng vàng, đuôi đầy màu sắc và chân và móng guốc có thể tạo dáng. Nó có thể được trình bày ở 2 tư thế khác nhau: đứng trên 4 chân hoặc dựng đứng trên 2 chân sau để tạo dáng mang tính biểu tượng và được trưng bày trên giá đỡ cầu vồng của bộ đồ chơi.\n\nXây dựng các loài động vật đầy màu sắc từ những viên gạch LEGO®\nHành động thần thoại không bao giờ dừng lại với 3 sinh vật kỳ diệu khác nhau để các nhà xây dựng nhỏ lắp ráp trong bộ LEGO Creator 3 trong 1 này. Chúng có thể xây dựng một Kỳ lân kỳ diệu có thể tạo dáng, xây dựng lại thành một đồ chơi cá ngựa có thể tạo dáng với giá đỡ dưới đáy biển, biến nó thành một con công kỳ diệu có thể tạo dáng với một cái đuôi đầy màu sắc hoặc thậm chí sử dụng các viên gạch để tạo ra một sinh vật quyến rũ khác.\n\nỨng dụng LEGO Builder\nTải xuống ứng dụng LEGO Builder và bước vào thế giới xây dựng mới đầy thú vị, nơi trẻ em có thể phóng to và xoay các mô hình ở chế độ 3D, lưu các bộ và theo dõi tiến trình của chúng.\n\n3 sinh vật kỳ diệu trong 1 bộ – Các nhà xây dựng nhỏ có thể xây dựng và tái thiết 3 mô hình đầy màu sắc khác nhau với bộ đồ chơi LEGO® Creator 3in1 Magical Unicorn (31140) này\nGiá trị chơi lâu dài – Trẻ em có thể thưởng thức những câu chuyện vui nhộn với 3 cảnh khác nhau ở một vùng đất thần thoại: chạy qua cầu vồng với Magical Unicorn, bơi với cá ngựa hoặc chơi với công\nCác mô hình có thể tạo dáng – Mỗi trong 3 sinh vật đều có các bộ phận cơ thể có thể tạo dáng: kỳ lân có thể di chuyển chân và móng guốc; cá ngựa có thể di chuyển đuôi, vây và đầu; và con công có đuôi và mắt có thể chuyển động\nChơi và trưng bày – Cả 3 loài động vật kỳ diệu bền bỉ này đều có thể dễ dàng trưng bày: kỳ lân trên giá đỡ cầu vồng, đồ chơi cá ngựa trên giá đỡ đáy biển và đồ chơi công trên 2 chân\nMột công trình xây dựng thú vị – Bộ đồ chơi gồm 145 mảnh ghép này mang đến cho trẻ em từ 7 tuổi trở lên một nhiệm vụ xây dựng thú vị trước khi trò chơi tưởng tượng bắt đầu và có thể được tặng như một món quà bất ngờ, quà sinh nhật hoặc quà tặng ngày lễ\nChơi khi di chuyển – Cao hơn 5 in. (13 cm), Kỳ lân kỳ diệu có thể được trẻ em chơi ở nhà hoặc bỏ vào túi và mang theo khi đi du lịch\nThêm niềm vui 3 trong 1 – Hãy tìm kiếm các bộ đồ chơi 3 trong 1 LEGO® Creator khác, bao gồm Xe máy cổ điển (31135), Vẹt kỳ lạ (31136) và Xe cắm trại bãi biển (31138)\nMột bàn tay giúp đỡ – Khám phá hướng dẫn xây dựng trực quan trong ứng dụng LEGO® Builder, nơi trẻ em có thể phóng to và xoay các mô hình ở chế độ 3D, theo dõi tiến trình và lưu các bộ khi chúng phát triển các kỹ năng\nChất lượng cao cấp – Trong hơn 6 thập kỷ, những viên gạch LEGO® đã được sản xuất để đảm bảo chúng luôn tách rời nhau một cách nhất quán\nĐảm bảo an toàn – Những viên gạch xây dựng LEGO® đáp ứng các tiêu chuẩn an toàn toàn cầu nghiêm ngặt', '2024-09-23 11:34:48', '2024-09-23 12:15:17'),
-(16, 'Chuyến đi thuyền Peppa Pig', 'chuyen-di-thuyen-peppa-pig', 'chuyen-di-thuyen-peppa-pig.webp', 5, 737604, 0, 0, 1, 'Tất cả đều có trên Đồ chơi du ngoạn thuyền LEGO® DUPLO® Peppa Pig (10432) để có nhiều giờ học vui vẻ ở trường mầm non. Các bé gái và bé trai từ 2 tuổi trở lên tham gia cùng các nhân vật Ông nội Pig và Peppa Pig khi họ đi đến bãi biển bằng thuyền của mình.\n\nĐồ chơi lắp ráp và lắp ráp này được đóng gói với các phụ kiện sáng tạo để truyền cảm hứng kể chuyện cho trẻ mới biết đi. Chúng giúp Peppa thoa kem chống nắng trước khi đi săn vỏ sò và rèn luyện kỹ năng xếp chồng của mình khi xây lâu đài cát. Nếu trời quá nóng, Peppa có thể trú ẩn dưới ô dù hoặc đi bơi, và trẻ mới biết đi rèn luyện khả năng phối hợp tay mắt và các kỹ năng vận động tinh khi giúp cô bé đi chân vịt. Nếu trẻ mới biết đi cũng muốn giải nhiệt, chúng có thể: bộ đồ chơi thuyền Peppa Pig này nổi thực sự, vì vậy chúng có thể tận hưởng nhiều giờ vui chơi dưới nước với đồ chơi dưới nước này.\n\nĐồ chơi LEGO DUPLO Peppa Pig dành cho trẻ em được thiết kế để hỗ trợ việc học ở trường mầm non và giúp trẻ mới biết đi suy nghĩ logic và sáng tạo khi chúng xây dựng một chuỗi câu chuyện và bắt chước các cảnh trong chương trình truyền hình.\n\nBộ đồ chơi tưởng tượng về bãi biển và thuyền – Trẻ mới biết đi từ 2 tuổi trở lên sẽ ra khơi trong chuyến phiêu lưu trên bãi biển với Chuyến đi thuyền Peppa Pig LEGO® DUPLO® lấy cảm hứng từ chương trình truyền hình\nĐồ chơi lắp ráp và xây dựng lại với 2 nhân vật Peppa Pig – Đi kèm với các nhân vật Peppa và Grandpa Pig, một chiếc thuyền đồ chơi có thể lắp ráp và nổi, cùng nhiều phụ kiện sáng tạo để khơi dậy những câu chuyện kể bất tận\nĐồ chơi Peppa Pig giúp trẻ mới biết đi tái hiện lại niềm vui trên bãi biển – Peppa thoa kem chống nắng trước khi xây lâu đài cát bằng xẻng, thu thập vỏ sò trong xô và bơi bằng chân vịt\nĐồ chơi nổi cho trò chơi dưới nước – Đồ chơi thuyền Peppa Pig này nổi thật, vì vậy trẻ mới biết đi có thể tận hưởng trò chơi dưới nước với nhân vật truyền hình yêu thích của mình\nÝ tưởng quà tặng cho trẻ mới biết đi – Gây ấn tượng với những trẻ mới biết đi yêu thích Peppa Pig và đồ chơi dưới nước bằng món quà đặc biệt này dành cho trẻ mẫu giáo\nBộ chất lượng – Đồ chơi lắp ráp và xây dựng lại LEGO® DUPLO® Peppa Pig sử dụng gạch và các thành phần đã được thử nghiệm tối đa để đảm bảo đáp ứng các tiêu chuẩn an toàn khắt khe đối với trẻ em\nĐồ chơi học tập dành cho trẻ mẫu giáo – LEGO® Đồ chơi DUPLO® Peppa Pig hỗ trợ các kỹ năng vận động tinh và phát triển cảm xúc thông qua các giờ chơi sáng tạo, đầy thú vị\nKích thước – Bộ 23 món này bao gồm một đồ chơi thuyền có kích thước cao hơn 4,5 in. (11 cm), dài 4,5 in. (12 cm) và rộng 7 in. (18 cm)', '2024-09-23 11:34:48', '2024-09-23 12:15:17'),
+(16, 'Chuyến đi thuyền Peppa Pig', 'chuyen-di-thuyen-peppa-pig', 'chuyen-di-thuyen-peppa-pig.webp', 5, 737604, 0, 1, 1, 'Tất cả đều có trên Đồ chơi du ngoạn thuyền LEGO® DUPLO® Peppa Pig (10432) để có nhiều giờ học vui vẻ ở trường mầm non. Các bé gái và bé trai từ 2 tuổi trở lên tham gia cùng các nhân vật Ông nội Pig và Peppa Pig khi họ đi đến bãi biển bằng thuyền của mình.\n\nĐồ chơi lắp ráp và lắp ráp này được đóng gói với các phụ kiện sáng tạo để truyền cảm hứng kể chuyện cho trẻ mới biết đi. Chúng giúp Peppa thoa kem chống nắng trước khi đi săn vỏ sò và rèn luyện kỹ năng xếp chồng của mình khi xây lâu đài cát. Nếu trời quá nóng, Peppa có thể trú ẩn dưới ô dù hoặc đi bơi, và trẻ mới biết đi rèn luyện khả năng phối hợp tay mắt và các kỹ năng vận động tinh khi giúp cô bé đi chân vịt. Nếu trẻ mới biết đi cũng muốn giải nhiệt, chúng có thể: bộ đồ chơi thuyền Peppa Pig này nổi thực sự, vì vậy chúng có thể tận hưởng nhiều giờ vui chơi dưới nước với đồ chơi dưới nước này.\n\nĐồ chơi LEGO DUPLO Peppa Pig dành cho trẻ em được thiết kế để hỗ trợ việc học ở trường mầm non và giúp trẻ mới biết đi suy nghĩ logic và sáng tạo khi chúng xây dựng một chuỗi câu chuyện và bắt chước các cảnh trong chương trình truyền hình.\n\nBộ đồ chơi tưởng tượng về bãi biển và thuyền – Trẻ mới biết đi từ 2 tuổi trở lên sẽ ra khơi trong chuyến phiêu lưu trên bãi biển với Chuyến đi thuyền Peppa Pig LEGO® DUPLO® lấy cảm hứng từ chương trình truyền hình\nĐồ chơi lắp ráp và xây dựng lại với 2 nhân vật Peppa Pig – Đi kèm với các nhân vật Peppa và Grandpa Pig, một chiếc thuyền đồ chơi có thể lắp ráp và nổi, cùng nhiều phụ kiện sáng tạo để khơi dậy những câu chuyện kể bất tận\nĐồ chơi Peppa Pig giúp trẻ mới biết đi tái hiện lại niềm vui trên bãi biển – Peppa thoa kem chống nắng trước khi xây lâu đài cát bằng xẻng, thu thập vỏ sò trong xô và bơi bằng chân vịt\nĐồ chơi nổi cho trò chơi dưới nước – Đồ chơi thuyền Peppa Pig này nổi thật, vì vậy trẻ mới biết đi có thể tận hưởng trò chơi dưới nước với nhân vật truyền hình yêu thích của mình\nÝ tưởng quà tặng cho trẻ mới biết đi – Gây ấn tượng với những trẻ mới biết đi yêu thích Peppa Pig và đồ chơi dưới nước bằng món quà đặc biệt này dành cho trẻ mẫu giáo\nBộ chất lượng – Đồ chơi lắp ráp và xây dựng lại LEGO® DUPLO® Peppa Pig sử dụng gạch và các thành phần đã được thử nghiệm tối đa để đảm bảo đáp ứng các tiêu chuẩn an toàn khắt khe đối với trẻ em\nĐồ chơi học tập dành cho trẻ mẫu giáo – LEGO® Đồ chơi DUPLO® Peppa Pig hỗ trợ các kỹ năng vận động tinh và phát triển cảm xúc thông qua các giờ chơi sáng tạo, đầy thú vị\nKích thước – Bộ 23 món này bao gồm một đồ chơi thuyền có kích thước cao hơn 4,5 in. (11 cm), dài 4,5 in. (12 cm) và rộng 7 in. (18 cm)', '2024-09-23 11:34:48', '2024-09-23 12:15:17'),
 (17, 'Lâu đài ma thuật 3 trong 1', 'lau-dai-ma-thuat-3-trong-1', 'lau-dai-ma-thuat-3-trong-1.webp', 5, 2459254, 0, 0, 1, 'Bạn đang tìm đồ chơi xây dựng tốt nhất cho trẻ mới biết đi để tận hưởng nhiều giờ vui chơi sáng tạo? Bộ LEGO® DUPLO® ǀ Disney 3in1 Magic Castle (10998) chứa đầy những trò chơi khởi đầu. Trẻ mới biết đi từ 3 tuổi trở lên sẽ chơi một ngày vui vẻ để chuẩn bị cho lễ kỷ niệm với Chuột Mickey, Chuột Minnie, Vịt Daisy, Vịt Donald và chú mèo Figaro của Disney.\n\nLEGO magic biến 1 mô hình thành 3!\nLâu đài có thể được xây dựng theo 3 cách. Trẻ mới biết đi có thể lựa chọn xây dựng một mô hình lớn, một tòa tháp cao hoặc 2 tòa lâu đài nhỏ hơn. Bộ sản phẩm có đầy đủ các tính năng để chơi theo trí tưởng tượng, chẳng hạn như nhà bếp để làm bánh và phòng thay đồ với đồ chơi gương có thể xây dựng. Ngoài ra còn có các chi tiết hấp dẫn từ khắp vũ trụ Disney, chẳng hạn như đôi giày của Lọ Lem, bông hồng của Belle và cuốn sách ma thuật từ The Sorcerer\'s Apprentice.\n\nHọc thông qua trò chơi\nTrẻ mẫu giáo học cách thể hiện bản thân khi nhập vai vào những nhân vật Disney dễ nhận biết này và phát triển các kỹ năng vận động tinh khi khám phá các chức năng như ngăn bí mật mở của cây ma thuật.\n\nĐồ chơi xây dựng giàu trí tưởng tượng cho nhiều giờ chơi – Mang đến cho trẻ mới biết đi những cuộc phiêu lưu sáng tạo vô hạn khi chúng phát triển các kỹ năng vận động bằng cách xây dựng và xây dựng lại bộ LEGO® DUPLO® ǀ Disney 3in1 Magic Castle (10998)\nNhân vật Disney – Trẻ mẫu giáo khám phá các đặc điểm kỳ diệu của lâu đài cùng với 5 nhân vật LEGO® DUPLO®: Chuột Mickey của Disney, Chuột Minnie, Vịt Donald, Vịt Daisy và chú mèo Figaro\nXây dựng niềm vui luôn mới mẻ – Trẻ mới biết đi định hình mô hình theo bất kỳ cách nào chúng chọn: thành lâu đài lớn, tòa tháp cao hoặc thành 2 tòa nhà nhỏ hơn được ghép lại với nhau\nPhụ kiện khơi dậy những câu chuyện sáng tạo – Bộ sản phẩm đi kèm với các thành phần như giày của Lọ Lem, sách ma thuật, gương, đũa phép, máy ảnh, bóng bay và máy trộn nhà bếp\nQuà tặng cho những người xây dựng nhỏ tuổi có trí tưởng tượng lớn – Làm hài lòng người hâm mộ Disney từ 3 tuổi trở lên trong một dịp đặc biệt với lâu đài đồ chơi có thể xây dựng đầy đủ tính năng này, mang đến nhiều giờ chơi\nNhiều không gian để chơi – Mô hình chính có chiều cao hơn 20,5 in. (52 cm), Rộng 18,5 in. (48 cm) và sâu 7,5 in. (19 cm), vì vậy có đủ không gian cho các ngón tay nhỏ khám phá\nHướng dẫn xây dựng kỹ thuật số – Ứng dụng LEGO® Builder có phiên bản kỹ thuật số của hướng dẫn xây dựng đi kèm với bộ này\nBộ đồ chơi xây dựng giúp trẻ mẫu giáo học thông qua trò chơi – Bộ LEGO® DUPLO® được thiết kế chuyên nghiệp để cha mẹ và trẻ mới biết đi có thể chia sẻ các mốc phát triển và trò chơi mở\nĐảm bảo chất lượng – Bộ đồ chơi LEGO® DUPLO® đáp ứng các tiêu chuẩn chất lượng nghiêm ngặt của ngành để đảm bảo rằng các ngón tay nhỏ dễ dàng nhặt, đặt và tháo rời: đã như vậy kể từ năm 1969\nMột trải nghiệm an toàn – Các viên gạch và mảnh ghép của bộ đồ chơi xây dựng LEGO® DUPLO® được thả, nung nóng, nghiền nát, xoắn và phân tích để đảm bảo chúng đáp ứng các tiêu chuẩn an toàn khắt khe dành cho trẻ em', '2024-09-23 11:34:48', '2024-09-23 12:15:17');
 INSERT INTO `products` (`id`, `name`, `slug`, `image`, `category_id`, `price`, `view`, `outstanding`, `status`, `description`, `created_at`, `updated_at`) VALUES
 (18, 'Khám phá Ilu', 'kham-pha-ilu', 'kham-pha-ilu.webp', 5, 491654, 0, 0, 1, 'Trẻ em và người hâm mộ phim Avatar từ 8 tuổi trở lên có thể du hành đến mặt trăng ngoài hệ mặt trời Pandora tưởng tượng với bộ LEGO® Avatar Ilu Discovery (75575) này. Sống lại những khoảnh khắc yêu thích từ Avatar: The Way of Water hoặc tạo ra các cảnh và cốt truyện năng động với hình ilu có thể tạo dáng, các hình nhỏ Tsireya và Tuk và bối cảnh rạn san hô Pandoran.\n\nBao gồm hướng dẫn xây dựng tương tác\nBộ đồ chơi xây dựng LEGO Avatar này bao gồm hướng dẫn xây dựng bằng hình ảnh dễ làm theo và ứng dụng LEGO Builder – một người bạn đồng hành xây dựng kỹ thuật số với các công cụ thu phóng và xoay trực quan cho phép người dùng hình dung các mô hình từ mọi góc độ khi họ xây dựng.\n\nThích hợp để chơi và trưng bày\nBộ LEGO Avatar đi kèm với các phương tiện, máy móc, động vật, sinh vật và nhân vật mang tính biểu tượng trong bối cảnh theo chủ đề thiên nhiên ngoài hành tinh. Nó hoàn hảo cho trò chơi tưởng tượng và bạn cũng có thể tạo dáng cho các mô hình để tạo ra một trung tâm nổi bật cho bất kỳ căn phòng nào. Thu thập và kết hợp các bộ LEGO Avatar để mở rộng khả năng chơi hoặc xây dựng phiên bản Pandora của riêng bạn.\n\nBộ đồ chơi lắp ráp LEGO® Avatar – Trẻ em và người xem phim có thể sống lại những khoảnh khắc trong bộ phim thứ 2 hoặc thực hiện cuộc phiêu lưu của riêng mình với bộ LEGO Avatar Ilu Discovery (75575) này\nCó gì trong hộp? – Mọi thứ bạn cần để tạo ra một hình ilu có thể tạo dáng, các hình mini Tsireya và Tuk, bối cảnh rạn san hô Pandoran và giá đỡ trưng bày\nĐể chơi và trưng bày – Thưởng thức trò chơi tưởng tượng hoặc tạo dáng cho các nhân vật và sử dụng giá đỡ trưng bày để tái hiện các cảnh trong phim Avatar: The Way of Water\nMột ý tưởng quà tặng thú vị – Bộ đồ chơi xây dựng LEGO® Avatar 8+ này có thể được tặng làm quà sinh nhật, ngày lễ hoặc bất kỳ ngày nào khác cho người hâm mộ phim Avatar và trẻ em thích đồ chơi thú vị\nKích thước – Ilu (không có đế trưng bày) có kích thước cao hơn 1,5 in. (4 cm), rộng 5 in. (12 cm) và sâu 8 in. (21 cm)\nPhụ kiện hình mini LEGO® thú vị – Bộ LEGO Avatar này đi kèm với một con Na’vi kuru đồ chơi, ngọn giáo dưới nước và 2 con cá ngoài hành tinh\nBao gồm hướng dẫn xây dựng kỹ thuật số và in – Phóng to, xoay và xem các mô hình trong bộ này từ mọi góc độ khi bạn xây dựng chúng bằng ứng dụng LEGO® Builder dành cho điện thoại thông minh và máy tính bảng\nNhiều bộ hơn để sưu tập – Kết hợp bộ đồ chơi xây dựng sưu tập này với các bộ khác từ dòng sản phẩm LEGO® Avatar mở rộng khả năng chơi và xây dựng phiên bản Pandora của riêng bạn\nChất lượng là trọng tâm – Các mảnh ghép xây dựng LEGO® đáp ứng các tiêu chuẩn chất lượng khắt khe đảm bảo chúng nhất quán, tương thích và hoạt động mọi lúc\nAn toàn là trên hết – Các mảnh ghép LEGO® được thử nghiệm để đảm bảo rằng mọi bộ đồ chơi xây dựng đều đáp ứng các tiêu chuẩn an toàn nghiêm ngặt, đảm bảo bộ Avatar này được làm tốt và luôn sẵn sàng để chơi', '2024-09-23 11:34:48', '2024-09-23 12:15:17'),
@@ -685,7 +900,7 @@ INSERT INTO `products` (`id`, `name`, `slug`, `image`, `category_id`, `price`, `
 (249, 'Ký túc xá Harley Quinn™', 'ky-tuc-xa-harley-quinn™', 'ky-tuc-xa-harley-quinn.webp', 17, 1229504, 0, 1, 1, 'Tham gia vào thế giới LEGO® DC Super Hero Girls™ đầy hành động khi Harley Quinn™ đuổi theo Kryptomite™ màu ​​vàng quanh phòng ký túc xá của cô ấy! Bộ sản phẩm tuyệt vời này có các vật phẩm có thể xây dựng bao gồm giường hình bạt lò xo biến thành màn hình chiếu phim, ghế sofa biến thành khu vực trang điểm có hình dán phản chiếu và trò chơi Strong Man có búa và thanh trượt di chuyển, cùng với Harley\'s Wacky Wheeler và nhiều phụ kiện khác.\n\nBao gồm một hình búp bê mini Harley Quinn™ và hình Kryptomite™ màu ​​vàng.\nCó giường hình bạt lò xo biến thành màn hình chiếu phim, ghế sofa biến thành khu vực trang điểm có hình dán phản chiếu, gậy tự sướng có thể xây dựng, Harley\'s Wacky Wheeler và trò chơi Strong Man có búa.\nNhảy xung quanh trên giường bạt lò xo trước khi bạn nhấc nó lên để biến nó thành màn hình chiếu phim công nghệ cao.\nVặn núm trên ghế sofa để biến nó thành khu vực trang điểm của Harley.\nĐập vào đĩa BOOM trên Trò chơi Người đàn ông mạnh mẽ bằng vồ để làm cho thanh trượt \'rung\' \'chuông\'.\nNhảy lên Harley\'s Wacky Wheeler để đuổi theo Kryptomite™ quanh phòng.\nCác thành phần phụ kiện bao gồm son môi, lược chải tóc, hộp đựng bỏng ngô, mũ tiệc và camera điện thoại di động.\nKết nối với Trường trung học siêu anh hùng 41232 hoặc Ký túc xá Wonder Woman™ 41235 để mở rộng trò chơi Siêu anh hùng của bạn!\nKryptomite dễ thương nhưng độc ác có trong mọi bộ LEGO® DC Super Hero Girls™.\nGiường/màn hình có kích thước cao hơn 3” (9cm), rộng 2” (6cm) và sâu 1” (3cm).\nGương trang điểm/ghế sofa có kích thước cao hơn 1” (4cm), rộng 1” (4cm) và sâu 1” (4cm).\nTrò chơi Người đàn ông mạnh mẽ có kích thước cao hơn 3” (9cm), rộng 1” (4cm) và sâu 1” (4cm).\nWacky Wheeler có chiều cao hơn 1” (4cm), chiều dài 1” (3cm) và chiều rộng dưới 1” (1cm).', '2024-09-23 11:34:48', '2024-09-23 12:15:17'),
 (250, 'Bể Lashina™', 'be-lashina™', 'be-lashina.webp', 17, 1229504, 0, 0, 1, 'Join in the action-packed LEGO® DC Super Hero Girls™ world as Supergirl’s dog Krypto™ faces Lashina™ and the blue Kryptomite™. This great set features a Lashina mini-doll figure, Lashina’s tank with a stud shooter and space in the back for Krypto, plus Krypto’s house with defense shield and a catapult. Includes Krypto and a confused blue Kryptomite.\n\nIncludes a Lashina™ mini-doll figure, plus Krypto™ figure and a blue Kryptomite™.\nFeatures a tank with stud shooter and a cage in the back with removable cover to hold Krypto™.\nAlso includes a doghouse with shield that opens, fire hydrant and a catapult.\nFire the yellow ball element from Krypto’s catapult at Lashina’s tank.\nCapture Krypto™ with Lashina’s whip and put him in the back of the tank.\nBreak Krypto™ out of the tank to free him.\nAccessory elements include Lashina’s whip, a yellow ball element, stud, Supergirl’s phone and a dog bone.\nThis set offers an age-appropriate build and play experience for ages 7-12.\nCheck out the 41230 Batgirl™ Batjet Chase for some high-flying Super Hero fun!\nCute but evil Kryptomites are included in every LEGO® DC Super Hero Girls™ set.\nLashina’s tank measures over 1” (4cm) high, 3” (10cm) long and 1” (5cm) wide.\nKrypto’s doghouse measures over 1” (5cm) high, 2” (6cm) wide and 1” (3cm) deep.', '2024-09-23 11:34:48', '2024-09-23 12:15:17'),
 (251, 'Xe máy Black Widow và Captain America', 'xe-may-black-widow-va-captain-america', 'xe-may-black-widow-va-captain-america.webp', 17, 395672, 0, 0, 1, 'Mang hành động phim mang tính biểu tượng vào cuộc sống với LEGO® Marvel Black Widow & Captain America Motorcycles (76260). Dựa trên một cảnh trong Avengers: Age of Ultron của Marvel Studios, những Siêu anh hùng lái mô tô này sẽ đưa trẻ em từ 6 tuổi trở lên vào một con đường phiêu lưu tưởng tượng bất tận.\n\nAvengers hành động – trên bánh xe!\nCác nhân vật nhỏ Captain America và Black Widow lái mô tô lần đầu tiên xuất hiện trong bộ phim đáng nhớ Avengers: Age of Ultron năm 2015 của Marvel Studios. Cả hai mô tô đều có súng bắn bên hông và giá đỡ cho dùi cui của Black Widow và khiên của Captain America. Các nhân vật nhỏ có thể dễ dàng tháo rời khỏi mô tô để mở rộng khả năng chơi hơn nữa. Để tăng thêm niềm vui kỹ thuật số, người xây dựng có thể phóng to, xoay các bộ ở chế độ 3D và theo dõi tiến trình của họ bằng ứng dụng LEGO Builder trực quan, thú vị.\n\nCuộc phiêu lưu tốc độ cao của Avengers – LEGO® Marvel Black Widow & Captain America Motorcycles (76260) tái hiện một cảnh kinh điển trong Avengers: Age of Ultron của Marvel Studios\nSiêu anh hùng lái mô tô – Bộ đồ chơi bao gồm các nhân vật nhỏ Captain America và Black Widow với chiếc khiên và dùi cui quen thuộc, cùng 2 chiếc mô tô có thể lắp ráp được\nHành động trên và ngoài xe mô tô – Cả hai xe mô tô đều có súng bắn bên hông để chống lại kẻ xấu. Các nhân vật nhỏ dễ dàng tháo rời khỏi xe đạp để mở rộng khả năng chơi hơn nữa\nQuà tặng cho các siêu anh hùng trẻ tuổi – Tặng bộ đồ chơi thực hành này cho người hâm mộ phim Marvel từ 6 tuổi trở lên làm quà tặng sinh nhật, ngày lễ hoặc bất kỳ ngày nào\nVui chơi mọi lúc mọi nơi – Mỗi chiếc xe đạp có kích thước cao hơn 1,5 in. (4 cm), dài 3 in. (8 cm) và rộng 1,5 in. (4 cm), vì vậy trẻ em có thể mang theo đồ chơi lắp ráp và chơi đa năng này đến bất cứ đâu\nHướng dẫn lắp ráp trực quan – Trẻ em có thể tải xuống ứng dụng LEGO® Builder để có trải nghiệm lắp ráp nhập vai, với các công cụ kỹ thuật số để phóng to và xoay mô hình 3D, lưu các bộ và theo dõi tiến trình\nPhát triển niềm vui của Siêu anh hùng – Dòng đồ chơi lắp ráp LEGO® Marvel phong phú được thiết kế để mang đến khả năng lắp ráp và chơi tưởng tượng vô tận\nChất lượng được đảm bảo – Các thành phần LEGO® đáp ứng các tiêu chuẩn chất lượng nghiêm ngặt của ngành để đảm bảo chúng đồng nhất, tương thích và dễ lắp ráp\nĐảm bảo an toàn – Các viên gạch và mảnh ghép LEGO® được thả, nung nóng, nghiền nát, xoắn và phân tích để đảm bảo chúng đáp ứng các tiêu chuẩn an toàn toàn cầu nghiêm ngặt', '2024-09-23 11:34:48', '2024-09-23 12:15:17'),
-(252, 'The Avengers đấu với The Leviathan', 'the-avengers-dau-voi-the-leviathan', 'the-avengers-dau-voi-the-leviathan.webp', 17, 1237002, 0, 0, 1, 'Bộ đồ chơi Siêu anh hùng sưu tầm LEGO® Marvel The Avengers vs. The Leviathan (76290) tái hiện cảnh chiến đấu cuối cùng trong Marvel: The Avengers của Marvel Studios. Mô hình LEGO Marvel có thể lắp ráp này dành cho trẻ em từ 7 tuổi trở lên có dàn nhân vật mang tính biểu tượng, cùng với nhiều tính năng và chức năng đích thực.\n\nBộ sản phẩm bao gồm 4 nhân vật nhỏ – Captain America với chiếc khiên, Black Widow cầm súng bắn đinh, Loki với áo choàng và mũ bảo hiểm, và một chiến binh Chitauri với khẩu súng lục laser – cùng với một nhân vật Hulk lớn. Leviathan có thể lắp ráp được có 6 vây có thể di chuyển, một cái miệng mở, một cái đầu có thể xoay nhẹ sang một bên và 2 súng bắn đinh. Leviathan đi kèm với chân đế trong suốt cho phép các nhân vật nhỏ \'bay\' trong khi chơi và làm cho màn hình trở nên ấn tượng hơn. Để tăng thêm sự thú vị kỹ thuật số, ứng dụng LEGO Builder trực quan cho phép trẻ em phóng to, xoay mô hình ở chế độ 3D, lưu các bộ và theo dõi tiến trình khi chúng lắp ráp.\n\nBộ đồ chơi The Avengers đấu với The Leviathan – Bộ đồ chơi LEGO® Siêu anh hùng dành cho trẻ em sưu tầm này dành cho bé trai và bé gái từ 7 tuổi trở lên tái hiện cảnh chiến đấu cuối cùng trong Marvel: The Avengers của Marvel Studios\nCác nhân vật Marvel – Một nhân vật Hulk và 4 nhân vật nhỏ: Captain America với chiếc khiên, Black Widow với súng bắn đinh, Loki với áo choàng và mũ bảo hiểm, và một chiến binh Chitauri với khẩu súng lục laser\nĐồ chơi Siêu anh hùng có thể lắp ráp – Khi Loki và một chiến binh Chitauri tấn công thành phố bằng \'cá voi không khí\' Leviathan, LEGO® Marvel Avengers phải cứu cả ngày\nMô hình hành động LEGO® Marvel – \'cá voi không khí\' Leviathan có thể lắp ráp được có 6 vây có thể di chuyển, một cái miệng mở, một cái đầu có thể xoay nhẹ sang một bên, 2 súng bắn đinh và chân đế trong suốt\nQuà tặng Hulk Avengers cho trẻ em – Tặng món quà lắp ráp và chơi này cho những người đam mê Marvel Avengers, người hâm mộ Hulk và bất kỳ Siêu anh hùng trẻ tuổi nào thích đồ chơi hành động có thể lắp ráp\nHướng dẫn lắp ráp 3D – Trẻ em có thể tải xuống ứng dụng LEGO® Builder để có trải nghiệm lắp ráp nhập vai, với các công cụ kỹ thuật số để phóng to và xoay mô hình 3D, lưu bộ và theo dõi tiến trình\nNhiều bộ đồ chơi LEGO® Marvel hơn – Dòng đồ chơi xây dựng LEGO Marvel phong phú đưa một vũ trụ luôn thay đổi của những cuộc phiêu lưu Siêu anh hùng giàu trí tưởng tượng vào tay trẻ em\nBộ đồ chơi 347 mảnh – Leviathan có thể xây dựng có kích thước cao hơn 2,5 in. (7 cm), dài 10,5 in. (27 cm) và rộng 8,5 in. (21 cm)', '2024-09-23 11:34:48', '2024-09-23 12:15:17');
+(252, 'The Avengers đấu với The Leviathan', 'the-avengers-dau-voi-the-leviathan', 'the-avengers-dau-voi-the-leviathan.webp', 17, 1237002, 0, 0, 1, 'Bộ đồ chơi Siêu anh hùng sưu tầm LEGO® Marvel The Avengers vs. The Leviathan (76290) tái hiện cảnh chiến đấu cuối cùng trong Marvel: The Avengers của Marvel Studios. Mô hình LEGO Marvel có thể lắp ráp này dành cho trẻ em từ 7 tuổi trở lên có dàn nhân vật mang tính biểu tượng, cùng với nhiều tính năng và chức năng đích thực.\n\nBộ sản phẩm bao gồm 4 nhân vật nhỏ – Captain America với chiếc khiên, Black Widow cầm súng bắn đinh, Loki với áo choàng và mũ bảo hiểm, và một chiến binh Chitauri với khẩu súng lục laser – cùng với một nhân vật Hulk lớn. Leviathan có thể lắp ráp được có 6 vây có thể di chuyển, một cái miệng mở, một cái đầu có thể xoay nhẹ sang một bên và 2 súng bắn đinh. Leviathan đi kèm với chân đế trong suốt cho phép các nhân vật nhỏ \'bay\' trong khi chơi và làm cho màn hình trở nên ấn tượng hơn. Để tăng thêm sự thú vị kỹ thuật số, ứng dụng LEGO Builder trực quan cho phép trẻ em phóng to, xoay mô hình ở chế độ 3D, lưu các bộ và theo dõi tiến trình khi chúng lắp ráp.\n\nBộ đồ chơi The Avengers đấu với The Leviathan – Bộ đồ chơi LEGO® Siêu anh hùng dành cho trẻ em sưu tầm này dành cho bé trai và bé gái từ 7 tuổi trở lên tái hiện cảnh chiến đấu cuối cùng trong Marvel: The Avengers của Marvel Studios\nCác nhân vật Marvel – Một nhân vật Hulk và 4 nhân vật nhỏ: Captain America với chiếc khiên, Black Widow với súng bắn đinh, Loki với áo choàng và mũ bảo hiểm, và một chiến binh Chitauri với khẩu súng lục laser\nĐồ chơi Siêu anh hùng có thể lắp ráp – Khi Loki và một chiến binh Chitauri tấn công thành phố bằng \'cá voi không khí\' Leviathan, LEGO® Marvel Avengers phải cứu cả ngày\nMô hình hành động LEGO® Marvel – \'cá voi không khí\' Leviathan có thể lắp ráp được có 6 vây có thể di chuyển, một cái miệng mở, một cái đầu có thể xoay nhẹ sang một bên, 2 súng bắn đinh và chân đế trong suốt\nQuà tặng Hulk Avengers cho trẻ em – Tặng món quà lắp ráp và chơi này cho những người đam mê Marvel Avengers, người hâm mộ Hulk và bất kỳ Siêu anh hùng trẻ tuổi nào thích đồ chơi hành động có thể lắp ráp\nHướng dẫn lắp ráp 3D – Trẻ em có thể tải xuống ứng dụng LEGO® Builder để có trải nghiệm lắp ráp nhập vai, với các công cụ kỹ thuật số để phóng to và xoay mô hình 3D, lưu bộ và theo dõi tiến trình\nNhiều bộ đồ chơi LEGO® Marvel hơn – Dòng đồ chơi xây dựng LEGO Marvel phong phú đưa một vũ trụ luôn thay đổi của những cuộc phiêu lưu Siêu anh hùng giàu trí tưởng tượng vào tay trẻ em\nBộ đồ chơi 347 mảnh – Leviathan có thể xây dựng có kích thước cao hơn 2,5 in. (7 cm), dài 10,5 in. (27 cm) và rộng 8,5 in. (21 cm)', '2024-09-23 11:34:48', '2024-10-15 23:47:50');
 
 -- --------------------------------------------------------
 
@@ -707,14 +922,75 @@ CREATE TABLE `product_discounts` (
 --
 
 INSERT INTO `product_discounts` (`id`, `product_id`, `user_group_id`, `price`, `created_at`, `updated_at`) VALUES
-(37, 16, 1, 735000, NULL, NULL),
-(38, 17, 1, 2300000, NULL, NULL),
-(39, 18, 1, 485000, NULL, NULL),
-(40, 19, 1, 735000, NULL, NULL),
-(41, 16, 2, 730000, NULL, NULL),
-(42, 17, 2, 2500000, NULL, NULL),
-(43, 18, 2, 480000, NULL, NULL),
-(44, 19, 2, 730000, NULL, NULL);
+(53, 1, 4, 1029504, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(54, 1, 3, 1079504, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(55, 1, 2, 1129504, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(56, 1, 1, 1179504, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(57, 2, 4, 348679, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(58, 2, 3, 353679, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(59, 2, 2, 358679, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(60, 2, 1, 363679, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(61, 3, 4, 840579, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(62, 3, 3, 845579, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(63, 3, 2, 850579, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(64, 3, 1, 855579, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(65, 4, 4, 471654, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(66, 4, 3, 476654, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(67, 4, 2, 481654, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(68, 4, 1, 486654, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(69, 5, 4, 963554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(70, 5, 3, 968554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(71, 5, 2, 973554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(72, 5, 1, 978554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(73, 6, 4, 963554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(74, 6, 3, 968554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(75, 6, 2, 973554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(76, 6, 1, 978554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(77, 7, 4, 471654, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(78, 7, 3, 476654, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(79, 7, 2, 481654, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(80, 7, 1, 486654, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(81, 8, 4, 963554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(82, 8, 3, 968554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(83, 8, 2, 973554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(84, 8, 1, 978554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(85, 9, 4, 471654, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(86, 9, 3, 476654, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(87, 9, 2, 481654, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(88, 9, 1, 486654, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(89, 10, 4, 840579, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(90, 10, 3, 845579, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(91, 10, 2, 850579, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(92, 10, 1, 855579, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(93, 11, 4, 250299, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(94, 11, 3, 255299, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(95, 11, 2, 260299, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(96, 11, 1, 265299, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(97, 12, 4, 963554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(98, 12, 3, 968554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(99, 12, 2, 973554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(100, 12, 1, 978554, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(101, 13, 4, 717604, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(102, 13, 3, 722604, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(103, 13, 2, 727604, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(104, 13, 1, 732604, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(105, 14, 4, 1767354, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(106, 14, 3, 1817354, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(107, 14, 2, 1867354, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(108, 14, 1, 1917354, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(109, 15, 4, 225704, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(110, 15, 3, 230704, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(111, 15, 2, 235704, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(112, 15, 1, 240704, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(113, 16, 4, 717604, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(114, 16, 3, 722604, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(115, 16, 2, 727604, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(116, 16, 1, 732604, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(117, 17, 4, 2259254, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(118, 17, 3, 2309254, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(119, 17, 2, 2359254, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(120, 17, 1, 2409254, '2024-10-07 07:44:00', '2024-10-07 07:44:00'),
+(121, 18, 4, 471654, '2024-10-07 07:44:00', '2024-10-07 07:44:00');
 
 -- --------------------------------------------------------
 
@@ -2018,7 +2294,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('DZLGdzLKzUjFPs9sL7FlUUbpmyeieyYNVaVfDN3d', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiQUF2Nm5OWUx5dUJQUE9xRzRwUGplZzlVYVBKT3N3NkhQdXVUcUM1aCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9jYXRlZ29yeVByb2R1Y3QvMTciO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1728313629);
+('M7iAmUFq3rrdGfgTmArE6FgbBcbi7FIc7MJmxgNw', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiN3FnNk5VSUpqczQwZnBqZ1F0NW10eTkyNkxFZ29qRU14MGdsQUJNTiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MzoidXJsIjthOjE6e3M6ODoiaW50ZW5kZWQiO3M6MjY6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9jYXJ0Ijt9fQ==', 1729868859),
+('xY8dikswm4dl7p3j0DvfsOshknqspyXK6yuCVL1f', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiZjdEN0tzWFR6Z3V5YW1Qb3E0RHNscnZSNHFoQTB4aGdFZDhGYzRzMyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hZG1pbi9hcnRpY2xlIjt9czo1MjoibG9naW5fYWRtaW5fNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxO3M6NToiYWRtaW4iO086MjU6IkFwcFxNb2RlbHNcQWRtaW5pc3RyYXRpb24iOjMyOntzOjEzOiIAKgBjb25uZWN0aW9uIjtzOjU6Im15c3FsIjtzOjg6IgAqAHRhYmxlIjtzOjE1OiJhZG1pbmlzdHJhdGlvbnMiO3M6MTM6IgAqAHByaW1hcnlLZXkiO3M6MjoiaWQiO3M6MTA6IgAqAGtleVR5cGUiO3M6MzoiaW50IjtzOjEyOiJpbmNyZW1lbnRpbmciO2I6MTtzOjc6IgAqAHdpdGgiO2E6MDp7fXM6MTI6IgAqAHdpdGhDb3VudCI7YTowOnt9czoxOToicHJldmVudHNMYXp5TG9hZGluZyI7YjowO3M6MTA6IgAqAHBlclBhZ2UiO2k6MTU7czo2OiJleGlzdHMiO2I6MTtzOjE4OiJ3YXNSZWNlbnRseUNyZWF0ZWQiO2I6MDtzOjI4OiIAKgBlc2NhcGVXaGVuQ2FzdGluZ1RvU3RyaW5nIjtiOjA7czoxMzoiACoAYXR0cmlidXRlcyI7YToxMDp7czoyOiJpZCI7aToxO3M6MTQ6ImFkbWluX2dyb3VwX2lkIjtpOjEwO3M6ODoiZnVsbG5hbWUiO3M6OToiSHV5bmggS2hhIjtzOjg6InVzZXJuYW1lIjtzOjg6ImtoYWtoYTE3IjtzOjU6ImVtYWlsIjtzOjIwOiJraGFraGE1MDg3QGdtYWlsLmNvbSI7czo4OiJwYXNzd29yZCI7czo2MDoiJDJ5JDEyJDlzVXN0bkduMzBsVFd5SDRzVnJrbXVhWEhpbHJkaTVtUmsubElyL05GaWMvZWkyajdoOHdlIjtzOjU6ImltYWdlIjtzOjU6IjEucG5nIjtzOjY6InN0YXR1cyI7aToxO3M6MTA6ImNyZWF0ZWRfYXQiO3M6MTk6IjIwMjQtMDktMTQgMDY6Mjk6NDIiO3M6MTA6InVwZGF0ZWRfYXQiO3M6MTk6IjIwMjQtMDktMTYgMDM6MzE6NTAiO31zOjExOiIAKgBvcmlnaW5hbCI7YToxMDp7czoyOiJpZCI7aToxO3M6MTQ6ImFkbWluX2dyb3VwX2lkIjtpOjEwO3M6ODoiZnVsbG5hbWUiO3M6OToiSHV5bmggS2hhIjtzOjg6InVzZXJuYW1lIjtzOjg6ImtoYWtoYTE3IjtzOjU6ImVtYWlsIjtzOjIwOiJraGFraGE1MDg3QGdtYWlsLmNvbSI7czo4OiJwYXNzd29yZCI7czo2MDoiJDJ5JDEyJDlzVXN0bkduMzBsVFd5SDRzVnJrbXVhWEhpbHJkaTVtUmsubElyL05GaWMvZWkyajdoOHdlIjtzOjU6ImltYWdlIjtzOjU6IjEucG5nIjtzOjY6InN0YXR1cyI7aToxO3M6MTA6ImNyZWF0ZWRfYXQiO3M6MTk6IjIwMjQtMDktMTQgMDY6Mjk6NDIiO3M6MTA6InVwZGF0ZWRfYXQiO3M6MTk6IjIwMjQtMDktMTYgMDM6MzE6NTAiO31zOjEwOiIAKgBjaGFuZ2VzIjthOjA6e31zOjg6IgAqAGNhc3RzIjthOjA6e31zOjE3OiIAKgBjbGFzc0Nhc3RDYWNoZSI7YTowOnt9czoyMToiACoAYXR0cmlidXRlQ2FzdENhY2hlIjthOjA6e31zOjEzOiIAKgBkYXRlRm9ybWF0IjtOO3M6MTA6IgAqAGFwcGVuZHMiO2E6MDp7fXM6MTk6IgAqAGRpc3BhdGNoZXNFdmVudHMiO2E6MDp7fXM6MTQ6IgAqAG9ic2VydmFibGVzIjthOjA6e31zOjEyOiIAKgByZWxhdGlvbnMiO2E6MDp7fXM6MTA6IgAqAHRvdWNoZXMiO2E6MDp7fXM6MTA6InRpbWVzdGFtcHMiO2I6MTtzOjEzOiJ1c2VzVW5pcXVlSWRzIjtiOjA7czo5OiIAKgBoaWRkZW4iO2E6MDp7fXM6MTA6IgAqAHZpc2libGUiO2E6MDp7fXM6MTE6IgAqAGZpbGxhYmxlIjthOjc6e2k6MDtzOjE0OiJhZG1pbl9ncm91cF9pZCI7aToxO3M6ODoiZnVsbG5hbWUiO2k6MjtzOjg6InVzZXJuYW1lIjtpOjM7czo1OiJlbWFpbCI7aTo0O3M6ODoicGFzc3dvcmQiO2k6NTtzOjU6ImltYWdlIjtpOjY7czo2OiJzdGF0dXMiO31zOjEwOiIAKgBndWFyZGVkIjthOjE6e2k6MDtzOjE6IioiO31zOjE5OiIAKgBhdXRoUGFzc3dvcmROYW1lIjtzOjg6InBhc3N3b3JkIjtzOjIwOiIAKgByZW1lbWJlclRva2VuTmFtZSI7czoxNDoicmVtZW1iZXJfdG9rZW4iO319', 1729872736);
 
 -- --------------------------------------------------------
 
@@ -2037,19 +2314,24 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '1',
   `verification_code` int DEFAULT NULL,
-  `user_group_id` bigint UNSIGNED NOT NULL DEFAULT '1'
+  `user_group_id` bigint UNSIGNED NOT NULL DEFAULT '1',
+  `phone` int NOT NULL,
+  `province` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `district` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ward` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` text COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `status`, `verification_code`, `user_group_id`) VALUES
-(1, 'kha', 'khakha5087@gmail.com', NULL, '$2y$12$iTIh4lveGPukaao1qcMua.hHEPloLVDUxyOspw/4gB7as0mbXp4uu', NULL, NULL, '2024-09-21 04:35:39', 1, NULL, 2),
-(2, 'xaaaa', 'khahps31506@fpt.edu.vn', NULL, '$2y$12$1m1Ji3DxsIAz/uDDmmdCbeXhnL5zSH9yJDhz.aglhUbIS.mVfMWd2', NULL, NULL, '2024-10-01 23:40:34', 1, NULL, 2),
-(3, 'tester', 'solakearlene2004@outlook.com', NULL, '$2y$12$ngHJm6fXH21XwQvdiG7/zuNExgTya41rZGZj1tP9oZyO1sXFtpFoa', NULL, '2024-10-03 00:10:39', '2024-10-03 00:10:39', 1, NULL, 1),
-(6, 'xuww', 'xuxa0710@gmail.com', NULL, '$2y$12$6js62rg/AXb8ZhuAXTFb.OWD1TPX5ukGQxqHYCRepP2HJBj73233a', NULL, '2024-10-03 07:36:10', '2024-10-03 07:36:10', 1, NULL, 1),
-(7, 'testjwt', 'jwt@gmail.com', NULL, '$2y$12$0uU2dZ36g4SyD5PuLSX8gu/2N9djfBktvDEfSpCyGhV3TZUHObFhW', NULL, '2024-10-07 00:10:03', '2024-10-07 00:10:03', 1, NULL, 1);
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `status`, `verification_code`, `user_group_id`, `phone`, `province`, `district`, `ward`, `image`) VALUES
+(1, 'kha', 'khakha5087@gmail.com', NULL, '$2y$12$iTIh4lveGPukaao1qcMua.hHEPloLVDUxyOspw/4gB7as0mbXp4uu', NULL, NULL, '2024-10-20 23:26:33', 1, NULL, 4, 353123771, 'Tỉnh Bình Định', 'Thị xã Hoài Nhơn', 'Phường Tam Quan Bắc', 'user1.jpg'),
+(2, 'xaaaa17', 'khahps31506@fpt.edu.vn', NULL, '$2y$12$ZPf1vADrxO.Gj6.rMhoniegRJHPQMqQqfqsCzSEMimbsTl4WLQApq', NULL, NULL, '2024-10-20 23:26:33', 1, NULL, 3, 383331822, 'Thành phố Hà Nội', 'Thị xã Sơn Tây', 'Phường Trung Hưng', '2.jpg'),
+(13, 'hahaha', 'khahuynh@gmail.com', NULL, '$2y$12$ZPf1vADrxO.Gj6.rMhoniegRJHPQMqQqfqsCzSEMimbsTl4WLQApq', NULL, NULL, '2024-10-20 23:41:45', 1, NULL, 1, 383331822, 'Thành phố Hà Nội', 'Thị xã Sơn Tây', 'Phường Trung Hưng', '2.jpg'),
+(14, 'hihihi', 'quahuynh@gmail.com', NULL, '$2y$12$ZPf1vADrxO.Gj6.rMhoniegRJHPQMqQqfqsCzSEMimbsTl4WLQApq', NULL, NULL, '2024-10-22 23:31:01', 1, NULL, 1, 383331822, 'Thành phố Hà Nội', 'Thị xã Sơn Tây', 'Phường Trung Hưng', '2.jpg'),
+(17, 'jwt', 'xuxa0710@gmail.com', NULL, '$2y$12$eAikMp.C8FXDYNl.wRNZ9OO6jpy7tpBv0.k7ZxL4uRiYJyvvLkcO.', NULL, '2024-10-25 05:06:03', '2024-10-25 05:06:03', 1, NULL, 1, 353553991, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2100,6 +2382,22 @@ ALTER TABLE `articles`
   ADD KEY `articles_categoryarticle_id_foreign` (`categoryArticle_id`);
 
 --
+-- Chỉ mục cho bảng `assemblies`
+--
+ALTER TABLE `assemblies`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `assemblies_user_id_foreign` (`user_id`),
+  ADD KEY `assemblies_product_id_foreign` (`product_id`),
+  ADD KEY `assemblies_employee_id_foreign` (`employee_id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
+-- Chỉ mục cho bảng `blocks`
+--
+ALTER TABLE `blocks`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Chỉ mục cho bảng `cache`
 --
 ALTER TABLE `cache`
@@ -2133,6 +2431,14 @@ ALTER TABLE `category_articles`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Chỉ mục cho bảng `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comments_user_id_foreign` (`user_id`),
+  ADD KEY `comments_product_id_foreign` (`product_id`);
+
+--
 -- Chỉ mục cho bảng `coupons`
 --
 ALTER TABLE `coupons`
@@ -2140,11 +2446,28 @@ ALTER TABLE `coupons`
   ADD UNIQUE KEY `coupons_code_unique` (`code`);
 
 --
+-- Chỉ mục cho bảng `employees`
+--
+ALTER TABLE `employees`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `employees_email_unique` (`email`),
+  ADD UNIQUE KEY `employees_phone_unique` (`phone`),
+  ADD KEY `admin_group_id` (`admin_group_id`);
+
+--
 -- Chỉ mục cho bảng `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Chỉ mục cho bảng `favourites`
+--
+ALTER TABLE `favourites`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `favourites_user_id_foreign` (`user_id`),
+  ADD KEY `favourites_product_id_foreign` (`product_id`);
 
 --
 -- Chỉ mục cho bảng `jobs`
@@ -2246,49 +2569,79 @@ ALTER TABLE `user_groups`
 -- AUTO_INCREMENT cho bảng `administrations`
 --
 ALTER TABLE `administrations`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `administration_groups`
 --
 ALTER TABLE `administration_groups`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT cho bảng `assemblies`
+--
+ALTER TABLE `assemblies`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT cho bảng `blocks`
+--
+ALTER TABLE `blocks`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT cho bảng `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=194;
 
 --
 -- AUTO_INCREMENT cho bảng `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT cho bảng `category_articles`
 --
 ALTER TABLE `category_articles`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `coupons`
 --
 ALTER TABLE `coupons`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT cho bảng `employees`
+--
+ALTER TABLE `employees`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT cho bảng `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT cho bảng `favourites`
+--
+ALTER TABLE `favourites`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT cho bảng `jobs`
@@ -2300,19 +2653,19 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT cho bảng `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
 
 --
 -- AUTO_INCREMENT cho bảng `order_products`
 --
 ALTER TABLE `order_products`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=211;
 
 --
 -- AUTO_INCREMENT cho bảng `personal_access_tokens`
@@ -2330,7 +2683,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT cho bảng `product_discounts`
 --
 ALTER TABLE `product_discounts`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
 
 --
 -- AUTO_INCREMENT cho bảng `product_images`
@@ -2342,7 +2695,7 @@ ALTER TABLE `product_images`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT cho bảng `user_groups`
@@ -2367,6 +2720,15 @@ ALTER TABLE `articles`
   ADD CONSTRAINT `articles_categoryarticle_id_foreign` FOREIGN KEY (`categoryArticle_id`) REFERENCES `category_articles` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
+-- Các ràng buộc cho bảng `assemblies`
+--
+ALTER TABLE `assemblies`
+  ADD CONSTRAINT `assemblies_employee_id_foreign` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `assemblies_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `assemblies_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `assemblies_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
 -- Các ràng buộc cho bảng `carts`
 --
 ALTER TABLE `carts`
@@ -2378,6 +2740,26 @@ ALTER TABLE `carts`
 --
 ALTER TABLE `categories`
   ADD CONSTRAINT `categories_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Các ràng buộc cho bảng `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `comments_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Các ràng buộc cho bảng `employees`
+--
+ALTER TABLE `employees`
+  ADD CONSTRAINT `employees_ibfk_1` FOREIGN KEY (`admin_group_id`) REFERENCES `administration_groups` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Các ràng buộc cho bảng `favourites`
+--
+ALTER TABLE `favourites`
+  ADD CONSTRAINT `favourites_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  ADD CONSTRAINT `favourites_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Các ràng buộc cho bảng `orders`

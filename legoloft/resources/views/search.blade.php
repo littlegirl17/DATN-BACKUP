@@ -53,7 +53,7 @@
                                         <button onclick="addFavourite('{{ $item->id }}')" class="outline-0 border-0"
                                             style="background-color: transparent">
                                             <i class="fa-solid fa-heart {{ $isFavourite ? 'red' : '' }}"
-                                                id="favourite-{{ $item->id }}"></i>
+                                                data-product-id="favourite-{{ $item->id }}"></i>
                                         </button>
                                         <button type="button" class="outline-0 border-0 "
                                             style="background-color: transparent"

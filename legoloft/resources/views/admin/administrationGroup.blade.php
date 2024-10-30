@@ -64,6 +64,9 @@
 
                      </tbody>
                  </table>
+                 <nav class="navPhanTrang">
+                     {{ $administrationGroup->links() }}
+                 </nav>
              </div>
          </form>
 

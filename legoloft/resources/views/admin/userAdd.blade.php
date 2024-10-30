@@ -4,16 +4,13 @@
 
      <div class="container-fluid">
 
-         <h3 class="title-page ">
-             Thêm khách hàng mới
-         </h3>
-         <div class="row " style="margin-left: 1100px;">
-
-         </div>
          <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data">
              @csrf
              <div class="buttonProductForm">
                  <div class="">
+                     <h3 class="title-page ">
+                         Thêm khách hàng mới
+                     </h3>
                      @if ($errors->any())
                          @foreach ($errors->all() as $error)
                              <div id="alert-message" class="alertDanger">{{ $error }}</div>

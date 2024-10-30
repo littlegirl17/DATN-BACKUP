@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Product;
 use App\Models\UserGroup;
 use App\Models\Categories;
@@ -15,6 +16,7 @@ class HomeController extends Controller
     private $productModel;
     private $productDiscountModel;
     private $categoryModel;
+    private $articleModel;
 
 
     public function __construct()
@@ -22,6 +24,7 @@ class HomeController extends Controller
         $this->productModel = new Product();
         $this->productDiscountModel = new ProductDiscount();
         $this->categoryModel = new Categories();
+        $this->articleModel = new Article();
     }
 
     public function index()
@@ -45,9 +48,11 @@ class HomeController extends Controller
         $categoryAll = $this->categoryModel->categoryTotal();
         $categoryChoose = $this->categoryModel->categoryChoose();
 
+        $articles = $this->articleModel->articleAll();
+
         session()->forget('buyNow');
         session()->forget('employeeAssembly');
-        return view('home', compact('productOutStanding',  'productDiscountSection',  'categories', 'productBestseller', 'productByCategory', 'user', 'productSoldOut', 'categoryAll', 'categoryChoose'));
+        return view('home', compact('productOutStanding',  'productDiscountSection',  'categories', 'productBestseller', 'productByCategory', 'user', 'productSoldOut', 'categoryAll', 'categoryChoose', 'articles'));
     }
 
     public function search(Request $request)

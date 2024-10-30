@@ -5,9 +5,7 @@
     <div class="container-fluid">
 
         <div class="d-flex justify-content-between align-items-center  my-3">
-            <h2 class="title-page ">
-                Chỉnh sửa đơn hàng
-            </h2>
+            <div class=""></div>
             <a class="text-decoration-none text-light bg-31629e py-2 px-2" href="{{ route('admin.order') }}">Quay lại</a>
         </div>
 
@@ -15,7 +13,11 @@
             enctype="multipart/form-data">
             @csrf
             <div class="buttonProductForm">
-                <div class=""></div>
+                <div class="">
+                    <h2 class="title-page ">
+                        Chỉnh sửa đơn hàng
+                    </h2>
+                </div>
                 <div class="">
                     <button type="submit" class="btnFormAdd">
                         <p class="text m-0 p-0">Lưu</p>
@@ -128,7 +130,6 @@
                                             @endforeach
                                         </select>
                                     </div>
-
                                 </td>
                                 <td colspan="1"></td>
                                 <td colspan="2" class="m-0 p-0">

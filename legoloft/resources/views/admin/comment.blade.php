@@ -5,41 +5,45 @@
      <div class="container-fluid">
 
          <div class="searchAdmin">
-             <form id="filterFormComment" action="" method="">
+             <form id="filterFormComment"action="{{ route('searchComment') }}" method="POST">
+                 @csrf
                  <div class="row d-flex flex-row justify-content-between align-items-center">
-                     <div class="col-sm-3">
+                     <div class="col-md-4">
                          <div class="form-group mt-3">
-                             <label for="title" class="form-label">Lọc bình luận theo sản phẩm</label>
-                             <select class="form-select  rounded-0" aria-label="Default select example" name="filter_idsp">
+                             <label for="title" class="form-label">Lọc bình luận theo số sao</label>
+                             <select class="form-select  rounded-0" aria-label="Default select example" name="filter_rating">
                                  <option value="">Tất cả</option>
-                                 <option value="">
-                                 </option>
+                                 <option value="5"> 5 sao</option>
+                                 <option value="4"> 4 sao</option>
+                                 <option value="3"> 3 sao</option>
+                                 <option value="2"> 2 sao</option>
+                                 <option value="1"> 1 sao</option>
+
                              </select>
                          </div>
                      </div>
-                     <div class="col-sm-3">
+                     <div class="col-md-4">
                          <div class="form-group mt-3">
-                             <label for="title" class="form-label">Lọc người bình luận</label>
-                             <input class="form-control rounded-0" name="filter_userName" placeholder="Nhập người bình luận"
-                                 type="text" value="">
+                             <label for="title" class="form-label">Lọc sản phẩm</label>
+                             <select class="form-select  rounded-0" aria-label="Default select example" name="filter_name">
+                                 <option value="">Tất cả</option>
+                                 @foreach ($products as $item)
+                                     <option value="{{ $item->id }}" {{ $item->id == $filter_name ? 'selected' : '' }}>
+                                         {{ $item->name }}
+                                     </option>
+                                 @endforeach
+                             </select>
                          </div>
                      </div>
-                     <div class="col-sm-3">
-                         <div class="form-group mt-3">
-                             <label for="title" class="form-label">Lọc nội dung bình luận</label>
-                             <input class="form-control rounded-0" name="filter_content" placeholder="Nhập nội dung "
-                                 type="text" value="">
-                         </div>
-                     </div>
-                     <div class="col-sm-3">
+                     <div class="col-md-4">
                          <div class="form-group mt-3">
                              <label for="title" class="form-label">Trạng thái</label>
                              <select class="form-select  rounded-0" aria-label="Default select example"
                                  name="filter_status">
                                  <option value="">Tất cả</option>
-                                 <option value="1">Kích hoạt
+                                 <option value="1">Bật
                                  </option>
-                                 <option value="0">Vô hiệu hóa
+                                 <option value="0">Tắt
                                  </option>
                              </select>
                          </div>
@@ -55,11 +59,7 @@
          <form id="submitFormAdmin">
              <div class="buttonProductForm mt-3">
                  <div class=""></div>
-
-                 <div class=""> <button class="btn btnF2" type="button" onclick=""><i
-                             class="pe-2 fa-solid fa-trash" style="color: #ffffff;"></i>Xóa nhiều
-                         bình luận</button></div>
-
+                 <div class=""> </div>
              </div>
 
              <div class="border p-2 mt-3">
@@ -67,47 +67,40 @@
                  <table class="table table-bordered  pt-3">
                      <thead class="table-header">
                          <tr class="">
-                             <th class=" py-2"></th>
                              <th class=" py-2">Người bình luận</th>
                              <th class=" py-2">Sản phẩm</th>
+                             <th class=" py-2">Rating</th>
                              <th class=" py-2">Nội dung</th>
                              <th class=" py-2">Trạng thái</th>
-                             <th class=" py-2">Hành động</th>
                          </tr>
                      </thead>
 
                      <tbody class="table-body">
-                         <tr class="">
-                             <td>
-                                 <input class="" type="checkbox" name="comment_id[]" value="">
-                                 <p class=""></p>
-                             </td>
-                             <td class="nameAdmin">
-                                 <p></p>
-                             </td>
-                             <td class=""></td>
-                             <td class=""></td>
-                             <td class="">
-                                 <div class="form-check form-switch">
-                                     <input class="form-check-input" type="checkbox" role="switch" data-id=""
-                                         id="flexSwitchCheckChecked">
-                                     <label class="form-check-label" for="flexSwitchCheckChecked">Bật</label>
-                                 </div>
-                             </td>
-
-                             <td class="m-0 p-0">
-                                 <div class="actionAdminProduct">
-                                     <div class="buttonProductForm m-0 py-3">
-                                         <button class="btn btnF2"><a href=""
-                                                 class="text-decoration-none text-light "><i class="pe-2 fa-solid fa-trash"
-                                                     style="color: #ffffff;"></i>Xóa bình
-                                                 luận</a></button>
+                         @foreach ($comments as $item)
+                             <tr class="">
+                                 <td class="">{{ $item->user->name }}</td>
+                                 <td>{{ $item->rating }}<i class="fa-solid fa-star ps-1" style="color: #FFD43B;"></i></td>
+                                 <td class="nameAdmin">
+                                     <p>{{ $item->product->name }}</p>
+                                 </td>
+                                 <td class="">{{ $item->content }}</td>
+                                 <td class="">
+                                     <div class="form-check form-switch">
+                                         <input class="form-check-input" type="checkbox" role="switch"
+                                             data-id="{{ $item->id }}" id="flexSwitchCheckChecked"
+                                             {{ $item->status == 1 ? 'checked' : 0 }}>
+                                         <label class="form-check-label"
+                                             for="flexSwitchCheckChecked">{{ $item->status == 1 ? 'Bật' : 'Tắt' }}</label>
                                      </div>
-                                 </div>
-                             </td>
-                         </tr>
+                                 </td>
+                             </tr>
+                         @endforeach
+
                      </tbody>
                  </table>
+                 <nav class="navPhanTrang">
+                     {{ $comments->links() }}
+                 </nav>
              </div>
          </form>
 
@@ -115,62 +108,62 @@
 
 
  @endsection
- {{--
-@section('scriptComment')
-    <script>
-        $(document).ready(function() {
-            $('.form-check-input').on('click', function() {
-                // (this) tham chiếu đến phần tử html đó
-                var comment_id = $(this).data(
-                    'id'); //lấy ra id danh mục thông qua data-id="item->id"
-                var status = $(this).is(':checked') ? 1 : 0; //is() trả về true nếu phần tử khớp với bộ chọn
-                var label = $(this).siblings('label'); // Lấy label liền kề
-                updateCommentStatus(comment_id, status, label);
-            });
 
-        })
+ @section('commentAdminScript')
+     <script>
+         $(document).ready(function() {
+             $('.form-check-input').on('click', function() {
+                 // (this) tham chiếu đến phần tử html đó
+                 var comment_id = $(this).data(
+                     'id'); //lấy ra id danh mục thông qua data-id="item->id"
+                 var status = $(this).is(':checked') ? 1 : 0; //is() trả về true nếu phần tử khớp với bộ chọn
+                 var label = $(this).siblings('label'); // Lấy label liền kề
+                 updateCommentStatus(comment_id, status, label);
+             });
 
-        function updateCommentStatus(comment_id, status, label) {
-            $.ajax({
-                url: '{{ route('commentUpdateStatus', ':id') }}'.replace(':id', comment_id),
-                type: 'PUT',
-                data: {
-                    '_token': '{{ csrf_token() }}', //Việc gửi mã token này cùng với mỗi request giúp xác thực rằng request đó được gửi từ ứng dụng của bạn, chứ không phải từ một nguồn khác.
-                    'status': status
-                },
-                success: function(response) {
-                    console.log('Cập nhật trạng thái thành công');
+         })
 
-                    if (status == 1) {
-                        label.text('Bật');
-                    } else {
-                        label.text('Tắt');
-                    }
-                },
-                error: function(xhr, status, error) {
-                    console.error('Lỗi khi cập nhật trạng thái sản phẩm: ' + error);
-                }
-            })
-        }
-    </script>
+         function updateCommentStatus(comment_id, status, label) {
+             $.ajax({
+                 url: '{{ route('commentUpdateStatus', ':id') }}'.replace(':id', comment_id),
+                 type: 'PUT',
+                 data: {
+                     '_token': '{{ csrf_token() }}', //Việc gửi mã token này cùng với mỗi request giúp xác thực rằng request đó được gửi từ ứng dụng của bạn, chứ không phải từ một nguồn khác.
+                     'status': status
+                 },
+                 success: function(response) {
+                     console.log('Cập nhật trạng thái thành công');
 
-    <script>
-        $(document).ready(function() {
-            $('#filterFormComment').on('submit', function() {
-                var formData = $(this).serialize();
+                     if (status == 1) {
+                         label.text('Bật');
+                     } else {
+                         label.text('Tắt');
+                     }
+                 },
+                 error: function(xhr, status, error) {
+                     console.error('Lỗi khi cập nhật trạng thái bình luận: ' + error);
+                 }
+             })
+         }
+     </script>
 
-                $.ajax({
-                    url: '{{ route('searchComment') }}',
-                    type: 'GET',
-                    data: formData,
-                    success: function(response) {
-                        $('.table-body').html(response.html);
-                    },
-                    error: function(error) {
-                        console.error('Lỗi khi lọc' + error);
-                    }
-                })
-            })
-        })
-    </script>
-@endsection  --}}
+     <script>
+         $(document).ready(function() {
+             $('#filterFormComment').on('submit', function() {
+                 var formData = $(this).serialize();
+
+                 $.ajax({
+                     url: '{{ route('searchComment') }}',
+                     type: 'POST',
+                     data: formData,
+                     success: function(response) {
+                         $('.table-body').html(response.html);
+                     },
+                     error: function(error) {
+                         console.error('Lỗi khi lọc' + error);
+                     }
+                 })
+             })
+         })
+     </script>
+ @endsection

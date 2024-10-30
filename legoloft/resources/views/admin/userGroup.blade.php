@@ -1,27 +1,42 @@
 @extends('admin.layout.layout')
-@Section('title', 'Admin | Nhóm khách hàng')
-@Section('content')
-    {{--
+@section('title', 'Admin | Nhóm khách hàng')
+@section('content')
+
     <div class="container-fluid">
 
-        <div id="alert-message" class="alertDanger"></div>
-        <div class="d-flex justify-content-between  align-items-center">
-            <form action="" method="GET">
-                <input class="inputSearch_Admin" name="search" placeholder="Nhập từ khóa tìm kiếm" type="search">
-                <button type="submit" class="btn-coupon">Tìm kiếm</button>
-            </form>
 
-        </div>
-        <form id="submitFormAdmin" method="">
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+
+
+        <form id="submitFormAdmin" action="{{ route('userGroupCheckboxDelete') }}" method="POST">
+            @csrf
             <div class="buttonProductForm">
-                <button class="btn btnF1">
-                    <a href="" class="text-decoration-none text-light"><i class="pe-2 fa-solid fa-plus"
-                            style="color: #ffffff;"></i>Tạo Nhóm khách hàng</a>
-                </button>
-
-                <button class="btn btnF2" type="button" onclick=""><i class="pe-2 fa-solid fa-trash"
-                        style="color: #ffffff;"></i>Xóa
-                </button>
+                <div class="m-0 p-0">
+                    @if (session('error'))
+                        <div id="alert-message" class="alertDanger">{{ session('error') }}</div>
+                    @endif
+                    @if (session('success'))
+                        <div id="alert-message" class="alertSuccess">{{ session('success') }}</div>
+                    @endif
+                </div>
+                <div class="m-0 p-0">
+                    <a href="{{ route('userGroupAdd') }}" class="btn btnF1 text-decoration-none text-light">
+                        <i class="pe-2 fa-solid fa-plus" style="color: #ffffff;"></i> Tạo Nhóm khách hàng
+                    </a>
+                    <button class="btn btnF2" type="submit">
+                        <i class="pe-2 fa-solid fa-trash" style="color: #ffffff;"></i>Xóa
+                    </button>
+                </div>
 
             </div>
 
@@ -30,28 +45,33 @@
                 <table class="table table-bordered pt-3">
                     <thead class="table-header">
                         <tr>
-                            <th class=" py-2"></th>
-                            <th class=" py-2">Tên Nhóm khách hàng</th>
-                            <th class=" py-2">Hành động</th>
+                            <th class="py-2"><input type="checkbox" id="selectAll"></th>
+                            <th class="py-2">Tên Nhóm khách hàng</th>
+                            <th class="py-2">Hành động</th>
                         </tr>
                     </thead>
-                    <tbody class="">
-                        <tr class="">
-                            <td>
-                                <input type="checkbox" name="userGroup_id[]" id="" value="">
-                            </td>
-                            <td class="nameAdmin">
-                                <p></p>
-                            </td>
-                            <td class="m-0 p-0">
-                                <div class="actionAdminProduct m-0 py-3">
-                                    <button class="btnActionProductAdmin2"><a href=""
-                                            class="text-decoration-none text-light"><i class="pe-2 fa-solid fa-pen"
-                                                style="color: #ffffff;"></i>Sửa
-                                            nhóm khách hàng</a></button>
-                                </div>
-                            </td>
-                        </tr>
+                    <tbody>
+                        @foreach ($userGroups as $group)
+                            <tr>
+                                <td class="text-center">
+                                    <input type="checkbox" name="userGroup_id[]" value="{{ $group->id }}">
+                                </td>
+                                <td class="nameAdmin">
+                                    <p>{{ $group->name }}</p>
+                                </td>
+                                <td class="m-0 p-0">
+                                    <div class="actionAdminProduct m-0 py-3">
+                                        <button class="btnActionProductAdmin2">
+                                            <a href="{{ route('userGroupEdit', $group->id) }}"
+                                                class="btn btnF1 text-decoration-none text-light">
+                                                <i class="pe-2 fa-solid fa-pencil-alt" style="color: #ffffff;"></i> Sửa nhóm
+                                                khách hàng
+                                            </a>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -62,6 +82,15 @@
                 <li></li>
             </ul>
         </nav>
-    </div> --}}
+    </div>
+
+    <script>
+        document.getElementById('selectAll').onclick = function() {
+            let checkboxes = document.querySelectorAll('input[name="userGroup_id[]"]');
+            for (let checkbox of checkboxes) {
+                checkbox.checked = this.checked;
+            }
+        };
+    </script>
 
 @endsection

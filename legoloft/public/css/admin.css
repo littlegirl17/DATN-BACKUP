@@ -608,6 +608,12 @@ table tbody tr:nth-child(even) {
     text-align: center;
 }
 
+.employyeeNameRed {
+    color: #ff0000;
+    font-weight: 600;
+    text-align: center;
+}
+
 .actionAdminProduct .btnActionProductAdmin1 {
 
     padding: 10px 10px;
@@ -1041,7 +1047,7 @@ table tbody tr:nth-child(even) {
 .form_admin {
     margin: 0 auto;
     width: 400px;
-    padding-top: 150px;
+    padding-top: 80px;
 }
 
 .form_admin_content {
@@ -1328,4 +1334,364 @@ table tbody tr:nth-child(even) {
 .total-order div {
     padding: 10px 20px;
 
+}
+
+/**/
+.dash_row {}
+
+
+.dash_product, .dash_article, .dash_user, .dash_admin {
+    padding: 10px 10px 10px 10px;
+}
+
+
+.dash_product {
+    border: 3px solid #00ffff26;
+    border-radius: 5px;
+    text-align: center;
+
+    background-color: #faf7f7;
+}
+
+.dash_product_header {
+    padding: 5px 15px 10px 15px;
+    background-color: #04f7f7;
+    color: #037e7e;
+    font-weight: 500;
+    width: 100%;
+
+}
+
+.dash_product_main {
+    display: flex;
+}
+
+.dash_product_content {
+    background-color: #fff;
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dash_product_content span {}
+
+.dash_product_content p {
+    margin: 0 0;
+    background-color: #04f7f7;
+    color: #fff;
+    font-weight: 500;
+    width: 50px;
+    padding: 12px 3px;
+    margin: 5px 0;
+    border-radius: 8px;
+}
+
+.dash_product_content a {
+    color: #037e7e;
+    font-size: 0.8rem
+}
+
+.dash_product_content a:hover {
+    color: #037e7e;
+}
+
+/**/
+.dash_article {
+    border: 3px solid #f4050517;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #faf7f7;
+}
+
+.dash_article_header {
+    padding: 5px 15px 10px 15px;
+    background-color: #f40505;
+    color: #fff;
+    font-weight: 500;
+    width: 100%;
+
+}
+
+.dash_article_main {
+    display: flex;
+}
+
+.dash_article_content {
+    background-color: #fff;
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dash_article_content span {}
+
+.dash_article_content p {
+    margin: 0 0;
+    background-color: #f40505;
+    color: #fff;
+    font-weight: 500;
+    width: 50px;
+    padding: 12px 3px;
+    margin: 5px 0;
+    border-radius: 8px;
+}
+
+.dash_article_content a {
+    color: #f40505;
+    font-size: 0.8rem
+}
+
+.dash_article_content a:hover {
+    color: #f40505;
+}
+
+/**/
+.dash_user {
+    border: 3px solid #007acc47;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #faf7f7;
+}
+
+.dash_user_header {
+    padding: 5px 15px 10px 15px;
+    background-color: #007ACC;
+    color: #fff;
+    font-weight: 500;
+    width: 100%;
+
+}
+
+.dash_user_main {
+    display: flex;
+}
+
+.dash_user_content {
+    background-color: #fff;
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dash_user_content span {}
+
+.dash_user_content p {
+    margin: 0 0;
+    background-color: #007ACC;
+    color: #fff;
+    font-weight: 500;
+    width: 50px;
+    padding: 12px 3px;
+    margin: 5px 0;
+    border-radius: 8px;
+}
+
+.dash_user_content a {
+    color: #007ACC;
+    font-size: 0.8rem
+}
+
+.dash_user_content a:hover {
+    color: #007ACC;
+}
+
+/**/
+.dash_admin {
+    border: 3px solid #fbc00033;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #faf7f7;
+}
+
+.dash_admin_header {
+    padding: 5px 15px 10px 15px;
+    background-color: #fbc000;
+    color: #fff;
+    font-weight: 500;
+    width: 100%;
+
+}
+
+.dash_admin_main {
+    display: flex;
+}
+
+.dash_admin_content {
+    background-color: #fff;
+    width: 100%;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dash_admin_content span {}
+
+.dash_admin_content p {
+    margin: 0 0;
+    background-color: #fbc000;
+    color: #fff;
+    font-weight: 500;
+    width: 50px;
+    padding: 12px 3px;
+    margin: 5px 0;
+    border-radius: 8px;
+}
+
+.dash_admin_content a {
+    color: #fbc000;
+    font-size: 0.8rem
+}
+
+.dash_admin_content a:hover {
+    color: #fbc000;
+}
+
+/**/
+/* From Uiverse.io by bimbx */
+/* Hide the default checkbox */
+.containerSlug input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.containerSlug {
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+    cursor: pointer;
+    font-size: 13px;
+    user-select: none;
+}
+
+/* Create a custom checkbox */
+.checkmarkSlug {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 1.3em;
+    width: 1.3em;
+    background: #c6c6c6;
+    border-radius: 5px;
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.30), 0px 1px 1px rgba(0, 5);
+}
+
+/* When the checkbox is checked, add a blue background */
+.containerSlug input:checked~.checkmarkSlug {
+    background-image: linear-gradient(#00d500, #00d500)
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmarkSlug:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.containerSlug input:checked~.checkmarkSlug:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.containerSlug .checkmarkSlug:after {
+    left: 0.45em;
+    top: 0.25em;
+    width: 0.25em;
+    height: 0.5em;
+    border: solid white;
+    border-width: 0 0.15em 0.15em 0;
+    transform: rotate(45deg);
+}
+
+/**/
+.bg_favourite_dash {
+    background-color: #cfdfea6e;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.dashFavorite10_main ul {
+    display: flex;
+    justify-content: center;
+    gap: 0 1.25rem;
+    padding: 1.5rem 0;
+    flex-wrap: wrap;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+
+}
+
+.dashFavorite10_main ul li {
+    list-style: none;
+    max-width: 7.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dashFavorite10_img {
+    width: 100px;
+    height: 100px;
+}
+
+.dashFavorite10_img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.dashFavorite10_content span {
+    display: -webkit-box;
+    /* Sử dụng box model */
+    -webkit-box-orient: vertical;
+    /* Định hướng theo chiều dọc */
+    -webkit-line-clamp: 2;
+    /* Giới hạn số dòng hiển thị */
+    overflow: hidden;
+    /* Ẩn phần văn bản vượt quá */
+    padding: 0.3125rem 0px;
+    font-size: 0.775rem;
+    line-height: 1.5875rem;
+    color: #393939;
+}
+
+/**/
+.login_forgetpw {
+    padding-top: 5px;
+}
+
+.login_forgetpw a {
+    text-decoration: none;
+    color: #8e8c8c;
+    font-size: 0.8rem;
+}
+
+/**/
+.ExpireCoupon {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.stillValidCoupon {
+    background-color: #00d500;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }

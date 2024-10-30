@@ -10,6 +10,7 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'name',
         'slug',
         'description',
@@ -48,13 +49,46 @@ class Product extends Model
 
     public function productAll()
     {
-        return $this->orderBy('id', 'desc')->paginate(10); // Phân trang với 10 sản phẩm mỗi trang
+        return $this->orderBy('id', 'desc')->paginate(8); // Phân trang với 10 sản phẩm mỗi trang
     }
 
-
-    public function productByCategory($category_id)
+    public function productFavouriteAll()
     {
-        return $this->where('category_id', $category_id)->orderBy('id', 'desc')->paginate(9);
+        return $this->orderBy('id', 'desc')->get();
+    }
+
+    public function productByCategory($category_id, $filter_sort = 'default', $price_range)
+    {
+        $query = $this->where('category_id', $category_id);
+
+        if (!empty($price_range)) {
+            $query->where(function ($q) use ($price_range) { // where thêm điều kiện lọc, use ($priceRanges) cho phép hàm where truy cập đến biến $priceRanges bên ngoài phạm vi của nó, $q là biến đại diện cho truy vấn hiện tại
+                foreach ($price_range as $range) { //Vòng lặp foreach này sẽ duyệt qua từng khoảng giá (ví dụ: "0-100000", "100000-200000",...) trong mảng $priceRanges.
+                    [$min, $max] = explode('-', $range); // explode('-', $range) tách chuỗi khoảng giá (ví dụ: "0-100000") thành hai phần là giá trị nhỏ nhất (min) và giá trị lớn nhất (max) => Sau đó, hai giá trị này được lưu vào biến $min và $max
+                    $q->orWhereBetween('price', [$min, $max]); //orWhereBetween('price', [$min, $max]) thêm điều kiện lọc cho truy vấn, để tìm các sản phẩm có giá (price) nằm giữa khoảng giá từ $min đến $max.
+                }
+            });
+        }
+        // xử lí chọn lọc
+        switch ($filter_sort) {
+            case 'filter_az':
+                $query->orderBy('name', 'asc');
+                break;
+            case 'filter_za':
+                $query->orderBy('name', 'desc');
+                break;
+            case 'filter_asc':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'filter_desc':
+                $query->orderBy('price', 'desc');
+                break;
+            default:
+                $query->orderBy('id', 'desc');
+                break;
+        }
+
+        return $query->paginate(9);
     }
 
     public function searchProduct($filter_iddm, $filter_name, $filter_price, $filter_status)
@@ -108,5 +142,15 @@ class Product extends Model
     public function searchProductHome($name)
     {
         return $this->where('name', 'LIKE', "%{$name}%")->where('status', 1)->orderBy('id', 'desc')->paginate(12);
+    }
+
+    public function countProduct($category_id)
+    {
+        return $this->where('category_id', $category_id)->count();
+    }
+
+    public function countProductAll()
+    {
+        return $this->count();
     }
 }

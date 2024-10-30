@@ -86,4 +86,9 @@ class User extends Authenticatable
 
         return $query->paginate(10);
     }
+
+    public function countUserAll()
+    {
+        return $this->count();
+    }
 }

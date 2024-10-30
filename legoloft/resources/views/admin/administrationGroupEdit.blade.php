@@ -5,9 +5,7 @@
      <div class="container-fluid">
 
          <div class="d-flex justify-content-between my-3">
-             <h3 class="title-page ">
-                 Chỉnh sửa nhóm người dùng
-             </h3>
+             <div class=""></div>
              <div>
                  <a class="text-decoration-none text-light bg-return py-2 px-2" href="">Quay lại</a>
              </div>
@@ -19,7 +17,11 @@
              @csrf
              @method('PUT')
              <div class="buttonProductForm">
-                 <div class=""></div>
+                 <div class="">
+                     <h3 class="title-page ">
+                         Chỉnh sửa nhóm người dùng
+                     </h3>
+                 </div>
                  <div class="">
                      <button type="submit" class="btnFormAdd">
                          <p class="text m-0 p-0">Lưu</p>
@@ -30,6 +32,9 @@
              <div class="form-group mt-3">
                  <label for="title" class="form-label">Tên nhóm người dùng</label>
                  <input type="text" class="form-control" name="name" value="{{ $administrationGroup->name }}">
+                 @error('name')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
 
              <div class="row">
@@ -103,7 +108,8 @@
                              <label class="checkbox-btnGroup">
                                  <label for="checkbox"></label>
                                  <input type="checkbox" class="" name="permission[]" value="administration"
-                                     id="" {{ in_array('administration', $permissionGroupGet) ? 'checked' : '' }}>
+                                     id=""
+                                     {{ in_array('administration', $permissionGroupGet) ? 'checked' : '' }}>
                                  <span class="checkmark"></span>
                              </label>
                              <p>Administration</p>
@@ -155,16 +161,29 @@
                              </label>
                              <p> Assembly(Lắp ráp Lego)</p>
                          </div>
+
                          <div class="d-flex">
                              <label class="checkbox-btnGroup">
                                  <label for="checkbox"></label>
-                                 <input type="checkbox" class="" name="permission[]" value="employee"
-                                     id="" {{ in_array('employee', $permissionGroupGet) ? 'checked' : '' }}>
+                                 <input type="checkbox" class="" name="permission[]" value="favourite"
+                                     id="" {{ in_array('favourite', $permissionGroupGet) ? 'checked' : '' }}>
                                  <span class="checkmark"></span>
                              </label>
-                             <p> Employee(Nhân viên)</p>
+                             <p> Favourite(Sản phẩm yêu thích)</p>
+                         </div>
+                         <div class="d-flex">
+                             <label class="checkbox-btnGroup">
+                                 <label for="checkbox"></label>
+                                 <input type="checkbox" class="" name="permission[]" value="contact"
+                                     id="" {{ in_array('contact', $permissionGroupGet) ? 'checked' : '' }}>
+                                 <span class="checkmark"></span>
+                             </label>
+                             <p> Contact(Liên hệ)</p>
                          </div>
                      </div>
+                     @error('permission')
+                         <div class="text-danger" id="alert-message">{{ $message }}</div>
+                     @enderror
                  </div>
                  <div class="col-md-6">
                      <div class="form-group mt-3">

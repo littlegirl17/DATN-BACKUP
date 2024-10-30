@@ -16,11 +16,22 @@ class CategoryArticle extends Model
         'description',
         'status'
     ];
-    public function articles() {
+    public function articles()
+    {
         return $this->hasMany(Article::class, 'categoryArticle_id');
     }
     public function categoryArticle()
-{
-    return $this->belongsTo(CategoryArticle::class, 'categoryArticle_id');
-}
+    {
+        return $this->belongsTo(CategoryArticle::class, 'categoryArticle_id');
+    }
+
+    public function categoryArticleAll()
+    {
+        return $this->orderBy('id', 'desc')->get();
+    }
+
+    public function countCategoryArticleAll()
+    {
+        return $this->count();
+    }
 }

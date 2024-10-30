@@ -7,6 +7,10 @@ use App\Models\Administration;
 use App\Models\AdministrationGroup;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\AdministrationEditRequest;
+use App\Http\Requests\admin\AdministrationGroupEditRequest;
+use App\Http\Requests\admin\AdministrationGroupRequest;
+use App\Http\Requests\admin\AdministrationRequest;
 
 class AdminstrationController extends Controller
 {
@@ -35,22 +39,14 @@ class AdminstrationController extends Controller
 
         return view('admin.administration', compact('administration', 'administrationGroup'));
     }
-    public function adminstrationAdd(Request $request)
+    public function adminstrationAdd(AdministrationRequest $request)
     {
         $response = $this->adminstrationGroupCrud();
         if ($response) {
             return $response;
         }
         if ($request->isMethod('post')) {
-            $request->validate([
-                'fullname' => 'required | string | max:255',
-                'username' => 'required | string | unique:administrations,username',
-                'admin_group_id' => 'required | exists:administration_groups,id',
-                'email' => 'required | email | unique:administrations,email',
-                'password' => 'required | confirmed',
-                'image' => 'nullable',
-                'status' => 'required | in:0,1',
-            ]);
+
             $administration = $this->administrationModel;
             $administration->fullname = $request->fullname;
             $administration->username = $request->username;
@@ -84,17 +80,9 @@ class AdminstrationController extends Controller
         return view('admin.administrationEdit', compact('administration', 'administrationGroup'));
     }
 
-    public function adminstrationUpdate(Request $request, $id)
+    public function adminstrationUpdate(AdministrationEditRequest $request, $id)
     {
-        $request->validate([
-            'fullname' => 'required|string|max:255',
-            'username' => 'required|string|unique:administrations,username,' . $id,
-            'admin_group_id' => 'required|exists:administration_groups,id',
-            'email' => 'required|email|unique:administrations,email,' . $id,
-            'password' => 'nullable|confirmed',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:0,1',
-        ]);
+
         $administration = $this->administrationModel->findOrFail($id);
         $administration->fullname = $request->fullname;
         $administration->username = $request->username;
@@ -151,27 +139,18 @@ class AdminstrationController extends Controller
         return view('admin.administrationGroup', compact('administrationGroup'));
     }
 
-    public function adminstrationGroupAdd(Request $request)
+    public function adminstrationGroupAdd(AdministrationGroupRequest $request)
     {
         $response = $this->adminstrationGroupCrud();
         if ($response) {
             return $response;
         }
         if ($request->isMethod('post')) {
-            $request->validate([
-                'name' => 'required | string',
-                'permission' => 'required',
-            ]);
-
-            try {
-                $adminstrationGroup = $this->administrationGroupModel;
-                $adminstrationGroup->name  = $request->name;
-                $adminstrationGroup->permission  = json_encode($request->permission); // chuyển array thành string
-                $adminstrationGroup->save();
-                return redirect()->route('adminstrationGroup')->with('success', 'Thêm nhóm người dùng thành công.');
-            } catch (\Throwable $th) {
-                return back()->withErrors(['error' => 'Có lỗi xảy ra, vui lòng thử lại.']);
-            }
+            $adminstrationGroup = $this->administrationGroupModel;
+            $adminstrationGroup->name  = $request->name;
+            $adminstrationGroup->permission  = json_encode($request->permission); // chuyển array thành string
+            $adminstrationGroup->save();
+            return redirect()->route('adminstrationGroup')->with('success', 'Thêm nhóm người dùng thành công.');
         }
         return view('admin.administrationGroupAdd');
     }
@@ -188,7 +167,7 @@ class AdminstrationController extends Controller
 
     }
 
-    public function adminstrationGroupUpdate(Request $request, $id)
+    public function adminstrationGroupUpdate(AdministrationGroupEditRequest $request, $id)
     {
         $administrationGroup = $this->administrationGroupModel->findOrFail($id);
         $administrationGroup->name = $request->name;

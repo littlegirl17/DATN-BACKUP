@@ -11,17 +11,16 @@
             <a class="text-decoration-none text-light bg-31629e py-2 px-2" href="">Quay lại</a>
         </div>
 
-        <form action="{{ route('admin.userGroupUpdate', $userGroup->id) }}" method="post" class="formAdmin"
+        <form action="{{ route('updateUserGroup', $userGroup->id) }}" method="post" class="formAdmin"
             enctype="multipart/form-data">
+            @csrf
             <div class="buttonProductForm ">
-                <button class="btn btnF3">
-                    Lưu
-                </button>
+                <button type="submit" class="btn btnF3">Lưu</button>
             </div>
 
             <div class="form-group mt-3">
                 <label for="title" class="form-label">Tên nhóm khách hàng</label>
-                <input type="text" class="form-control" name="name" value="">
+                <input type="text" class="form-control" name="name" value="{{ $userGroup->name }}">
             </div>
         </form>
     </div>

@@ -42,7 +42,7 @@ class CheckoutController extends Controller
             // Lưu vào COOKIE - KHÔNG CẦN LOGIN
             $cart = json_decode(request()->cookie('cart'), true) ?? [];
         }
-        if (count($cart) == 0 && empty(session()->get('buyNow')) && empty(session()->get('employeeAssembly'))) {
+        if (count($cart) == 0 && empty(session()->get('buyNow')) && empty(session()->get('assemblyPackage'))) {
             return redirect()->route('cart');
         }
         return view('checkout', compact('cart', 'products'));
@@ -106,7 +106,7 @@ class CheckoutController extends Controller
 
 
         $buyNow = session()->get('buyNow', []);
-        $employeeAssembly = session()->get('employeeAssembly', []);
+        $assemblyPackage = session()->get('assemblyPackage', []);
         if ($buyNow) {
             $price = $buyNow['priceDiscount'] ? $buyNow['priceDiscount'] : $buyNow['price'];
             $intoMoney = $price * $buyNow['quantity'];
@@ -119,24 +119,26 @@ class CheckoutController extends Controller
             $orderProduct->price = $price;
             $orderProduct->total = $intoMoney;
             $orderProduct->save();
-        } elseif ($employeeAssembly) {
-            $price = $employeeAssembly['priceDiscount'] ? $employeeAssembly['priceDiscount'] : $employeeAssembly['price'];
-            $intoMoney = $price * $employeeAssembly['quantity'];
+        } elseif ($assemblyPackage) {
+            $price = $assemblyPackage['priceDiscount'] ? $assemblyPackage['priceDiscount'] : $assemblyPackage['price'];
+            $intoMoney = $price * $assemblyPackage['quantity'];
             $orderProduct = new OrderProduct();
             $orderProduct->order_id = $order->id;
-            $orderProduct->product_id = $employeeAssembly['product_id'];
-            $orderProduct->quantity = $employeeAssembly['quantity'];
-            $orderProduct->name = $employeeAssembly['name'];
+            $orderProduct->product_id = $assemblyPackage['product_id'];
+            $orderProduct->quantity = $assemblyPackage['quantity'];
+            $orderProduct->name = $assemblyPackage['name'];
             $orderProduct->price = $price;
-            $orderProduct->total = $intoMoney + $employeeAssembly['fee'];
+            $orderProduct->total =  $assemblyPackage['totalFee'];
             $orderProduct->save();
 
             $assembly = new Assembly();
             $assembly->order_id = $order->id;
-            $assembly->user_id = Auth::user()->id;
-            $assembly->product_id = $employeeAssembly['product_id'];
-            $assembly->fee = $employeeAssembly['fee'];
-            $assembly->employee_id = $employeeAssembly['employee_id'];
+            $assembly->user_id =  Auth::check() ? Auth::user()->id : null;
+            $assembly->product_id = $assemblyPackage['product_id'];
+            $assembly->admin_id = $assemblyPackage['admin_id'] ?? null;
+            $assembly->assembly_package_id  = $assemblyPackage['assembly_package_id'];
+            $assembly->quantity  = $assemblyPackage['quantity'];
+
             $assembly->save();
         } else {
             $cart = [];
@@ -346,9 +348,11 @@ class CheckoutController extends Controller
         return redirect()->route('checkout');
     }
 
-    public function employeeBuy(Request $request)
+    public function assemblyPackage(Request $request)
     {
-        $employee_id = $request->input('employee_id');
+        $assembly_package_id = $request->input('assembly_package_id');
+        $price_assembly = $request->input('price_assembly');
+        $fee = $request->input('fee');
         $product_id = $request->input('product_id');
         $name = $request->input('name');
         $price = $request->input('price');
@@ -357,14 +361,18 @@ class CheckoutController extends Controller
         $quantity = $request->input('quantity');
 
         $totalFee =  $priceDiscount ?  $priceDiscount :  $price;
-        $fee = 0;
-        if ($employee_id) {
-            $fee = 50000;
-            $totalFee += $fee;
+        if ($assembly_package_id) {
+            if ($fee > 0) {
+                $totalFee += $price_assembly + $fee;
+            } else {
+                $totalFee += $price_assembly;
+            }
         }
 
-        $employeeArray = [
-            'employee_id' => $employee_id,
+        $assemblyPackageArray = [
+            'assembly_package_id' => $assembly_package_id,
+            'price_assembly' => $price_assembly,
+            'fee' => $fee,
             'product_id' => $product_id,
             'name' => $name,
             'image' => $image,
@@ -376,7 +384,7 @@ class CheckoutController extends Controller
 
         ];
 
-        session()->put('employeeAssembly', $employeeArray);
+        session()->put('assemblyPackage', $assemblyPackageArray);
         return redirect()->route('checkout');
     }
 }

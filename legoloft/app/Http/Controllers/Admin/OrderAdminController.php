@@ -46,9 +46,9 @@ class OrderAdminController extends Controller
         $statuses = $this->getOrderStatuses();
         $orderCounts = $this->getOrderCounts();
         // Lấy danh sách đơn hàng đã lọc
-        $order = $query->orderBy('id', 'desc')->get();
+        $orders = $query->orderBy('id', 'desc')->paginate(8);
 
-        return view('admin.order', compact('order', 'statuses', 'orderCounts'));
+        return view('admin.order', compact('orders', 'statuses', 'orderCounts'));
     }
 
     // Phương thức để lấy trạng thái đơn hàng

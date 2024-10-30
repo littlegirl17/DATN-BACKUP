@@ -29,7 +29,7 @@ class Administration extends Authenticatable
 
     public function administrationAll()
     {
-        return $this->orderBy('id', 'desc')->get();
+        return $this->orderBy('id', 'desc')->paginate(8);
     }
 
     public function searchAdministration($fillter_name, $filter_adminGroup)
@@ -48,6 +48,22 @@ class Administration extends Authenticatable
     public function administrationCheckLogin($username)
     {
         return $this->where('username', $username)->first();
+    }
+
+    public function administrationAssembly()
+    {
+        return $this->where('admin_group_id', '=', 20)->get();
+    }
+
+    public function countAdministrationAll()
+    {
+        return $this->count();
+    }
+
+
+    public function mailCheck($mail)
+    {
+        return $this->where('email', $mail)->first();
     }
     /*---------------------- CONNECT TABLE -----------------------------------*/
     public function administrationGroup()

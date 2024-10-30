@@ -41,7 +41,21 @@
                     if ($productDiscountPrice) {
                         $priceDiscount = $productDiscountPrice ? $productDiscountPrice->price : null;
                     }
+                    $percent = ceil((($detail->price - $priceDiscount) / $detail->price) * 100);
 
+                    $isFavourite = false; // Mặc định là false
+                    if (Auth::check()) {
+                        $isFavourite = $detail->favourite
+                            ->where('user_id', Auth::id())
+                            ->contains('product_id', $detail->id); //contains kiểm tra xem một tập hợp (collection) có chứa một giá trị cụ thể hay không.
+                    } else {
+                        $favourite = json_decode(Cookie::get('favourite', '[]'), true);
+                        // Lấy danh sách tất cả các product_id từ mảng $favourite
+                        $productIds = array_column($favourite, 'product_id'); //Lấy tất cả các product_id từ các mảng con trong $favourite và tạo ra một mảng chỉ chứa các product_id.
+
+                        // Kiểm tra xem $item->id có nằm trong danh sách product_id không
+                        $isFavourite = is_array($productIds) && in_array((string) $detail->id, $productIds); //Kiểm tra xem product_id của $item->id có nằm trong danh sách sản phẩm yêu thích hay không. Chúng ta ép kiểu item->id thành chuỗi để so sánh chính xác với product_id trong mảng (vì product_id trong cookie là chuỗi).
+                    }
                 @endphp
                 <div class="col-md-4 col-12">
                     <div class="detail_product_right">
@@ -50,6 +64,10 @@
                                 <span class="inStock">Còn hàng</span>
                             @else
                                 <span class="outStock">Hết hàng</span>
+                            @endif
+
+                            @if (isset($productDiscountPrice))
+                                <span class="outStock">Giảm giá {{ $percent }}%</span>
                             @endif
                         </div>
                         <div class="detail_product_right_two">
@@ -68,9 +86,15 @@
                                 <input type="number" class="right_four_item_number" id="inputQuantity" value="1" />
                                 <button class="right_four_item_increase" onclick="increaseQuantity()">+</button>
                             </div>
-                            {{-- <div class="detail_product_right_four_span">
-                            <span>Giới hạn 5</span>
-                        </div> --}}
+                            <div class="detail_product_right_four_span">
+                                <span>
+                                    <button onclick="addFavourite('{{ $detail->id }}')" class="outline-0 border-0"
+                                        style="background-color: transparent">
+                                        <i class="fa-solid fa-heart {{ $isFavourite ? 'red' : '' }} favouriteSize"
+                                            data-product-id="favourite-{{ $detail->id }}"></i>
+                                    </button>
+                                </span>
+                            </div>
                         </div>
                         <div class="detail_product_right_five">
                             <div class="right_five_bnt">
@@ -111,31 +135,66 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        <form action="{{ route('employeeBuy') }}" method="post" id="employeeForm">
+                                        <form action="{{ route('assemblyPackage') }}" method="post"
+                                            id="assemblyPackageForm">
                                             @csrf
                                             <div class="modal-body">
                                                 <div class="lego_assembly">
-                                                    <ul>
-                                                        @foreach ($employees as $item)
-                                                            <li>
-                                                                <input type="radio" id="employee-{{ $item->id }}"
-                                                                    name="employee" value="{{ $item->id }}" hidden>
-
-                                                                <label for="employee-{{ $item->id }}">
-                                                                    <div class="lego_assembly_img">
-                                                                        <img src="{{ asset('img/' . $item->image) }}"
-                                                                            alt="">
-                                                                    </div>
-                                                                    <span>{{ $item->fullname }}</span>
-                                                                </label>
-                                                            </li>
+                                                    @if (count($assemblyPackages) > 0)
+                                                        <ul>
+                                                            @foreach ($assemblyPackages as $item)
+                                                                <li class="span_assembly">
+                                                                    <input type="radio"
+                                                                        id="assemblyPackage-{{ $item->id }}"
+                                                                        name="assemblyPackage"
+                                                                        value="{{ $item->id }}" hidden>
+                                                                    <label for="assemblyPackage-{{ $item->id }}">
+                                                                        <div class="lego_assembly_img">
+                                                                            <img src="{{ asset('img/' . $item->image) }}"
+                                                                                alt="">
+                                                                        </div>
+                                                                        <span>{{ $item->name }}</span>
+                                                                    </label>
+                                                                    <input type="hidden"
+                                                                        id="assemblyPackageFee-{{ $item->id }}"
+                                                                        name="assemblyPackageFee"
+                                                                        value="{{ $item->fee }}">
+                                                                    <input type="hidden"
+                                                                        id="assemblyPackagePrice-{{ $item->id }}"
+                                                                        name="assemblyPackagePrice"
+                                                                        value="{{ $item->price_assembly }}">
+                                                            @endforeach
+                                                        </ul>
+                                                        @foreach ($assemblyPackages as $item)
+                                                            <div class="detail_assembly">
+                                                                <span
+                                                                    class="detail_assembly_name">{{ $item->name }}</span><br>
+                                                                <span class="">Phí công lắp:
+                                                                    <span
+                                                                        class="detail_assembly_price">{{ number_format($item->price_assembly, 0, ',', '.') . 'đ' }}</span>
+                                                                </span><br>
+                                                                @if ($item->fee > 0)
+                                                                    <span class="">Tiền gói hộp quà:
+                                                                        <span
+                                                                            class="detail_assembly_fee">{{ number_format($item->fee, 0, ',', '.') . 'đ' }}</span>
+                                                                    </span><br>
+                                                                @endif
+                                                                <span class="pt-1">Mô tả:</span><br>
+                                                                <span>{{ $item->description }}</span>
+                                                            </div>
                                                         @endforeach
-                                                    </ul>
+                                                    @else
+                                                        <p>Hiện chưa có gói nào để bạn book!</p>
+                                                    @endif
+
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
-
-                                                <input type="hidden" name="employee_id" id="selectedEmployeeId">
+                                                <input type="hidden" name="assembly_package_id"
+                                                    id="selectedAssemblyPackageId">
+                                                <input type="hidden" name="fee" id="selectedAssemblyPackageFee">
+                                                <input type="hidden" name="price_assembly"
+                                                    id="selectedAssemblyPackagePrice">
                                                 <input type="hidden" name="product_id" value="{{ $detail->id }}">
                                                 <input type="hidden" name="name" value="{{ $detail->name }}">
                                                 <input type="hidden" name="price" value="{{ $detail->price }}">
@@ -147,9 +206,11 @@
 
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Hủy</button>
-                                                <button type="submit" class="btn btn-primary">Tiếp tục</button>
+                                                <button type="submit" class="btn btn-primary"
+                                                    {{ count($assemblyPackages) > 0 ? '' : 'disabled' }}>Tiếp tục</button>
                                             </div>
                                         </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -279,7 +340,6 @@
                                                     <a class="star" data-rating="5" href="javascript:void(0);">5</a>
                                                 </span>
                                             </p>
-
                                             <input type="hidden" name="rating" id="rating" value="">
                                         </div>
                                         <div class="product_review_content">
@@ -323,6 +383,7 @@
 
                             $percent = ceil((($item->price - $priceDiscount) / $item->price) * 100);
                             $productImageCollect = $item->productImage->pluck('images'); // pluck lấy một tập hợp các giá trị của trường cụ thể
+                            $isFavourite = false;
                             if (Auth::check()) {
                                 $isFavourite = $item->favourite
                                     ->where('user_id', Auth::id())
@@ -350,7 +411,7 @@
                                         <button onclick="addFavourite('{{ $item->id }}')" class="outline-0 border-0"
                                             style="background-color: transparent">
                                             <i class="fa-solid fa-heart {{ $isFavourite ? 'red' : '' }}"
-                                                id="favourite-{{ $item->id }}"></i>
+                                                data-product-id="favourite-{{ $item->id }}"></i>
                                         </button>
                                         <button type="button" class="outline-0 border-0 "
                                             style="background-color: transparent"
@@ -395,6 +456,7 @@
                 <div id="modal_review_box_img"></div>
             </div>
         </div>
+
     </div>
 
 

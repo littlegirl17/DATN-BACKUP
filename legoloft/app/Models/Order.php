@@ -92,4 +92,5 @@ class Order extends Model
     // 'order_id': Là khóa ngoại trong bảng order_products, kết nối sản phẩm với đơn hàng.
 
 
+    public function reportOrder() {}
 }

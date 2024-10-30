@@ -2,21 +2,52 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Comment;
+use App\Models\Product;
+use App\Models\Favourite;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class CommentAdminController extends Controller
 {
+
+
+    private $productModel;
     private $commentModel;
 
     public function __construct()
     {
+        $this->productModel = new Product();
         $this->commentModel = new Comment();
     }
 
     public function comment()
     {
-        return view('admin.comment');
+        $comments =  $this->commentModel->commentAll();
+        $products = $this->productModel->productFavouriteAll();
+        $filter_name = '';
+        $filter_rating = '';
+        return view('admin.comment', compact('comments', 'products', 'filter_name', 'filter_rating'));
+    }
+
+    public function commentUpdateStatus(Request $request, $id)
+    {
+        $comment = $this->commentModel->findOrFail($id);
+        $comment->status = $request->status;
+        $comment->save();
+        return response()->json(['success' => true]);
+    }
+
+    public function commentSearch(Request $request)
+    {
+        //Lấy từ khóa tìm kiếm từ yêu cầu
+        $filter_name = $request->input('filter_name');
+        $filter_rating = $request->input('filter_rating');
+
+        $filter_status = $request->input('filter_status');
+
+        $comments = $this->commentModel->searchComment($filter_name, $filter_rating, $filter_status);
+        $products = $this->productModel->productFavouriteAll();
+        return view('admin.comment', compact('products', 'comments', 'filter_name', 'filter_rating'));
     }
 }

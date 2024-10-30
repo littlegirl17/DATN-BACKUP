@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use App\Models\Product;
 use App\Models\Assembly;
-use App\Models\Employee;
+use App\Models\AssemblyPackages;
 use App\Models\Favourite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +17,8 @@ class ProductController extends Controller
     private $commentModel;
     private $favouriteModel;
     private $assemblyModel;
-    private $employeeModel;
+    private $assemblyPackagesModel;
+
 
     public function __construct()
     {
@@ -25,18 +26,19 @@ class ProductController extends Controller
         $this->commentModel = new Comment();
         $this->favouriteModel = new Favourite();
         $this->assemblyModel = new Assembly();
-        $this->employeeModel = new Employee();
+        $this->assemblyPackagesModel = new AssemblyPackages();
     }
 
     public function detail($slug)
     {
+
         $detail = $this->productModel->whereSlug($slug)->firstOrFail();
         $productRelated = $this->productModel->productRelated($detail);
         $productReview = $this->commentModel->productReview($detail);
         $productCountReview = $this->commentModel->productCountReview($detail);
-        $employees = $this->employeeModel->employeeAll();
+        $assemblyPackages = $this->assemblyPackagesModel->assemblyPackageAll();
 
-        return view('detail', compact('detail', 'productRelated', 'productReview', 'productCountReview', 'employees'));
+        return view('detail', compact('detail', 'productRelated', 'productReview', 'productCountReview', 'assemblyPackages'));
     }
 
     public function commentReview(Request $request)
@@ -123,6 +125,24 @@ class ProductController extends Controller
                     'is_favourite' => true
                 ])->withCookie(cookie()->forever('favourite', json_encode($favourite)));
             }
+        }
+    }
+
+    public function favouriteDeleteItem(Request $request)
+    {
+        $product_id = $request->product_id; //product_id lay tu ajax gui len
+        if (Auth::check()) {
+            $favourite = $this->favouriteModel->favouriteById(Auth::id(), $product_id);
+            if ($favourite) {
+                $favourite->delete();
+            }
+            return response()->json(['success' => true]);
+        } else {
+            $favourite = json_decode(request()->cookie('favourite'), true) ?? [];
+            if (isset($favourite[$product_id])) {
+                unset($favourite[$product_id]);
+            }
+            return response()->json(['success' => true, 'message' => 'Xóa sản phẩm yêu thích thành công'])->withCookie(cookie()->forever('favourite', json_encode($favourite))); //withCookie :  cho phép bạn thêm một cookie vào phản hồi, Cookie này sẽ được gửi về trình duyệt của người dùng cùng với phản hồi, và trình duyệt sẽ lưu cookie này
         }
     }
 }

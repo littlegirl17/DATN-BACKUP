@@ -31,14 +31,29 @@
                  <label for="title" class="form-label">Tên danh mục</label>
                  <input type="text" class="form-control" onkeyup="ChangeToSlug();" id="slug" name="name"
                      value="{{ $category->name }}">
+                 @error('name')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
              <div class="form-group mt-3">
-                 <label for="title" class="form-label">Slug</label>
+                 <div class="d-flex">
+                     <label for="slug" class="form-label pe-2">Slug</label>
+                     <label class="containerSlug">
+                         <input type="checkbox"id="off_slug" onclick="toggleSlug()">Tắt tự động
+                         <div class="checkmarkSlug"></div>
+                     </label>
+                 </div>
                  <input type="text" class="form-control" id="convert_slug" name="slug" value="{{ $category->slug }}">
+                 @error('slug')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
              <div class="form-group mt-3">
                  <label for="description" class="form-label">Mô tả </label>
                  <textarea class="form-control " id="" name="description" rows="6" col="50">{{ $category->description }}</textarea>
+                 @error('description')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
              <div class="form-group mt-3">
                  <label for="exampleInputFile" class="form-label">Ảnh danh mục</label>
@@ -47,6 +62,9 @@
                      <img src="{{ asset('img/' . $category->image) }}" alt=""
                          style="width:80px; height:80px; object-fit:cover;">
                  </div>
+                 @error('image')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
              <div class="form-group mt-3">
                  <label for="description" class="form-label">Lựa chọn danh mục cha</label>
@@ -57,11 +75,17 @@
                          </option>
                      @endforeach
                  </select>
+                 @error('parent_id')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
 
              <div class="form-group mt-3">
                  <label for="title" class="form-label">Thứ tự xuất hiện</label>
                  <input type="text" class="form-control" name="sort_order" value="{{ $category->sort_order }}">
+                 @error('sort_order')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
              <div class="form-group mt-3">
                  <label for="title" class="form-label">Danh mục được chọn</label>
@@ -71,6 +95,9 @@
                      <option value="1"{{ $category->choose == 1 ? 'selected' : '' }}>Bật danh mục được lựa chọn
                      </option>
                  </select>
+                 @error('choose')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
              <div class="form-group mt-3">
                  <label for="title" class="form-label">Trạng thái</label>
@@ -78,6 +105,9 @@
                      <option value="0"{{ $category->status == 0 ? 'selected' : '' }}>Tắt</option>
                      <option value="1"{{ $category->status == 1 ? 'selected' : '' }}>Bật</option>
                  </select>
+                 @error('status')
+                     <div class="text-danger" id="alert-message">{{ $message }}</div>
+                 @enderror
              </div>
          </form>
      </div>

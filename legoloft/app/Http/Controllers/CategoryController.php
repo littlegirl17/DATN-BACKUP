@@ -27,11 +27,15 @@ class CategoryController extends Controller
         return view('totalCategory', compact('categoryAll'));
     }
 
-    public function categoryProduct($id)
+    public function categoryProduct(Request $request, $id)
     {
         $categoryName = $this->categoryModel->findOrFail($id);
         $categoryAll = $this->categoryModel->categoryTotal();
-        $productCategory = $this->productModel->productByCategory($id);
+
+        $filter_sort = $request->input('filter_sort', 'default');
+        $price_range = $request->input('price_range', []);
+
+        $productCategory = $this->productModel->productByCategory($id, $filter_sort, $price_range);
         $user = auth()->user();
         return view('categoryProduct', compact('categoryAll', 'productCategory', 'user', 'categoryName'));
     }

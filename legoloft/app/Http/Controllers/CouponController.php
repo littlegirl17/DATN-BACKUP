@@ -28,6 +28,14 @@ class CouponController extends Controller
         $couponCheck = $this->couponModel->couponCheckCode($code);
 
         if ($couponCheck) {
+
+
+            $currentDate = now(); // time hiện tại
+            // lt và gt: phương thức so sánh ngày có sẵn trong Carbon
+            if ($currentDate->lt($couponCheck->date_start) || $currentDate->gt($couponCheck->date_end)) { // lt (less than): Kiểm tra xem thời gian hiện tại có nhỏ hơn thời gian bắt đầu hay không. // gt (greater than): Kiểm tra xem thời gian hiện tại có lớn hơn thời gian kết thúc hay không.
+                return redirect()->back()->with('error', 'Mã giảm giá không còn hiệu lực!');
+            }
+
             // kiểm tra giỏ hàng có sản phẩm để áp mã coupon hay không
             $cart = [];
             if (Auth::check()) {

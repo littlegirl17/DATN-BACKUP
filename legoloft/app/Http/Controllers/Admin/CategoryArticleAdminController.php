@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\CategoryArticleEditRequest;
+use App\Http\Requests\admin\CategoryArticleRequest;
 use App\Models\CategoryArticle;
 use App\Models\Article;
 use Illuminate\Http\Request;
@@ -32,39 +34,39 @@ class CategoryArticleAdminController extends Controller
             $query->where('status', $request->filter_status);
         }
         // Lấy danh sách danh mục
-        $CA = $query->orderBy('id', 'desc')->get();
+        $CA = $query->orderBy('id', 'desc')->paginate(8);
 
         return view('admin.categoryArticle', compact('CA'));
     }
-
-    public function categoryArticleAdd(Request $request)
+    public function categoryArticleAdd(CategoryArticleRequest $request)
     {
         if ($request->isMethod('post')) {
-            // Xác thực dữ liệu
-            $request->validate([
-                'title' => 'required|string|max:255',
-                'description_short' => 'nullable|string',
-                'description' => 'nullable|string',
-                'status' => 'required|boolean',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
 
             // Thêm mới bài viết
             $categoryArticle = new CategoryArticle();
             $categoryArticle->title = $request->title;
             $categoryArticle->description_short = $request->description_short;
             $categoryArticle->description = $request->description;
-            $categoryArticle->status = $request->status ?? 1;
+            $categoryArticle->status = $request->status;
 
+            // Kiểm tra xem có file ảnh hay không
             if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $filename = time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('img'), $filename);
-                $categoryArticle->image = $filename;
+                // Lấy tên gốc của tệp
+                $image = $request->file('image');
+
+                $imageName = "{$categoryArticle->id}.{$image->getClientOriginalExtension()}";
+
+                $image->move(public_path('img/'), $imageName);
+
+                $categoryArticle->image = $imageName;
+
+                $categoryArticle->save();
             }
 
+            // Lưu bài viết
             $categoryArticle->save();
-            return redirect()->route('categoryArticle');
+
+            return redirect()->route('categoryArticle')->with('success', 'Bài viết đã được thêm thành công!');
         }
 
         // Hiển thị form khi là GET request
@@ -72,50 +74,32 @@ class CategoryArticleAdminController extends Controller
     }
 
 
-
-
-
-    public function categoryArticleEdit(Request $request, $id)
+    public function categoryArticleEdit(CategoryArticleEditRequest $request, $id)
     {
         // Tìm danh mục theo ID
         $categoryArticle = CategoryArticle::findOrFail($id);
 
         if ($request->isMethod('put')) {
-            $data = $request->only([
-                'title',
-                'description_short',
-                'description',
-                'status'
-            ]);
-
-            // Kiểm tra hợp lệ
-            $request->validate([
-                'title' => 'required|string|max:255',
-                'description_short' => 'nullable|string',
-                'description' => 'nullable|string',
-                'status' => 'required|boolean',
-                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Kiểm tra hình ảnh
-            ]);
+            $categoryArticle->title = $request->title;
+            $categoryArticle->description_short = $request->description_short;
+            $categoryArticle->description = $request->description;
+            $categoryArticle->status = $request->status;
 
             // Xử lý hình ảnh nếu có
             if ($request->hasFile('image')) {
-                // Xóa hình ảnh cũ nếu tồn tại
-                if ($categoryArticle->image) {
-                    $oldImagePath = public_path('img/' . $categoryArticle->image);
-                    if (file_exists($oldImagePath)) {
-                        unlink($oldImagePath); // Xóa hình ảnh cũ
-                    }
-                }
+                // Lấy tên gốc của tệp
+                $image = $request->file('image');
 
-                // Lưu hình ảnh mới
-                $file = $request->file('image');
-                $filename = time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('img'), $filename);
-                $data['image'] = $filename; // Cập nhật tên file vào dữ liệu
+                $imageName = "{$categoryArticle->id}.{$image->getClientOriginalExtension()}";
+
+                $image->move(public_path('img/'), $imageName);
+
+                $categoryArticle->image = $imageName;
+
+                $categoryArticle->save();
             }
-
             // Cập nhật danh mục
-            $categoryArticle->update($data);
+            $categoryArticle->save();
 
             return redirect()->route('categoryArticle')->with('success', 'Cập nhật thành công!');
         }
@@ -123,7 +107,6 @@ class CategoryArticleAdminController extends Controller
         // Trả về view với biến đã được định nghĩa
         return view('admin.categoryArticleEdit', ['categoryArticle' => $categoryArticle]);
     }
-
 
 
 

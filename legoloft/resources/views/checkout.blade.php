@@ -189,48 +189,47 @@
 
                                     </div>
                                 </div>
-                            @elseif (Session::has('employeeAssembly'))
+                            @elseif (Session::has('assemblyPackage'))
                                 @php
-                                    $employee = Session::get('employeeAssembly');
+                                    $assemblyPackage = Session::get('assemblyPackage');
                                     //dd($employee['employee_id']);
 
-                                    $amount = $employee['priceDiscount']
-                                        ? $employee['priceDiscount']
-                                        : $employee['price'];
-                                    // thành tiền
-                                    $intoMoney = $amount * $employee['quantity'];
-                                    $assemblyFee = $employee['fee'];
+                                    $amount = $assemblyPackage['priceDiscount']
+                                        ? $assemblyPackage['priceDiscount']
+                                        : $assemblyPackage['price'];
+
                                     // tổng tiền
-                                    $total = $intoMoney + $assemblyFee;
+                                    $total = $assemblyPackage['totalFee'];
                                 @endphp
                                 <div class="row checkout_row_right">
-                                    <input type="hidden" name="product_id" value="{{ $employee['product_id'] }}">
+                                    <input type="hidden" name="product_id"
+                                        value="{{ $assemblyPackage['product_id'] }}">
                                     <div class="col-md-3 col-sm-3 col-4">
                                         <div class="img_checkout_product">
-                                            <img src="{{ asset('img/' . $employee['image']) }}" alt="" />
+                                            <img src="{{ asset('img/' . $assemblyPackage['image']) }}" alt="" />
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-sm-9 col-8">
-                                        <h5>{{ $employee['name'] }}</h5>
-                                        <p class="">Số lượng: {{ $employee['quantity'] }}</p>
-                                        @if ($employee['priceDiscount'])
+                                        <h5>{{ $assemblyPackage['name'] }}</h5>
+                                        <p class="">Số lượng: {{ $assemblyPackage['quantity'] }}</p>
+                                        @if ($assemblyPackage['priceDiscount'])
                                             <p class="pricecheckout_mobile">
-                                                <span>{{ number_format($employee['price'], 0, ',', '.') . 'đ' }}</span>{{ number_format($employee['priceDiscount'], 0, ',', '.') . 'đ' }}
+                                                <span>{{ number_format($assemblyPackage['price'], 0, ',', '.') . 'đ' }}</span>{{ number_format($assemblyPackage['priceDiscount'], 0, ',', '.') . 'đ' }}
                                             </p>
                                         @else
                                             <p class="pricecheckout_mobile">
-                                                <span></span>{{ number_format($employee['price'], 0, ',', '.') . 'đ' }}
+                                                <span></span>{{ number_format($assemblyPackage['price'], 0, ',', '.') . 'đ' }}
                                             </p>
                                         @endif
                                     </div>
                                     <div class="col-md-3 col-12 checkout_right_price">
-                                        @if ($employee['priceDiscount'])
+                                        @if ($assemblyPackage['priceDiscount'])
                                             <p class="product_box_price">
-                                                <span>{{ number_format($employee['price'], 0, ',', '.') . 'đ' }}</span>{{ number_format($employee['priceDiscount'], 0, ',', '.') . 'đ' }}
+                                                <span>{{ number_format($assemblyPackage['price'], 0, ',', '.') . 'đ' }}</span>{{ number_format($assemblyPackage['priceDiscount'], 0, ',', '.') . 'đ' }}
                                             </p>
                                         @else
                                             <p class="product_box_price">
-                                                <span></span>{{ number_format($employee['price'], 0, ',', '.') . 'đ' }}
+                                                <span></span>{{ number_format($assemblyPackage['price'], 0, ',', '.') . 'đ' }}
                                             </p>
                                         @endif
 
@@ -300,14 +299,20 @@
                         </div>
                         <div class="checkout_main_right_total">
                             <div class="check_item_total_one">
-                                @if (Session::has('employeeAssembly'))
+                                @if (Session::has('assemblyPackage'))
                                     @php
-                                        $employee = Session::get('employeeAssembly');
+                                        $assemblyPackage = Session::get('assemblyPackage');
                                     @endphp
                                     <div class="checkout_item_total">
                                         <span>Phí lắp ráp</span>
-                                        <span>{{ number_format($employee['fee'], 0, ',', '.') . 'đ' }}</span>
+                                        <span>{{ number_format($assemblyPackage['price_assembly'], 0, ',', '.') . 'đ' }}</span>
                                     </div>
+                                    @if ($assemblyPackage['fee'] > 0)
+                                        <div class="checkout_item_total">
+                                            <span>Phí hộp quà tặng</span>
+                                            <span>{{ number_format($assemblyPackage['fee'], 0, ',', '.') . 'đ' }}</span>
+                                        </div>
+                                    @endif
                                 @endif
                                 <div class="checkout_item_total">
                                     <span>Tạm tính</span>

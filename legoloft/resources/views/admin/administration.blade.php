@@ -4,7 +4,8 @@
      <div class="container-fluid">
 
          <div class="searchAdmin">
-             <form id="filterFormAdministration" action="{{ route('searchAdminstration') }}" method="GET">
+             <form id="filterFormAdministration" action="{{ route('searchAdminstration') }}" method="post">
+                 @csrf
                  <div class="row d-flex flex-row justify-content-between align-items-center">
                      <div class="col-sm-6">
                          <div class="form-group mt-3">
@@ -105,6 +106,9 @@
 
                      </tbody>
                  </table>
+                 <nav class="navPhanTrang">
+                     {{ $administration->links() }}
+                 </nav>
              </div>
          </form>
      </div>
@@ -152,7 +156,7 @@
                      .serialize(); //.serialize(): Phương thức này sẽ lấy tất cả các trường trong form (các input, select, v.v.) và chuyển đổi chúng thành một chuỗi URL-encoded.
                  $.ajax({
                      url: '{{ route('searchAdminstration') }}',
-                     type: 'GET',
+                     type: 'post',
                      data: formData,
                      success: function(response) {
                          $('.table-body').html(response

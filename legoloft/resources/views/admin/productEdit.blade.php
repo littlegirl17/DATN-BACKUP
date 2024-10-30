@@ -5,15 +5,16 @@
      <div class="container-fluid">
 
 
-         <h3 class="title-page ">
-             Chỉnh sửa sản phẩm
-         </h3>
 
          <form action="{{ route('editProduct', $product->id) }}" method="post" class="formAdmin" enctype="multipart/form-data">
              @csrf
              @method('PUT')
              <div class="buttonProductForm">
-                 <div class=""></div>
+                 <div class="">
+                     <h3 class="title-page ">
+                         Chỉnh sửa sản phẩm
+                     </h3>
+                 </div>
                  <div class="">
                      <button type="submit" class="btnFormAdd">
                          <p class="text m-0 p-0">Lưu</p>
@@ -46,16 +47,31 @@
                          <label for="name" class="form-label">Tên sản phẩm</label>
                          <input type="text" class="form-control" onkeyup="ChangeToSlug();" id="slug" name="name"
                              value="{{ $product->name }}">
+                         @error('name')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
                      <div class="form-group mt-3">
-                         <label for="slug" class="form-label">Slug</label>
+                         <div class="d-flex">
+                             <label for="slug" class="form-label pe-2">Slug</label>
+                             <label class="containerSlug">
+                                 <input type="checkbox"id="off_slug" onclick="toggleSlug()">Tắt tự động
+                                 <div class="checkmarkSlug"></div>
+                             </label>
+                         </div>
                          <input type="text" class="form-control" id="convert_slug" name="slug"
                              value="{{ $product->slug }}">
+                         @error('slug')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
                      <div class="form-group mt-3">
                          <label for="description" class="form-label">Nội dung chi tiết sản phẩm</label>
                          <textarea class="form-control" id="editor1" name="description" rows="3">{{ $product->description }}
                     </textarea>
+                         @error('description')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
 
                      <div class="form-group mt-3">
@@ -70,17 +86,26 @@
                              @endforeach
 
                          </select>
+                         @error('category_id')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
                      <div class="form-group mt-3">
                          <label for="price" class="form-label">Giá sản phẩm</label>
                          <input type="number" class="form-control" id="price" name="price"
                              value="{{ $product->price }}">
+                         @error('price')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
 
                      <div class="form-group mt-3">
                          <label for="price" class="form-label">Lượt xem</label>
                          <input type="number" class="form-control" id="view" name="view"
                              value="{{ $product->view }}">
+                         @error('view')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
                      <div class="form-group mt-3">
                          <label for="">Nổi bật</label>
@@ -88,6 +113,9 @@
                              <option value="0" {{ $product->outstanding == 0 ? 'selected' : '' }}>Tắt</option>
                              <option value="1" {{ $product->outstanding == 1 ? 'selected' : '' }}>Bật</option>
                          </select>
+                         @error('outstanding')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
 
                      <div class="form-group mt-3">
@@ -96,6 +124,9 @@
                              <option value="0"{{ $product->status == 0 ? 'selected' : '' }}>Tắt</option>
                              <option value="1" {{ $product->status == 1 ? 'selected' : '' }}>Bật</option>
                          </select>
+                         @error('status')
+                             <div class="text-danger" id="alert-message">{{ $message }}</div>
+                         @enderror
                      </div>
                  </div>
                  <div class="tab-pane fade" id="discount-tab-pane" role="tabpanel" aria-labelledby="discount-tab"

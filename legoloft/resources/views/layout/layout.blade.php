@@ -164,9 +164,8 @@
     </script>
     <script>
         function addFavourite(id) {
-            var user_id = '{{ Auth::check() ? Auth::user()->id : 0 }}';
             $.ajax({
-                url: '{{ route('favourite') }}',
+                url: '{{ route('favouriteForm') }}',
                 type: 'POST',
                 data: {
                     product_id: id,
@@ -174,7 +173,7 @@
                     _token: '{{ csrf_token() }}',
                 },
                 success: function(response) {
-                    console.log(response); // Kiểm tra phản hồi
+                    // console.log(response); // Kiểm tra phản hồi
                     const favouriteIcon = document.querySelector(`i[data-product-id="favourite-${id}"]`);
                     if (response.is_favourite) {
                         favouriteIcon.classList.add('red');
@@ -388,15 +387,31 @@
         });
     </script>
     <script>
-        document.getElementById('employeeForm').addEventListener('submit', function() {
-            const selectedEmployee = document.querySelector('input[name="employee"]:checked');
-            if (!selectedEmployee) {
+        document.getElementById('assemblyPackageForm').addEventListener('submit', function(event) {
+            const selectedAssemblyPackage = document.querySelector('input[name="assemblyPackage"]:checked');
+
+            if (!selectedAssemblyPackage) {
                 event.preventDefault();
-                alert('Vui lòng chọn một nhân viên.');
+                alert('Vui lòng chọn một gói lắp ráp.');
             } else {
-                // Gán giá trị của nhân viên đã chọn vào input ẩn
-                document.getElementById('selectedEmployeeId').value = selectedEmployee.value;
+                // Gán giá trị của gói lắp ráp đã chọn vào input ẩn
+                const selectedPackageId = selectedAssemblyPackage.value;
+                document.getElementById('selectedAssemblyPackageId').value = selectedPackageId;
+                document.getElementById('selectedAssemblyPackageFee').value = document.getElementById(
+                    'assemblyPackageFee-' + selectedPackageId).value;
+                document.getElementById('selectedAssemblyPackagePrice').value = document.getElementById(
+                    'assemblyPackagePrice-' + selectedPackageId).value;
             }
+        });
+
+        const span_assembly = document.querySelectorAll('.span_assembly');
+        const detail_assembly = document.querySelectorAll('.detail_assembly');
+        span_assembly.forEach((span, i) => {
+            span.addEventListener('click', () => {
+                detail_assembly.forEach(detail => detail.style.display = 'none');
+
+                detail_assembly[i].style.display = "block";
+            })
         })
     </script>
 </body>

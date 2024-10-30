@@ -31,9 +31,15 @@
                 @csrf
                 <div class="form_admin">
                     <div class="form_admin_alrt">
-                        @if (session('error'))
-                            <div id="alert-message" class="alertDanger">{{ session('error') }}</div>
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <div id="alert-message" class="alertDanger">{{ $error }}</div>
+                            @endforeach
                         @endif
+                        @if (session('success'))
+                            <div id="alert-message" class="alertSuccess">{{ session('success') }}</div>
+                        @endif
+
                     </div>
                     <div class="form_admin_content">
                         <div class="img_login_admin"><img src="{{ asset('img/lockk.png') }}" alt=""></div>
@@ -42,31 +48,15 @@
                         </div>
                         <div class="form_admin_item">
                             <label for="">Tên đăng nhập</label>
-                            <input type="text" name="username" placeholder="Nhập tên đăng nhập" />
+                            <input type="text" name="username" placeholder="Nhập tên đăng nhập"
+                                value="{{ old('username') }}" />
                         </div>
                         <div class="form_admin_item">
                             <label for="">Mật khẩu</label>
                             <input type="password" name="password" placeholder="Nhập mật khẩu" />
-                        </div>
-
-                        <div class="radio-button-container">
-                            <div class="radio-button">
-                                <input type="radio" class="radio-button__input" id="radio1" name="account_type"
-                                    value="admin">
-                                <label class="radio-button__label" for="radio1">
-                                    <span class="radio-button__custom"></span>
-                                    Quản trị viên
-                                </label>
-                            </div>
-                            <div class="radio-button">
-                                <input type="radio" class="radio-button__input" id="radio2" name="account_type"
-                                    value="employee">
-                                <label class="radio-button__label" for="radio2">
-                                    <span class="radio-button__custom"></span>
-                                    Nhân viên
-                                </label>
-                            </div>
-
+                            <label for="" class="login_forgetpw"><a href="{{ route('forgetPasswordAdmin') }}"
+                                    class="">Quên mật
+                                    khẩu</a></label>
                         </div>
                         <button type="submit" class="btn_admin_login">Đăng nhập</button>
                     </div>

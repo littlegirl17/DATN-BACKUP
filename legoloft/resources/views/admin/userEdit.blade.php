@@ -4,16 +4,18 @@
     <div class="container-fluid">
 
         <div class="d-flex justify-content-between align-items-center  my-3">
-            <h3 class="title-page ">
-                Chỉnh sửa khách hàng
-            </h3>
+            <div class=""></div>
             <a class="text-decoration-none text-light bg-31629e py-2 px-2" href="">Quay lại</a>
         </div>
         <form class="formAdmin" action="{{ route('user.update', $user->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="buttonProductForm">
-                <div class=""></div>
+                <div class="">
+                    <h3 class="title-page ">
+                        Chỉnh sửa khách hàng
+                    </h3>
+                </div>
                 <div class="">
                     <button type="submit" class="btnFormAdd">
                         <p class="text m-0 p-0">Lưu</p>
@@ -99,11 +101,13 @@
                                 <label for="title" class="form-label">Ảnh tài khoản</label>
                                 <div class="custom-file">
                                     <input type="file" name="image" id="HinhAnh" class="inputFile">
-                                    <div class="imageFile">
-                                        <img src="{{ asset('img/' . $user->image) }}" alt="">
+                                    <div id="preview" class="imageFile">
+                                        <img src="{{ asset('img/' . $user->image) }}" alt="Ảnh xem trước" width="300" height="300" />
                                     </div>
                                 </div>
                             </div>
+
+
                             <div class="form-group mt-3">
                                 <label for="user_group_id" class="form-label">Hạng thành viên</label>
                                 <select class="form-select" id="user_group_id" name="user_group_id" required>
